@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="vertexShader2">
+uniform mat4 u_MVPMatrix;     // A constant representing the combined model/view/projection matrix.\n
+ \n
+attribute vec4 a_Position;    // Per-vertex position information we will pass in.\n
+attribute vec4 a_Color;       // Per-vertex color information we will pass in.\n
+\n
+varying vec4 v_Color;         // This will be passed into the fragment shader.\n
+ \n
+void main()                   // The entry point for our vertex shader.\n
+{                             \n
+   v_Color = a_Color;         // Pass the color through to the fragment shader.\n
+                              // It will be interpolated across the triangle.\n
+   gl_Position = u_MVPMatrix* a_Position;  // gl_Position is a special variable used to store the final position.\n
+                              // Multiply the vertex by the matrix to get the final point in\n
+}                             // normalized screen coordinates.\n
+	</string>
+	<string name="fragmentShader2">
+precision mediump float;       // Set the default precision to medium. We do not need as high of a\n
+                               // precision in the fragment shader.\n
+varying vec4 v_Color;          // This is the color from the vertex shader interpolated across the\n
+                               // triangle per fragment.\n
+void main()                    // The entry point for our fragment shader.\n
+{                              \n
+   gl_FragColor = v_Color;     // Pass the color directly through the pipeline.\n
+}                              \n
+	</string>
+</resources>
