@@ -20,12 +20,12 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.util.Xml.Encoding;
 
-public class Renderer2 implements GLSurfaceView.Renderer {
+public class Renderer3 implements GLSurfaceView.Renderer {
 
 	private final int mBytesPerFloat = 4;
 	private Resources res;
 	final String vertexShader,fragmentShader;
-	public Renderer2(Resources res){
+	public Renderer3(Resources res){
 		this.res=res;
 		vertexShader = res.getString(R.string.vertexShader2);
 		fragmentShader = res.getString(R.string.fragmentShader2);
@@ -154,7 +154,7 @@ public class Renderer2 implements GLSurfaceView.Renderer {
 		//drawTriangle(mTriangle2Vertices);
 
 		try {
-			if(renderer2_obj==null) renderer2_obj=this.readCompleteVerticesFromObjFile("renderer2.obj");
+			if(renderer2_obj==null) renderer2_obj=this.readCompleteVerticesFromObjFile("earth.obj");
 			GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, renderer2_obj.fCount*3*3*mBytesPerFloat, renderer2_obj.vertices, GLES20.GL_STATIC_DRAW);
 			GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, renderer2_obj.fCount*4*mBytesPerFloat, renderer2_obj.colors, GLES20.GL_STATIC_DRAW);
 			
