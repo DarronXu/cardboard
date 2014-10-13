@@ -157,7 +157,7 @@ public class CardboardRenderer2 implements CardboardView.StereoRenderer {
 		
 		GLES20.glClearColor(0.3f, 0.3f, 0.3f, 0.5f);
 		GLES20.glEnable(GLES20.GL_DEPTH_TEST);
-		//GLES20.glDepthFunc(GLES20.GL_LESS);
+		GLES20.glDepthFunc(GLES20.GL_LESS);
 		
 		//---------------Set up View Matrix-----------------
 		// eye: Position the eye behind the origin
