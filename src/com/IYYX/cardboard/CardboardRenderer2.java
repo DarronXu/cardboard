@@ -56,7 +56,8 @@ public class CardboardRenderer2 implements CardboardView.StereoRenderer {
 	@Override
 	public void onDrawEye(EyeTransform arg0) {
 		// TODO Auto-generated method stub
-		Log.d("[Renderer]","OnDrawEye");
+		//Log.d("[Renderer]","OnDrawEye");
+		
 		update();
 		
         Matrix.multiplyMM(mViewMatrix, 0, arg0.getEyeView(), 0, mCameraMatrix, 0);
@@ -76,20 +77,36 @@ public class CardboardRenderer2 implements CardboardView.StereoRenderer {
 
 	void render(){
 		GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT|GLES20.GL_COLOR_BUFFER_BIT);
-		GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, renderer2_obj.fCount*3*3*mBytesPerFloat, renderer2_obj.vertices, GLES20.GL_STATIC_DRAW);
+
+		mPositionHandle = GLES20.glGetAttribLocation(mGLProgramHandle, "a_Position");
+		mColorHandle = GLES20.glGetAttribLocation(mGLProgramHandle, "a_Color");
+
+		GLES20.glEnableVertexAttribArray(mColorHandle);
+		GLES20.glEnableVertexAttribArray(mPositionHandle);
+		
+		//GLES20.glEnableVertexAttribArray(mColorHandle);
+
+		//renderer2_obj.vertices.position(0);
+		//GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, renderer2_obj.fCount*3*3*mBytesPerFloat, renderer2_obj.vertices, GLES20.GL_STATIC_DRAW);
 		//GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, renderer2_obj.fCount*4*mBytesPerFloat, renderer2_obj.colors, GLES20.GL_STATIC_DRAW);
 		
 		renderer2_obj.vertices.position(0);
 		GLES20.glVertexAttribPointer(mPositionHandle, mPositionDataSize, GLES20.GL_FLOAT, false, 0, renderer2_obj.vertices);
-		GLES20.glEnableVertexAttribArray(mPositionHandle);
 		
-		//renderer2_obj.colors.position(0);
-		//GLES20.glVertexAttribPointer(mColorHandle, mColorDataSize, GLES20.GL_FLOAT, false, 0/*mStrideBytes*/, renderer2_obj.colors);
-		//GLES20.glEnableVertexAttribArray(mColorHandle);
+		renderer2_obj.colors.position(0);
+		GLES20.glVertexAttribPointer(mColorHandle, mColorDataSize, GLES20.GL_FLOAT, false, 0, renderer2_obj.colors);
 		
 		GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mMVPMatrix, 0);
 		GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, renderer2_obj.fCount*3);
+		checkGLError("After Draw Array");
 	}
+    private static void checkGLError(String func) {
+        int error;
+        while ((error = GLES20.glGetError()) != GLES20.GL_NO_ERROR) {
+            Log.e("[ZZ]", func + ": glError " + error);
+            throw new RuntimeException(func + ": glError " + error);
+        }
+    }
 
 	@Override
 	public void onFinishFrame(Viewport arg0) {
@@ -101,6 +118,12 @@ public class CardboardRenderer2 implements CardboardView.StereoRenderer {
 	public void onNewFrame(HeadTransform arg0) {
 		// TODO Auto-generated method stub
 		arg0.getHeadView(mHeadViewMatrix, 0);
+		//----------------Really Load in the compiled GLProgram------------
+		// Put this block in onDrawFrame() if:
+		// there are many different GLPrograms
+		GLES20.glUseProgram(mGLProgramHandle);
+		//----------------Get Handles to pass values into GL-Script Variables---------------
+		mMVPMatrixHandle = GLES20.glGetUniformLocation(mGLProgramHandle, "u_MVPMatrix");
 		//We are not going to use mHeadViewMatrix just yet.
 	}
 
@@ -134,7 +157,7 @@ public class CardboardRenderer2 implements CardboardView.StereoRenderer {
 		
 		GLES20.glClearColor(0.3f, 0.3f, 0.3f, 0.5f);
 		GLES20.glEnable(GLES20.GL_DEPTH_TEST);
-		GLES20.glDepthFunc(GLES20.GL_LESS);
+		//GLES20.glDepthFunc(GLES20.GL_LESS);
 		
 		//---------------Set up View Matrix-----------------
 		// eye: Position the eye behind the origin
@@ -197,25 +220,14 @@ public class CardboardRenderer2 implements CardboardView.StereoRenderer {
 			GLES20.glDeleteProgram(programHandle);
 			throw  new RuntimeException("Error linking GL Program!");
 		}
-		//----------------Get Handles to pass values into GL-Script Variables---------------
-		mMVPMatrixHandle = GLES20.glGetUniformLocation(programHandle, "u_MVPMatrix");
-		mPositionHandle = GLES20.glGetAttribLocation(programHandle, "a_Position");
-		mColorHandle = GLES20.glGetAttribLocation(programHandle, "a_Color");
-		//----------------Really Load in the compiled GLProgram------------
-		// Put this block in onDrawFrame() if:
-		// there are many different GLPrograms
-		GLES20.glUseProgram(programHandle);
+		mGLProgramHandle=programHandle;
 	}
+	
+	int mGLProgramHandle;
 
 	public void oldSurfaceChanged(int width, int height) {
 		//---------------Set up Projection Matrix-------------
 		final float ratio=(float) width/height;
-	}
-
-	public void oldDrawFrame(GL10 gl) {
-		// TODO Auto-generated method stub
-		update();
-		render();
 	}
 	
 	float angleInDegrees;
@@ -263,7 +275,7 @@ public class CardboardRenderer2 implements CardboardView.StereoRenderer {
 		}
 		ans.vCount=_vertex.size();
 		ans.vertices=ByteBuffer.allocateDirect(ans.fCount*3*3*mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
-		ans.colors=ByteBuffer.allocateDirect(ans.fCount*4*mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
+		ans.colors=ByteBuffer.allocateDirect(ans.fCount*3*4*mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
 		ans.vertices.position(0);
 		ans.colors.position(0);
 		scan.close();
@@ -297,13 +309,16 @@ public class CardboardRenderer2 implements CardboardView.StereoRenderer {
 		}
 		ans.vertices.position(0);
 		
-		for(int i=0;i<ans.fCount;i++){
+		for(int i=0;i<ans.fCount*3;i++){
 			ans.colors.put((float)Math.random());
 			ans.colors.put((float)Math.random());
 			ans.colors.put((float)Math.random());
 			ans.colors.put(1.0f);
 		}
 		ans.colors.position(0);
+
+		ans.vertices.position(0);
+		scan.close();
 		
 		return ans;
 	}

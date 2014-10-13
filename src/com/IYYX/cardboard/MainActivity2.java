@@ -9,6 +9,7 @@ import com.google.vrtoolkit.cardboard.CardboardView;
 import android.app.Activity;
 import android.opengl.*;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -20,24 +21,13 @@ public class MainActivity2 extends CardboardActivity {
 
         setContentView(R.layout.common_ui);
         CardboardView cardboardView = (CardboardView) findViewById(R.id.cardboard_view);
+        cardboardView.setEGLContextClientVersion(2);
         cardboardView.setRenderer(new CardboardRenderer2(getResources()));
         setCardboardView(cardboardView);
-        
-		/*
-		mGLView = new GLSurfaceView(this);
-		mGLView.setEGLContextClientVersion(2);		//VERY IMPORTANT!!!
-		mGLView.setRenderer(new Renderer2(getResources()));
-		setContentView(mGLView);*/
+        CardboardOverlayView mOverlayView = (CardboardOverlayView) findViewById(R.id.overlay);
+        mOverlayView.show3DToast("Please hold you phone so that it's vertical to the ground.\nThen, please turn your head around to search for the object.");
 	}
 	
-	protected void onResume() {
-		super.onResume();
-	}
-	
-	protected void onPause() {
-		super.onPause();
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -56,4 +46,10 @@ public class MainActivity2 extends CardboardActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+
+    @Override
+    public void onCardboardTrigger() {
+        Log.i("MainActivity", "onCardboardTrigger");
+    }
 }
