@@ -21,10 +21,10 @@ public class MainActivity2 extends CardboardActivity {
 
         setContentView(R.layout.common_ui);
         CardboardView cardboardView = (CardboardView) findViewById(R.id.cardboard_view);
-        cardboardView.setEGLContextClientVersion(2);
-        cardboardView.setRenderer(new CardboardRenderer2(getResources()));
-        setCardboardView(cardboardView);
         CardboardOverlayView mOverlayView = (CardboardOverlayView) findViewById(R.id.overlay);
+        cardboardView.setEGLContextClientVersion(2);
+        cardboardView.setRenderer(new CardboardRenderer2(getResources(),mOverlayView,this));
+        setCardboardView(cardboardView);
         mOverlayView.show3DToast("Please hold you phone so that it's vertical to the ground.\nThen, please turn your head around to search for the object.");
 	}
 	

@@ -14,6 +14,8 @@ import javax.microedition.khronos.opengles.GL10;
 import org.apache.http.util.EncodingUtils;
 
 import edu.union.graphics.*;
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.opengl.*;
 import android.os.SystemClock;
@@ -25,9 +27,13 @@ public class CardboardRenderer2 implements CardboardView.StereoRenderer {
 
 	private final int mBytesPerFloat = 4;
 	private Resources res;
+	private CardboardOverlayView mOverlayView;
+	private Activity mDad;
 	final String vertexShader,fragmentShader;
-	public CardboardRenderer2(Resources res){
+	public CardboardRenderer2(Resources res,CardboardOverlayView overlay,Activity context){
 		this.res=res;
+		this.mOverlayView=overlay;
+		mDad=context;
 		vertexShader = res.getString(R.string.vertexShader2);
 		fragmentShader = res.getString(R.string.fragmentShader2);
 	}
@@ -261,6 +267,7 @@ public class CardboardRenderer2 implements CardboardView.StereoRenderer {
 		ArrayList<Float> _normal=new ArrayList<Float>();
 		ans.fCount=0;
 		while(true){
+			showLoadingWait();
 			if(!scan.hasNextLine()) break;
 			String line=scan.nextLine();
 			StringBufferInputStream sistream= new StringBufferInputStream(line);
@@ -283,6 +290,7 @@ public class CardboardRenderer2 implements CardboardView.StereoRenderer {
 		istream=res.getAssets().open(assetsName);
 		scan=new Scanner(istream);
 		while(true){
+			showLoadingWait();
 			if(!scan.hasNextLine()) break;
 			String line=scan.nextLine();
 			line=line.replace("//", "/0/").replace('/', ' ');
@@ -310,6 +318,8 @@ public class CardboardRenderer2 implements CardboardView.StereoRenderer {
 		ans.vertices.position(0);
 		
 		for(int i=0;i<ans.fCount*3;i++){
+
+			showLoadingWait();
 			ans.colors.put((float)Math.random());
 			ans.colors.put((float)Math.random());
 			ans.colors.put((float)Math.random());
@@ -321,6 +331,15 @@ public class CardboardRenderer2 implements CardboardView.StereoRenderer {
 		scan.close();
 		
 		return ans;
+	}
+	
+	void showLoadingWait()
+	{
+		mDad.runOnUiThread(new Runnable(){
+			public void run(){
+				mOverlayView.show3DToast("Loading Model, Please wait.\nPlease keep your phone vertical to the ground.");	
+			}
+		});
 	}
 
 	/*ObjFile readCompleteVerticesFromObjFile(String assetsName) throws IOException{
