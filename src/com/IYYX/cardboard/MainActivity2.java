@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
 
 public class MainActivity2 extends CardboardActivity {
 
@@ -23,7 +24,7 @@ public class MainActivity2 extends CardboardActivity {
         CardboardView cardboardView = (CardboardView) findViewById(R.id.cardboard_view);
         CardboardOverlayView mOverlayView = (CardboardOverlayView) findViewById(R.id.overlay);
         cardboardView.setEGLContextClientVersion(2);
-        cardboardView.setRenderer(new CardboardRenderer2(getResources(),mOverlayView,this));
+        cardboardView.setRenderer(new CardboardRenderer3(getResources(),mOverlayView,this));
         setCardboardView(cardboardView);
         mOverlayView.show3DToast("Please hold you phone so that it's vertical to the ground.\nThen, please turn your head around to search for the object.");
 	}
