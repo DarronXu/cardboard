@@ -90,19 +90,12 @@ public class CardboardRenderer3 implements CardboardView.StereoRenderer {
 		GLES20.glUniform1i(myTextureSamplerHandle, 0);
 		
 		//------------------------TEXTURE drawing begins
-		loadTexture(R.drawable.earth_texture, true);
+		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureHandle);
 		earth_obj.vertices.position(0);
 		GLES20.glVertexAttribPointer(mPositionHandle, mPositionDataSize, GLES20.GL_FLOAT, false, 0, earth_obj.vertices);
 		earth_obj.textureUVs.position(0);
 		GLES20.glVertexAttribPointer(mUVHandle, mUVDataSize, GLES20.GL_FLOAT, false, 0, earth_obj.textureUVs);
 		GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, earth_obj.fCount*3);
-		
-		try {
-			Thread.sleep(40);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	/**
@@ -227,10 +220,15 @@ public class CardboardRenderer3 implements CardboardView.StereoRenderer {
 			throw  new RuntimeException("Error linking GL Program!");
 		}
 		mGLProgramHandle=programHandle;
+
+		earth_bitmap=loadBitmapFromResources(R.drawable.earth_texture, true);
+		mTextureHandle=loadGLTexture(earth_bitmap);
+		earth_bitmap.recycle();
 	}
 	
+	int mTextureHandle;
 	int mGLProgramHandle;
-	
+	Bitmap earth_bitmap;
 	float angleInDegrees;
 
 	ObjFile[] renderer2_obj=null;
@@ -256,7 +254,7 @@ public class CardboardRenderer3 implements CardboardView.StereoRenderer {
 		return newTextureHandles[0];
 	}
 	
-	public int loadTexture(int resourceID, boolean zoomForBetterPerformance) {
+	public Bitmap loadBitmapFromResources(int resourceID, boolean zoomForBetterPerformance) {
 	    // pull in the resource
 	    Bitmap bitmap = null;
 	    Drawable image = res.getDrawable(resourceID);
@@ -275,11 +273,7 @@ public class CardboardRenderer3 implements CardboardView.StereoRenderer {
 	    Canvas canvas = new Canvas(bitmap);
 	    bitmap.eraseColor(0);
 	    image.draw(canvas); // draw the image onto our bitmap
-
-	    int textureHandle = loadGLTexture(bitmap);
-
-	    bitmap.recycle();
-	    return textureHandle;
+	    return bitmap;
 	}
 	
 	public static int getNextHighestPO2( int n ) {
