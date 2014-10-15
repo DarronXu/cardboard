@@ -45,6 +45,10 @@ public class Texture {
 		GLES20.glDeleteTextures(1, handles, 0);
 	}
 	
+	public static Drawable readDrawableFromResources(Resources res, int resourceID){
+		return res.getDrawable(resourceID);
+	}
+	
 	public static Bitmap loadBitmapFromResources(Resources res, int resourceID, boolean zoomForBetterPerformance) {
 	    // pull in the resource
 	    Bitmap bitmap = null;

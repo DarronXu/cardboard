@@ -23,7 +23,7 @@ public class Model {
 	public static final Model[] emptyObjFileArray=new Model[]{};
 	public static final int mBytesPerFloat = Float.SIZE/8;
 	
-	public static Model readObjAsWholeModel(String assetsName, int colorDataSize, MyCallback callback) throws IOException {
+	public static Model readWholeModel(String assetsName, int colorDataSize, MyCallback callback) throws IOException {
 		long time=SystemClock.uptimeMillis();
 		
 		InputStream istream=callback.openAssetInput(assetsName);
@@ -92,7 +92,7 @@ public class Model {
 		Log.d("readObjAsAWhole","Load " + assetsName + " consumed "+(SystemClock.uptimeMillis()-time) + " ms.");
 		return ans;
 	}
-	public static Model[] readObjFileAsModelArr(String assetsName, int colorDataSize, MyCallback callback) throws IOException {
+	public static Model[] readPartitionedModel(String assetsName, int colorDataSize, MyCallback callback) throws IOException {
 		long time=SystemClock.uptimeMillis();
 
 		InputStream istream=callback.openAssetInput(assetsName);
@@ -109,7 +109,7 @@ public class Model {
 			callback.showToast3D(R.string.myAPI_LoadingObjFile);
 			final String line=scan.nextLine().replace("//", "/0/").replace('/', ' ');
 			final String[] split=line.split(" ");
-			if(split[0].equals("o")) {
+			if(split[0].equals("g")) {
 				currentObj=new Model();
 				ans.add(currentObj);
 				if(split.length>1) currentObj.name=split[1];

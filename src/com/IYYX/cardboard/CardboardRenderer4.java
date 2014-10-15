@@ -14,6 +14,7 @@ import com.IYYX.cardboard.myAPIs.GameObject;
 import com.IYYX.cardboard.myAPIs.GameObjectUpdater;
 import com.IYYX.cardboard.myAPIs.Model;
 import com.IYYX.cardboard.myAPIs.MyCardboardRenderer;
+import com.IYYX.cardboard.myAPIs.PartitionedGameObject;
 import com.IYYX.cardboard.myAPIs.Texture;
 import com.google.vrtoolkit.cardboard.*;
 public class CardboardRenderer4 extends MyCardboardRenderer { 
@@ -23,8 +24,10 @@ public class CardboardRenderer4 extends MyCardboardRenderer {
 	
 	GLTextureProgram mTextureProgram;
 	Model earthModel;
+	Model[] boyModel;
 	GameObject earthA;
 	GameObject earthB;
+	PartitionedGameObject boyA;
 	Texture earthTexture;
 	
 	public CardboardRenderer4(Resources res,CardboardOverlayView overlay, Activity dad) {
@@ -67,9 +70,11 @@ public class CardboardRenderer4 extends MyCardboardRenderer {
 		//------------------------ Load in Models and Textures --------------------------
 
 		try {
-			earthModel = Model.readObjAsWholeModel("earth.obj", 4, this.getMyCallback());
-			earthTexture = new Texture(res, R.drawable.earth_texture, false); 
+			earthModel = Model.readWholeModel("earth.obj", 3, this.getMyCallback());
+			boyModel = Model.readPartitionedModel("boy.obj", 3, getMyCallback());
 		} catch (IOException e) {e.printStackTrace();}
+
+		earthTexture = new Texture(res, R.drawable.earth_texture, false);
 		
 		earthA = new GameObject(earthModel, new GameObjectUpdater(){
 			float angleInDegrees;
@@ -93,9 +98,27 @@ public class CardboardRenderer4 extends MyCardboardRenderer {
 			}
 		}, earthTexture);
 		
+		boyA = new PartitionedGameObject(boyModel, new GameObjectUpdater(){
+			public void update(GameObject obj) {
+				float angleInDegreesA,angleInDegreesB,angleInDegreesC;
+				long time=SystemClock.uptimeMillis()%10000L;
+				angleInDegreesA = (360.0f / 10000.0f) * ((int) time);
+				time=SystemClock.uptimeMillis()%5000L;
+				angleInDegreesB = (360.0f / 5000.0f) * ((int) time);
+				time=SystemClock.uptimeMillis()%3000L;
+				angleInDegreesC = (360.0f / 3000.0f) * ((int) time);
+				Matrix.setIdentityM(obj.mModelMatrix, 0);
+				Matrix.translateM(obj.mModelMatrix, 0, 0.0f, 3.0f, 0.8f);
+				Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesA, 1.0f, 0.0f, 0.0f);
+				Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesB, 0.0f, 1.0f, 0.0f);
+				Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesC, 0.0f, 0.0f, 1.0f);
+			}
+		}, res, dad.getPackageName(), false);
+		
 		mTextureProgram = new GLTextureProgram(res);
-		mTextureProgram.addGameObject(earthA);
+		//mTextureProgram.addGameObject(earthA);
 		mTextureProgram.addGameObject(earthB);
+		boyA.addToGLProgram(mTextureProgram);
 	}
 
 	@Override

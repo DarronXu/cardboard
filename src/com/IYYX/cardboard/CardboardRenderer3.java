@@ -24,7 +24,7 @@ public class CardboardRenderer3 implements CardboardView.StereoRenderer {
 	private Resources res;
 	private CardboardOverlayView mOverlayView;
 	private Activity mDad;
-	final String vertexShader,fragmentShader;
+	private final String vertexShader,fragmentShader;
 	public CardboardRenderer3(Resources res,CardboardOverlayView overlay,Activity context){
 		this.res=res;
 		this.mOverlayView=overlay;
