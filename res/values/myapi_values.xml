@@ -20,7 +20,7 @@ varying vec2 v_UV;\n
 uniform sampler2D myTextureSampler;\n
 void main()                    // The entry point for our fragment shader.\n
 {                              \n
-   gl_FragColor = texture2D(myTextureSampler,v_UV);\n
+   gl_FragColor = texture2D(myTextureSampler,v_UV).rgba;\n
 }                              \n
 	</string>
 </resources>

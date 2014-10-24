@@ -19,11 +19,13 @@ public abstract class MyCardboardRenderer implements CardboardView.StereoRendere
 	protected Activity dad;
 	protected Resources res;
 	protected CardboardOverlayView overlay;
+	protected CardboardView mCardboardView;
 	
-	public MyCardboardRenderer(Resources res,CardboardOverlayView overlay, Activity dad){
+	public MyCardboardRenderer(Resources res,CardboardView cardboardView,CardboardOverlayView overlay, Activity dad){
 		this.res=res;
 		this.overlay=overlay;
 		this.dad=dad;
+		this.mCardboardView=cardboardView;
 	}
 
 	@Override

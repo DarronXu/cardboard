@@ -1,6 +1,7 @@
 package com.IYYX.cardboard.myAPIs;
 
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 import android.util.Log;
@@ -12,11 +13,9 @@ public class GLTextureProgram extends GLProgram {
 	public final Resources mResources;
 	public final String mVertexShader, mFragmentShader;
 
-	private final int mPositionDataSize = 3;
+	private final int mPositionDataSize = 4;
 	private final int mUVDataSize = 2;
 	
-	int mPositionHandle, mUVHandle;
-	int mMVPMatrixHandle;
 	private float[] mMVPMatrix = new float[16];
 	private float[] mViewMatrix;
 	private float[] mProjectionMatrix;
@@ -59,8 +58,8 @@ public class GLTextureProgram extends GLProgram {
 		GLES20.glAttachShader(programHandle, vertexShaderHandle);
 		GLES20.glAttachShader(programHandle, fragmentShaderHandle);
 		// Bind attributes
-		GLES20.glBindAttribLocation(programHandle, 0, "a_Position");
-		GLES20.glBindAttribLocation(programHandle, 1, "a_UV");
+		//GLES20.glBindAttribLocation(programHandle, 0, "a_Position");
+		//GLES20.glBindAttribLocation(programHandle, 1, "a_UV");
 		// Link these binded resources together into a program.
 		GLES20.glLinkProgram(programHandle);
 		GLES20.glGetProgramiv(programHandle, GLES20.GL_LINK_STATUS, compileStatus, 0);
@@ -74,27 +73,36 @@ public class GLTextureProgram extends GLProgram {
 		GLES20.glUseProgram(mProgramHandle);
 	}
 	public void renderAllGameObjects() {
-		mPositionHandle = GLES20.glGetAttribLocation(mProgramHandle, "a_Position");
-		mUVHandle = GLES20.glGetAttribLocation(mProgramHandle, "a_UV");
-		int myTextureSamplerHandle = GLES20.glGetUniformLocation(mProgramHandle, "myTextureSampler");
-		
-		GLES20.glEnableVertexAttribArray(mPositionHandle);
-		GLES20.glEnableVertexAttribArray(mUVHandle);
-		
 		for(GameObject obj:objects) {
+			int mPositionHandle, mUVHandle;
+			int mMVPMatrixHandle;
+			
+			mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgramHandle, "u_MVPMatrix");
+			mPositionHandle = GLES20.glGetAttribLocation(mProgramHandle, "a_Position");
+			mUVHandle = GLES20.glGetAttribLocation(mProgramHandle, "a_UV");
+			int myTextureSamplerHandle = GLES20.glGetUniformLocation(mProgramHandle, "myTextureSampler");
+			
+			GLES20.glEnableVertexAttribArray(mPositionHandle);
+			GLES20.glEnableVertexAttribArray(mUVHandle);
 
 			Matrix.multiplyMM(mMVPMatrix, 0, mViewMatrix, 0, obj.mModelMatrix, 0);
 			Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mMVPMatrix, 0);
 			
 			GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mMVPMatrix, 0);
+			
+			GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, obj.mTexture.mTextureHandle);
 			GLES20.glUniform1i(myTextureSamplerHandle, 0);
 			
-			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, obj.mTexture.mTextureHandle);
 			obj.mPrototype.vertices.position(0);
 			GLES20.glVertexAttribPointer(mPositionHandle, mPositionDataSize, GLES20.GL_FLOAT, false, 0, obj.mPrototype.vertices);
 			obj.mPrototype.textureUVs.position(0);
 			GLES20.glVertexAttribPointer(mUVHandle, mUVDataSize, GLES20.GL_FLOAT, false, 0, obj.mPrototype.textureUVs);
 			GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, obj.mPrototype.fCount*3);
+			
+			GLES20.glDisableVertexAttribArray(mPositionHandle);
+			GLES20.glDisableVertexAttribArray(mUVHandle);
+			//Log.w("GLProgram","Drawed "+obj.mPrototype.name);
 		}
 	}
 	public void resetViewMatrix(float[] viewMatrix){

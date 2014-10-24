@@ -1,5 +1,6 @@
 package com.IYYX.cardboard.myAPIs;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import android.content.res.Resources;
@@ -16,7 +17,7 @@ public class PartitionedGameObject {
 	
 	public PartitionedGameObject(Model[] modelForEachPart, GameObjectUpdater commonUpdater, Resources res, String packageName, boolean zoomTextureForBetterPerformance) {
 		this.res=res;
-		int howManyParts=modelForEachPart.length;
+		final int howManyParts=modelForEachPart.length;
 		mPartitionedObject = new GameObject[howManyParts];
 		for(int i=0;i<howManyParts;i++) {
 			GameObject part = mPartitionedObject[i] = new GameObject(modelForEachPart[i], commonUpdater, null);
@@ -26,16 +27,20 @@ public class PartitionedGameObject {
 			else {
 				int ID=res.getIdentifier(name, "drawable", packageName);
 				Log.d("PartitionedGameObject","ID="+ID);
+				try {
 				Texture texture = new Texture(res, ID, zoomTextureForBetterPerformance);
 				database.put(name, texture);
 				part.mTexture=texture;
+				} catch (Exception err) {
+					err.printStackTrace();
+				}
 			}
 		}
 	}
 	
 	public PartitionedGameObject(Model[] modelForEachPart, GameObjectUpdater[] updaterForEachPart, Resources res, String packageName, boolean zoomTextureForBetterPerformance) {
 		this.res=res;
-		int howManyParts=modelForEachPart.length;
+		final int howManyParts=modelForEachPart.length;
 		mPartitionedObject = new GameObject[howManyParts];
 		for(int i=0;i<howManyParts;i++) {
 			GameObject part = mPartitionedObject[i] = new GameObject(modelForEachPart[i], updaterForEachPart[i], null);

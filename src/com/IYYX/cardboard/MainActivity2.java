@@ -7,6 +7,7 @@ import com.google.vrtoolkit.cardboard.CardboardActivity;
 import com.google.vrtoolkit.cardboard.CardboardView;
 
 import android.app.Activity;
+import android.graphics.PixelFormat;
 import android.opengl.*;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +25,9 @@ public class MainActivity2 extends CardboardActivity {
         CardboardView cardboardView = (CardboardView) findViewById(R.id.cardboard_view);
         CardboardOverlayView mOverlayView = (CardboardOverlayView) findViewById(R.id.overlay);
         cardboardView.setEGLContextClientVersion(2);
-        cardboardView.setRenderer(new CardboardRenderer4(getResources(),mOverlayView,this));
+		cardboardView.setEGLConfigChooser(8, 8, 8, 8, 0, 0);
+        cardboardView.getHolder().setFormat(PixelFormat.RGBA_8888);
+        cardboardView.setRenderer(new CardboardRenderer4(getResources(),cardboardView,mOverlayView,this));
         setCardboardView(cardboardView);
         mOverlayView.show3DToast("Please hold you phone so that it's vertical to the ground.\nThen, please turn your head around to search for the object.");
 	}

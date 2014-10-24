@@ -1,11 +1,13 @@
 package com.IYYX.cardboard;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.microedition.khronos.egl.EGLConfig;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.PixelFormat;
 import android.opengl.*;
 import android.os.SystemClock;
 
@@ -30,8 +32,8 @@ public class CardboardRenderer4 extends MyCardboardRenderer {
 	PartitionedGameObject boyA;
 	Texture earthTexture;
 	
-	public CardboardRenderer4(Resources res,CardboardOverlayView overlay, Activity dad) {
-		super(res, overlay, dad);
+	public CardboardRenderer4(Resources res,CardboardView cardboardView,CardboardOverlayView overlay, Activity dad) {
+		super(res,cardboardView, overlay, dad);
 	}
 	
 	public void onDrawEye(EyeTransform arg0) {
@@ -54,9 +56,29 @@ public class CardboardRenderer4 extends MyCardboardRenderer {
 	}
 	
 	public void onSurfaceCreated(EGLConfig arg0) {
-		GLES20.glClearColor(0.3f, 0.3f, 0.3f, 0.5f);
+        
+		GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.7f);
 		GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 		GLES20.glDepthFunc(GLES20.GL_LESS);					//IMPORTANT!!
+		
+
+		/*
+		 * THE FOLLOWING CHANGE IS VERY IMPORTANT!!!
+		 * OR the alpha attribute in .png will NOT be normally showed.
+		 * 
+			In the surfaceView Constructor (in this case it is in the MainActivity2.java)
+			
+			        setEGLConfigChooser(8, 8, 8, 8, 0, 0);
+			        getHolder().setFormat(PixelFormat.RGBA_8888);
+			
+			In the Renderer's onSurfaceCreated
+			
+			        gl.glEnable(GL10.GL_BLEND);
+			        gl.glBlendFunc(GL10.GL_ONE, GL10.GL_ONE_MINUS_SRC_ALPHA); 
+		 */
+		
+		GLES20.glEnable(GLES20.GL_BLEND); 
+		GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);		//IMPORTANT for Alpha !! 
 		
 		//---------------Set up View Matrix-----------------
 		final float[] eye = {0.0f,5.0f,0.0f};
@@ -98,7 +120,11 @@ public class CardboardRenderer4 extends MyCardboardRenderer {
 			}
 		}, earthTexture);
 		
-		boyA = new PartitionedGameObject(boyModel, new GameObjectUpdater(){
+		ArrayList<Model> helper=new ArrayList<Model>();
+		for(int i=0;i<boyModel.length;i++) //if(i!=5)
+			helper.add(boyModel[i]);
+		
+		boyA = new PartitionedGameObject(helper.toArray(new Model[]{}), new GameObjectUpdater(){
 			public void update(GameObject obj) {
 				float angleInDegreesA,angleInDegreesB,angleInDegreesC;
 				long time=SystemClock.uptimeMillis()%10000L;
