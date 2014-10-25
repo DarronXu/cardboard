@@ -1,5 +1,7 @@
 package com.IYYX.cardboard.myAPIs;
 
+import javax.media.opengl.GL2;
+
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,6 +23,11 @@ public class Texture {
 		mTextureHandle = loadGLTexture(tmp);
 		tmp.recycle();
 		
+		bIsValid = true;
+	}
+	
+	public Texture(com.jogamp.opengl.util.texture.Texture texture, GL2 gl){
+		mTextureHandle = texture.getTextureObject(gl);
 		bIsValid = true;
 	}
 	

@@ -22,8 +22,8 @@ public class GLTextureProgram extends GLProgram {
 	
 	public GLTextureProgram(Resources res) {
 		mResources = res;
-		mVertexShader = res.getString(R.string.myAPI_TextureVertexShader);
-		mFragmentShader = res.getString(R.string.myAPI_TextureFragmentShader);
+		mVertexShader = this.readRawTextFile(res.openRawResource(R.raw.myapi_vertex));
+		mFragmentShader = this.readRawTextFile(res.openRawResource(R.raw.myapi_fragment));
 		//---------------Create GL Program-------------
 		int programHandle = GLES20.glCreateProgram();
 		int vertexShaderHandle = GLES20.glCreateShader(GLES20.GL_VERTEX_SHADER);
@@ -54,13 +54,8 @@ public class GLTextureProgram extends GLProgram {
 			throw new RuntimeException("Error compiling GL Fragment Shader!");
 		}
 		//-----------------GL Program------------------
-		// Bind the shaders to the program.
 		GLES20.glAttachShader(programHandle, vertexShaderHandle);
 		GLES20.glAttachShader(programHandle, fragmentShaderHandle);
-		// Bind attributes
-		//GLES20.glBindAttribLocation(programHandle, 0, "a_Position");
-		//GLES20.glBindAttribLocation(programHandle, 1, "a_UV");
-		// Link these binded resources together into a program.
 		GLES20.glLinkProgram(programHandle);
 		GLES20.glGetProgramiv(programHandle, GLES20.GL_LINK_STATUS, compileStatus, 0);
 		if(compileStatus[0]==0){
@@ -102,7 +97,6 @@ public class GLTextureProgram extends GLProgram {
 			
 			GLES20.glDisableVertexAttribArray(mPositionHandle);
 			GLES20.glDisableVertexAttribArray(mUVHandle);
-			//Log.w("GLProgram","Drawed "+obj.mPrototype.name);
 		}
 	}
 	public void resetViewMatrix(float[] viewMatrix){

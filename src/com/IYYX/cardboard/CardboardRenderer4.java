@@ -89,6 +89,8 @@ public class CardboardRenderer4 extends MyCardboardRenderer {
 				look[0], look[1], look[2],
 				up[0], up[1], up[2]);
 		
+		mTextureProgram = new GLTextureProgram(res);
+		
 		//------------------------ Load in Models and Textures --------------------------
 
 		try {
@@ -120,11 +122,7 @@ public class CardboardRenderer4 extends MyCardboardRenderer {
 			}
 		}, earthTexture);
 		
-		ArrayList<Model> helper=new ArrayList<Model>();
-		for(int i=0;i<boyModel.length;i++) //if(i!=5)
-			helper.add(boyModel[i]);
-		
-		boyA = new PartitionedGameObject(helper.toArray(new Model[]{}), new GameObjectUpdater(){
+		boyA = new PartitionedGameObject(boyModel, new GameObjectUpdater(){
 			public void update(GameObject obj) {
 				float angleInDegreesA,angleInDegreesB,angleInDegreesC;
 				long time=SystemClock.uptimeMillis()%10000L;
@@ -141,7 +139,6 @@ public class CardboardRenderer4 extends MyCardboardRenderer {
 			}
 		}, res, dad.getPackageName(), false);
 		
-		mTextureProgram = new GLTextureProgram(res);
 		//mTextureProgram.addGameObject(earthA);
 		mTextureProgram.addGameObject(earthB);
 		boyA.addToGLProgram(mTextureProgram);
