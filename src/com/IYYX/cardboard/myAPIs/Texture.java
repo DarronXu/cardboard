@@ -1,5 +1,7 @@
 package com.IYYX.cardboard.myAPIs;
 
+import java.io.InputStream;
+
 import javax.media.opengl.GL2;
 
 import android.content.res.Resources;
@@ -20,6 +22,14 @@ public class Texture {
 	
 	public Texture(Resources res, int resourceID, boolean zoomForBetterPerformance) {
 		Bitmap tmp=loadBitmapFromResources(res, resourceID, zoomForBetterPerformance);
+		mTextureHandle = loadGLTexture(tmp);
+		tmp.recycle();
+		
+		bIsValid = true;
+	}
+	
+	public Texture(InputStream istream) {
+		Bitmap tmp=loadBitmapFromStream(istream);
 		mTextureHandle = loadGLTexture(tmp);
 		tmp.recycle();
 		
@@ -53,19 +63,19 @@ public class Texture {
 	
 	public static Bitmap loadBitmapFromResources(Resources res, int resourceID, boolean zoomForBetterPerformance) {
 		final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inScaled = false;   // No pre-scaling
-        
-        
+        options.inScaled = false;
         options.inPreferredConfig=Bitmap.Config.ARGB_8888;
-        /*
-         * THE ABOVE sentence is important, so that
-         * the newly added code in MainActivity.java
-         * "cardboardView.setEGLConfigChooser(8, 8, 8, 8, 0, 0);"
-         * will accord with this actually format of decoded Bitmap
-        */
- 
-        // Read in the resource
+
         final Bitmap bitmap = BitmapFactory.decodeResource(res, resourceID, options);
+        return bitmap;
+	}
+	
+	public static Bitmap loadBitmapFromStream(InputStream istream) {
+		final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inScaled = false;
+        options.inPreferredConfig=Bitmap.Config.ARGB_8888;
+
+        final Bitmap bitmap = BitmapFactory.decodeStream(istream, null, options);
         return bitmap;
 	}
 	

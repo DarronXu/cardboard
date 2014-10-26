@@ -1,12 +1,14 @@
 package com.IYYX.cardboard.Helpers;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import javax.media.opengl.GL2;
-
-import android.opengl.GLES20;
 
 import com.IYYX.cardboard.myAPIs.*;
 import com.jogamp.opengl.util.texture.TextureData;
@@ -30,7 +32,7 @@ public class PartitionedGameObject {
 				part.mTexture=database.get(name);
 			else {
 				try{
-				Texture texture = getTexture("./res/drawable/"+name+".png",gl);
+				Texture texture = getTexture(getTexFilename("TextureInfo/"+name+".info"),gl);
 				database.put(name, texture);
 				part.mTexture=texture;
 				} catch (Exception err) {
@@ -39,7 +41,16 @@ public class PartitionedGameObject {
 			}
 		}
 	}
-	
+
+	private String getTexFilename(String TexInfoFile) throws IOException {
+		InputStream texinfo;
+		texinfo=new FileInputStream("./assets/"+TexInfoFile);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(texinfo));
+        String sInfo=reader.readLine();			//The first line contains the path of this texture
+        reader.close();
+        return "./assets/"+sInfo;
+	}
+
 	/*public PartitionedGameObject(Model[] modelForEachPart, GameObjectUpdater[] updaterForEachPart, String packageName, boolean zoomTextureForBetterPerformance) {
 		final int howManyParts=modelForEachPart.length;
 		mPartitionedObject = new GameObject[howManyParts];

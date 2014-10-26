@@ -23,6 +23,10 @@ public class Model {
 	public static final Model[] emptyObjFileArray=new Model[]{};
 	public static final int mBytesPerFloat = Float.SIZE/8;
 	
+	public String toString(){
+		return name;
+	}
+	
 	public static Model readWholeModel(String assetsName, int colorDataSize, MyCallback callback) throws IOException {
 		long time=SystemClock.uptimeMillis();
 		

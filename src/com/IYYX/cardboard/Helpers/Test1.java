@@ -74,25 +74,3 @@ class MyCanvas extends JComponent {
     g2.finalize();
   }
 }
-
-class TestCallback extends MyCallback {
-	public InputStream openAssetInput(String assetsName) throws IOException
-	{
-		return new FileInputStream("./assets/"+assetsName);
-	}
-	int count=0;
-	public void showToast3D(String textAsString)
-	{
-		System.out.print(textAsString);
-		count++;
-		if(count>100) {
-			System.out.println();
-			count=0;
-		}
-	}
-	public void showToast3D(int textAsResourceID)
-	{
-		if(textAsResourceID==com.IYYX.cardboard.R.string.myAPI_LoadingObjFile)
-			showToast3D(".");
-	}
-}
