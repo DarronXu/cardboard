@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +17,8 @@ import javax.media.opengl.GLEventListener;
 import javax.media.opengl.GLProfile;
 import javax.media.opengl.awt.GLCanvas;
 import javax.media.opengl.glu.GLU;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 
 import com.IYYX.cardboard.myAPIs.GameObject;
 import com.IYYX.cardboard.myAPIs.GameObjectUpdater;
@@ -26,11 +29,14 @@ import com.IYYX.cardboard.myAPIs.Texture;
 import com.jogamp.opengl.util.FPSAnimator;
 
 public class Test2 {
+	
+	static String objPath;
 
 	static class glEventer implements GLEventListener{
 		
 		private float[] mCameraMatrix = new float[16];			//The position and orientation of Camera
 		private float[] mIdentityMatrix = new float[16];
+		
 		
 		Test_GLTextureProgram mTextureProgram;
 		Model earthModel;
@@ -42,6 +48,7 @@ public class Test2 {
 		GL2 gl;
 		
 		public void init(GLAutoDrawable arg0) {
+			
 			gl=arg0.getGL().getGL2();
 			gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 			gl.glEnable(GL2.GL_DEPTH_TEST);
@@ -73,7 +80,7 @@ public class Test2 {
 			//------------------------ Load in Models and Textures --------------------------
 
 			try {
-				boyModel = Model.readPartitionedModel("boy.obj", 3, new TestCallback());
+				boyModel = Model.readPartitionedModel(objPath, 3, new TestCallback());
 			} catch (IOException e) {e.printStackTrace();}
 			
 			boyA = new PartitionedGameObject(boyModel, new GameObjectUpdater(){
@@ -100,6 +107,7 @@ public class Test2 {
 					gl.glMatrixMode(GL2.GL_MODELVIEW);
 					gl.glPushMatrix();
 					gl.glLoadIdentity();
+					gl.glTranslatef(0, 0.0f, 0.0f);
 					gl.glScalef(scale,scale,scale);
 					gl.glRotatef(degreeUD, 0.0f, 1.0f, 0.0f);
 					gl.glRotatef(degreeLR, 0.0f, 0.0f, 1.0f);
@@ -132,6 +140,33 @@ public class Test2 {
 	}
 	
 	public static void main(String[] args) {
+		
+		JFileChooser openObj=new JFileChooser();
+		openObj.setDialogTitle("Choose *.obj File");
+		openObj.setCurrentDirectory(new File("./assets/"));
+		openObj.setFileFilter(new FileFilter(){
+			public boolean accept(File f) {
+				String[] tmp=f.getName().split("\\.");
+				if(tmp.length==0) return false;
+				if(f.isDirectory()) return true;
+				if(tmp[tmp.length-1].equalsIgnoreCase("obj"))
+					return true;
+				else return false;
+			}
+			public String getDescription() {
+				return "3D Model File (.obj)";
+			}
+		});
+		int result = openObj.showOpenDialog(null);
+		if(result!=JFileChooser.APPROVE_OPTION) System.exit(0);
+		else {
+			if(!openObj.getSelectedFile().getAbsolutePath().contains(new File("assets/").getAbsolutePath())) {
+				System.err.println("Please select files ONLY in the project ./assets/ folder.");
+				System.exit(0);
+			}
+			objPath = openObj.getSelectedFile().getName();
+		}
+		
 		GLProfile glp=GLProfile.getDefault();
 		GLCapabilities caps=new GLCapabilities(glp);
 		GLCanvas canvas=new GLCanvas(caps);
