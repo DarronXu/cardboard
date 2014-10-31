@@ -81,9 +81,9 @@ public class CardboardRenderer4 extends MyCardboardRenderer {
 		GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);		//IMPORTANT for Alpha !! 
 		
 		//---------------Set up View Matrix-----------------
-		final float[] eye = {0.0f,5.0f,0.0f};
-		final float[] look = {0.0f,-5.0f,0.0f};
-		final float[] up = {0.0f,0.0f,5.0f};
+		final float[] eye = {0.0f,0.0f,0.0f};
+		final float[] look = {0.0f,0.5f,0.0f};
+		final float[] up = {0.0f,0.0f,1.0f};
 		Matrix.setLookAtM(mCameraMatrix, 0,
 				eye[0], eye[1], eye[2],
 				look[0], look[1], look[2],
@@ -132,15 +132,16 @@ public class CardboardRenderer4 extends MyCardboardRenderer {
 				time=SystemClock.uptimeMillis()%3000L;
 				angleInDegreesC = (360.0f / 3000.0f) * ((int) time);
 				Matrix.setIdentityM(obj.mModelMatrix, 0);
-				Matrix.translateM(obj.mModelMatrix, 0, 0.0f, 3.0f, 0.8f);
-				Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesA, 1.0f, 0.0f, 0.0f);
-				Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesB, 0.0f, 1.0f, 0.0f);
-				Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesC, 0.0f, 0.0f, 1.0f);
+				//Matrix.scaleM(obj.mModelMatrix, 0, 2, 2, 2);
+				//Matrix.translateM(obj.mModelMatrix, 0, 0.0f, 3.0f, 0.8f);
+				//Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesA, 1.0f, 0.0f, 0.0f);
+				//Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesB, 0.0f, 1.0f, 0.0f);
+				//Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesC, 0.0f, 0.0f, 1.0f);
 			}
 		}, res, dad.getPackageName(), false);
 		
 		//mTextureProgram.addGameObject(earthA);
-		mTextureProgram.addGameObject(earthB);
+		//mTextureProgram.addGameObject(earthB);
 		boyA.addToGLProgram(mTextureProgram);
 	}
 
