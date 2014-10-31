@@ -95,7 +95,7 @@ public class CardboardRenderer4 extends MyCardboardRenderer {
 
 		try {
 			earthModel = Model.readWholeModel("earth.obj", 3, this.getMyCallback());
-			boyModel = Model.readPartitionedModel("police.obj", 3, getMyCallback());
+			boyModel = Model.readPartitionedModel("chofsecret.obj", 3, getMyCallback());
 		} catch (IOException e) {e.printStackTrace();}
 
 		earthTexture = new Texture(res, R.drawable.earth_texture, false);

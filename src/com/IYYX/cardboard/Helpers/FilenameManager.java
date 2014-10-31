@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
@@ -36,7 +38,6 @@ import android.R;
 public class FilenameManager {
 	
 	static String objPath=null;
-	static Vector<Model> obj=null;
 	static Dimension controlPanelDimension;
 	static Point controlPanelLocation;
 	
@@ -74,15 +75,74 @@ public class FilenameManager {
 		
 		showModelNameList();
 		showTexturePreview();
+		showSearchBoxFrame();
 	}
 	
-	static Vector<String> texturesRelativePath=new Vector<String>();
 	static JFrame controlPanelFrame = null;
 	static JFrame textureListFrame = null;
 	static JFrame modelListFrame = null;
+	static JFrame searchBoxFrame = null;
 	static boolean alwaysOnTop=false;
 	static JList<String> textureList = null;
 	static JList<Model> modelList = null;
+	static Vector<String> texturesRelativePath=new Vector<String>();
+	static Vector<Model> obj=null;
+
+	static Vector<String> filteredP=new Vector<String>();
+	static Vector<Model> filteredM=new Vector<Model>();
+	
+	static JTextField textField=null;
+	
+	static void updateList(){
+		if(textField==null) return;
+		searchBoxFrame.pack();
+		filteredP=new Vector<String>();
+		filteredM=new Vector<Model>();
+		if(texturesRelativePath!=null) {
+			for(int i=0;i<texturesRelativePath.size();i++) {
+				String str=texturesRelativePath.get(i);
+				if(str.toLowerCase().contains(textField.getText().toLowerCase())) {
+					filteredP.add(str);
+				}
+			}
+		} else filteredP=null;
+		if(obj!=null) {
+			for(int i=0;i<obj.size();i++) {
+				Model model=obj.get(i);
+				if(model.name.toLowerCase().contains(textField.getText().toLowerCase())){
+					filteredM.add(model);
+				}
+			}
+		} else filteredM=null;
+		if(textureList!=null) {
+			textureList.setListData(filteredP);
+			textureListFrame.repaint();
+		}
+		if(modelList!=null) {
+			modelList.setListData(filteredM);
+			modelListFrame.repaint();
+		}
+	}
+	
+	static void showSearchBoxFrame(){
+		searchBoxFrame=new JFrame("Search Box");
+		textField=new JTextField();
+		textField.setSize(80, 60);
+		searchBoxFrame.add(textField);
+		textField.getDocument().addDocumentListener(new DocumentListener(){
+			public void changedUpdate(DocumentEvent e) {
+				updateList();
+			}
+			public void insertUpdate(DocumentEvent e) {
+				updateList();
+			}
+			public void removeUpdate(DocumentEvent e) {
+				updateList();
+			}
+		});
+		searchBoxFrame.pack();
+		searchBoxFrame.setVisible(true);
+	}
 	
 	public static void infoBox(String infoMessage, String titleBar)
     {
@@ -109,9 +169,9 @@ public class FilenameManager {
 		bindButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				final int texIndex=textureList.getSelectedIndex();
-				final String tex=texturesRelativePath.get(texIndex);
+				final String tex=filteredP.get(texIndex);
 				final int modIndex=modelList.getSelectedIndex();
-				final Model mod=obj.get(modIndex);
+				final Model mod=filteredM.get(modIndex);
 				
 				boolean successful=false;
 				if(new File("./assets/TextureInfo/"+mod.name+".info").exists())
@@ -126,13 +186,14 @@ public class FilenameManager {
 					System.err.println("Cannot write Texture Inforamtion into Android Project!");
 				}
 				if(successful) {
-					texturesRelativePath.remove(texIndex);
-					textureList.setListData(texturesRelativePath);
-					obj.remove(modIndex);
+					//texturesRelativePath.remove(tex);
+					//textureList.setListData(texturesRelativePath);
+					obj.remove(mod);
 					modelList.setListData(obj);
 					currentModel=null;
 					currentTextureName=null;
 					previewCanvas.repaint();
+					updateList();
 				}
 			}
 		});
