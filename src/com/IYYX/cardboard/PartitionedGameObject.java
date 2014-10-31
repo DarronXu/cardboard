@@ -1,11 +1,13 @@
-package com.IYYX.cardboard.myAPIs;
+package com.IYYX.cardboard;
+
+import com.IYYX.cardboard.myAPIs.Texture;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import com.IYYX.cardboard.myAPIs.Texture;
+import com.IYYX.cardboard.myAPIs.*;
 
 import android.content.res.AssetManager;
 import android.content.res.Resources;
@@ -14,7 +16,7 @@ import android.content.res.Resources;
  * Prerequisite: For every element in the GameObject[] passed in, its mPrototype.name corresponds with the resource name of the texture that should be attached to it.
  * @author c4phone
  */
-public class PartitionedGameObject {
+class PartitionedGameObject {
 	public static HashMap<String,Texture> database=new HashMap<String,Texture>();
 	public GameObject[] mPartitionedObject;
 	Resources res;

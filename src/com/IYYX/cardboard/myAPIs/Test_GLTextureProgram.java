@@ -12,7 +12,7 @@ public class Test_GLTextureProgram extends GLProgram {
 	private final int mPositionDataSize = 4;
 	private final int mUVDataSize = 2;
 	
-	private float[] mMVPMatrix = new float[16];
+	private final float[] mMVPMatrix = new float[16];
 	private float[] mViewMatrix;
 	private float[] mProjectionMatrix;
 	private GL2 gl;
@@ -81,10 +81,14 @@ public class Test_GLTextureProgram extends GLProgram {
 		for(GameObject obj:objects) {
 			int mPositionHandle, mUVHandle;
 			int mMVPMatrixHandle;
+			int mHasTexUVHandle;
+			int mFallbackColorHandle;
 			
 			mMVPMatrixHandle = gl.glGetUniformLocation(mProgramHandle, "u_MVPMatrix");
 			mPositionHandle = gl.glGetAttribLocation(mProgramHandle, "a_Position");
 			mUVHandle = gl.glGetAttribLocation(mProgramHandle, "a_UV");
+			mHasTexUVHandle=gl.glGetUniformLocation(mProgramHandle, "u_hasTexUV");
+			mFallbackColorHandle=gl.glGetUniformLocation(mProgramHandle, "u_fallbackColor");
 			int myTextureSamplerHandle = gl.glGetUniformLocation(mProgramHandle, "myTextureSampler");
 			
 			gl.glEnableVertexAttribArray(mPositionHandle);
@@ -105,13 +109,16 @@ public class Test_GLTextureProgram extends GLProgram {
 			gl.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mMVPMatrix, 0);
 			
 			gl.glActiveTexture(GL2.GL_TEXTURE0);
-			gl.glBindTexture(GL2.GL_TEXTURE_2D, obj.mTexture.mTextureHandle);
+			if(obj.mTexture!=null) gl.glBindTexture(GL2.GL_TEXTURE_2D, obj.mTexture.mTextureHandle);
 			gl.glUniform1i(myTextureSamplerHandle, 0);
 			
 			obj.mPrototype.vertices.position(0);
 			gl.glVertexAttribPointer(mPositionHandle, mPositionDataSize, GL2.GL_FLOAT, false, 0, obj.mPrototype.vertices);
 			obj.mPrototype.textureUVs.position(0);
 			gl.glVertexAttribPointer(mUVHandle, mUVDataSize, GL2.GL_FLOAT, false, 0, obj.mPrototype.textureUVs);
+			gl.glUniform4fv(mFallbackColorHandle, 1, obj.fbColorArr, 0);
+			if(obj.mPrototype.hasTextureUV) gl.glUniform1i(mHasTexUVHandle, 1);
+			else gl.glUniform1i(mHasTexUVHandle, 0);
 			gl.glDrawArrays(GL2.GL_TRIANGLES, 0, obj.mPrototype.fCount*3);
 			
 			gl.glDisableVertexAttribArray(mPositionHandle);

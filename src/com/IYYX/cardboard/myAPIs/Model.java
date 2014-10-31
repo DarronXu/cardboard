@@ -8,17 +8,14 @@ import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import android.os.SystemClock;
-import android.util.Log;
-
 import com.IYYX.cardboard.R;
 
 public class Model {
 	private Model() {}
 	public String name = "(default)";
 	public boolean hasTextureUV=false;
-	public FloatBuffer vertices, textureUVs, colors;
-	public int mColorDataSize, fCount = 0;
+	public FloatBuffer vertices, textureUVs;
+	public int fCount = 0;
 	
 	public static final Model[] emptyObjFileArray=new Model[]{};
 	public static final int mBytesPerFloat = Float.SIZE/8;
@@ -28,7 +25,6 @@ public class Model {
 	}
 	
 	public static Model readWholeModel(String assetsName, int colorDataSize, MyCallback callback) throws IOException {
-		long time=SystemClock.uptimeMillis();
 		
 		InputStream istream=callback.openAssetInput(assetsName);
 		Scanner scan=new Scanner(istream);
@@ -71,11 +67,8 @@ public class Model {
 		
 		ans.textureUVs=ByteBuffer.allocateDirect(ans.fCount*3*2*mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
 		ans.vertices=ByteBuffer.allocateDirect(ans.fCount*3*4*mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
-		ans.colors=ByteBuffer.allocateDirect(ans.fCount*3*colorDataSize*mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
 		ans.textureUVs.position(0);
 		ans.vertices.position(0);
-		ans.colors.position(0);
-		ans.mColorDataSize=colorDataSize;
 		ans.name=assetsName;
 		
 		for(int i=0;i<ans.fCount*3;i++){
@@ -86,15 +79,9 @@ public class Model {
 			ans.vertices.put(ansVertices.get(i*4+3));
 			if(ans.hasTextureUV) ans.textureUVs.put(ansTextureUVs.get(i*2));
 			if(ans.hasTextureUV) ans.textureUVs.put(ansTextureUVs.get(i*2+1));
-			ans.colors.put((float)Math.random());
-			ans.colors.put((float)Math.random());
-			ans.colors.put((float)Math.random());
-			if(colorDataSize==4) ans.colors.put(1.0f);
 		}
 		ans.vertices.position(0);
 		ans.textureUVs.position(0);
-		ans.colors.position(0);
-		Log.d("readObjAsAWhole","Load " + assetsName + " consumed "+(SystemClock.uptimeMillis()-time) + " ms.");
 		return ans;
 	}
 	public static Model[] readPartitionedModel(String assetsName, int colorDataSize, MyCallback callback) throws IOException {
@@ -147,28 +134,18 @@ public class Model {
 			Model cObj=ans.get(k);
 			cObj.textureUVs=ByteBuffer.allocateDirect(cObj.fCount*3*2*mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
 			cObj.vertices=ByteBuffer.allocateDirect(cObj.fCount*3*4*mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
-			cObj.colors=ByteBuffer.allocateDirect(cObj.fCount*3*colorDataSize*mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
 			cObj.textureUVs.position(0);
 			cObj.vertices.position(0);
-			cObj.colors.position(0);
 			//cObj.vCount=vertex.size();
-			cObj.mColorDataSize=colorDataSize;
 			final int tmp=currentAnsIndex;
 			for(;currentAnsIndex<tmp+cObj.fCount*3;currentAnsIndex++){
 				callback.showToast3D(R.string.myAPI_LoadingObjFile);
 				putAll(cObj.vertices,ansVertices.get(currentAnsIndex));
 				if(cObj.hasTextureUV) putAll(cObj.textureUVs,ansTextureUVs.get(currentAnsIndex));
-				cObj.colors.put((float)Math.random());
-				cObj.colors.put((float)Math.random());
-				cObj.colors.put((float)Math.random());
-				if(colorDataSize==4) cObj.colors.put(1.0f);
 			}
 			cObj.vertices.position(0);
 			cObj.textureUVs.position(0);
-			cObj.colors.position(0);
-			//Log.d("readObjToArr",cObj.name);
 		}
-		//Log.d("readObjToArr","Load " + assetsName + " consumed "+(SystemClock.uptimeMillis()-time) + " ms.");
 		return ans.toArray(emptyObjFileArray);
 	}
 	private static void putAll(FloatBuffer dest, Float[] vals) {

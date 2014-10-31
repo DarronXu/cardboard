@@ -18,7 +18,7 @@ import com.jogamp.opengl.util.texture.TextureIO;
  * Prerequisite: For every element in the GameObject[] passed in, its mPrototype.name corresponds with the resource name of the texture that should be attached to it.
  * @author c4phone
  */
-public class PartitionedGameObject {
+class PartitionedGameObject {
 	public static HashMap<String,Texture> database=new HashMap<String,Texture>();
 	public GameObject[] mPartitionedObject;
 	

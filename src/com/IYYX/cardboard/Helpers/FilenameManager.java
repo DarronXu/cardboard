@@ -194,7 +194,6 @@ public class FilenameManager {
 		controlPanelLocation=window.getLocation();
 		controlPanelDimension=window.getSize();
 		
-
 		container.add(textureList);
 		window2.pack();
 		window2.setLocation(controlPanelLocation.x+0, controlPanelLocation.y+controlPanelDimension.height+10);

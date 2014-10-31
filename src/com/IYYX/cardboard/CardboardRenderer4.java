@@ -16,7 +16,7 @@ import com.IYYX.cardboard.myAPIs.GameObject;
 import com.IYYX.cardboard.myAPIs.GameObjectUpdater;
 import com.IYYX.cardboard.myAPIs.Model;
 import com.IYYX.cardboard.myAPIs.MyCardboardRenderer;
-import com.IYYX.cardboard.myAPIs.PartitionedGameObject;
+import com.IYYX.cardboard.PartitionedGameObject;
 import com.IYYX.cardboard.myAPIs.Texture;
 import com.google.vrtoolkit.cardboard.*;
 public class CardboardRenderer4 extends MyCardboardRenderer { 

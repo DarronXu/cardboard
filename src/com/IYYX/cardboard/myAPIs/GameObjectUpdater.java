@@ -6,5 +6,5 @@ package com.IYYX.cardboard.myAPIs;
  * In this interface, you should update attributes such as the ModelMatrix, which is used to place this GameObject in the game space.
  */
 public interface GameObjectUpdater {
-	void update(GameObject object);
+	public void update(GameObject object);
 }
