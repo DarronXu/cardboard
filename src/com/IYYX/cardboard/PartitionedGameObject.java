@@ -1,6 +1,6 @@
 package com.IYYX.cardboard;
 
-import com.IYYX.cardboard.myAPIs.Texture;
+import com.IYYX.cardboard.Texture;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,11 +15,11 @@ import com.IYYX.cardboard.myAPIs.*;
  */
 class PartitionedGameObject {
 	public GameObject[] mPartitionedObject;
-	static HashMap<String,Texture> openedTextures=new HashMap<String,Texture>();
+	static HashMap<String,com.IYYX.cardboard.myAPIs.Texture> openedTextures=new HashMap<String,com.IYYX.cardboard.myAPIs.Texture>();
 	MyCallback helper;
 	
 	public static void resetOpenedTextures() {
-		openedTextures=new HashMap<String,Texture>();
+		openedTextures=new HashMap<String,com.IYYX.cardboard.myAPIs.Texture>();
 	}
 	
 	public PartitionedGameObject(Model[] modelForEachPart, String textureInfoFilename, GameObjectUpdater commonUpdater, MyCallback callback) {

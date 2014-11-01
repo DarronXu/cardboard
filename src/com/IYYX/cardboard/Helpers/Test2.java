@@ -20,7 +20,6 @@ import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.GLProfile;
 import javax.media.opengl.awt.GLCanvas;
-import javax.media.opengl.glu.GLU;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
@@ -28,7 +27,6 @@ import com.IYYX.cardboard.myAPIs.GameObject;
 import com.IYYX.cardboard.myAPIs.GameObjectUpdater;
 import com.IYYX.cardboard.myAPIs.Model;
 import com.IYYX.cardboard.myAPIs.MyCallback;
-import com.IYYX.cardboard.myAPIs.Test_GLTextureProgram;
 import com.IYYX.cardboard.myAPIs.Texture;
 import com.jogamp.opengl.util.FPSAnimator;
 

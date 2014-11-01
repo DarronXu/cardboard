@@ -97,7 +97,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 			}
 		}, getMyCallback());
 		
-		boyA.addToGLProgram(mTextureProgram);
+		//boyA.addToGLProgram(mTextureProgram);
 		chofsecretA.addToGLProgram(mTextureProgram);
 	}
 
