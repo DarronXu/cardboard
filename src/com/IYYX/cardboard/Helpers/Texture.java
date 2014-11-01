@@ -12,7 +12,6 @@ import android.opengl.GLUtils;
 
 class Texture extends com.IYYX.cardboard.myAPIs.Texture {
 	
-	public final int mTextureHandle;
 	public boolean bIsValid;
 	
 	public Texture(Bitmap image) {
