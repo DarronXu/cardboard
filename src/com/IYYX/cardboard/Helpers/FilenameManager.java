@@ -11,16 +11,12 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Vector;
 
 import javax.swing.*;
@@ -31,15 +27,14 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
 
 import com.IYYX.cardboard.myAPIs.Model;
-import com.IYYX.cardboard.myAPIs.MyCallback;
-
-import android.R;
+import com.IYYX.cardboard.myAPIs.ModelIO;
 
 public class FilenameManager {
 	
-	static String objPath=null;
+	static String objName=null;
 	static Dimension controlPanelDimension;
 	static Point controlPanelLocation;
+	static Model[] origObj;
 	
 	public static void main(String[] args) {
 		System.out.println("This is not a class used in Android.");
@@ -67,11 +62,11 @@ public class FilenameManager {
 				System.err.println("Please select files ONLY in the project ./assets/ folder.");
 				System.exit(0);
 			}
-			objPath = openObj.getSelectedFile().getName();
+			objName = openObj.getSelectedFile().getName();
 		}
 		obj=new Vector<Model>();
-		Model[] tmpObj=readObj(objPath);
-		for(int i=0;i<tmpObj.length;i++) obj.add(tmpObj[i]);
+		origObj=readObj(objName);
+		for(int i=0;i<origObj.length;i++) obj.add(origObj[i]);
 		
 		showModelNameList();
 		showTexturePreview();
@@ -149,10 +144,15 @@ public class FilenameManager {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
 	
+	static HashMap<String,String> bindingResult=new HashMap<String,String>();
+	
 	static void showControlPanel(){
 		JFrame window=controlPanelFrame=new JFrame("Main Panel");
 		JButton loadTexture=new JButton("Load Texture");
 		JButton bindButton=new JButton("Bind");
+		JButton quickBindButton=new JButton("Quick Bind");
+		JButton saveButton=new JButton("Save Binding");
+		JButton zipButton=new JButton("Update .objpp");
 		final JButton stayOnTop=new JButton("Stay on top");
 
 		final JFrame window2 = textureListFrame = new JFrame("Texture List");
@@ -166,35 +166,85 @@ public class FilenameManager {
 		textureList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		textureList.addListSelectionListener(new TextureNameListListener());
 		
+		quickBindButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(filteredP.size()!=1) {
+					infoBox("Quick Binding is only available when:\nThere is one and only one item in the picture list.","ERROR");
+					return;
+				}
+				final String tex=filteredP.get(0);
+				for(Model m:filteredM) {
+					bindingResult.put(m.name, tex);
+					obj.remove(m);
+					modelList.setListData(obj);
+					currentModel=null;
+					currentTextureName=null;
+				}
+				previewCanvas.repaint();
+				textField.setText("");
+				updateList();
+			}
+		});
+		
+		zipButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser saveObjpp=new JFileChooser();
+				saveObjpp.setDialogTitle("Save As *.objpp File");
+				saveObjpp.setCurrentDirectory(new File("./assets/"));
+				saveObjpp.setFileFilter(new FileFilter(){
+					public boolean accept(File f) {
+						String[] tmp=f.getName().split("\\.");
+						if(tmp.length==0) return false;
+						if(f.isDirectory()) return true;
+						if(tmp[tmp.length-1].equalsIgnoreCase("objpp"))
+							return true;
+						else return false;
+					}
+					public String getDescription() {
+						return "Our Own Compressed Model File (.objpp)";
+					}
+				});
+				int result = saveObjpp.showSaveDialog(controlPanelFrame);
+				if(result==JFileChooser.APPROVE_OPTION) try {
+					ModelIO.save(origObj,new FileOutputStream(saveObjpp.getSelectedFile()));
+					infoBox("Created *.objpp file in PARTITIONED format.","Warning");
+				}
+				catch(IOException err) {
+					infoBox("Failed! IOException occured!","Warning");
+					err.printStackTrace();
+				}
+			}
+		});
+		
+		saveButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				if(new File("./assets/TextureInfo/"+objName+".info").exists())
+					infoBox("There already exists a configuration file\n for the selected Model.\nPlease be cautious!\n\nIf backup is needed, please DON\'t press OK,\n and please copy the file out, NOW!","Warning!");
+				try {
+					OutputStream ostream=new FileOutputStream("./assets/TextureInfo/"+objName+"-info");
+					ObjectOutputStream writer=new ObjectOutputStream(ostream);
+					writer.writeObject(bindingResult);
+					writer.close();
+					infoBox("Notice:\nInfo File saved as "+"./assets/TextureInfo/"+objName+"-info","INFORMATION!");
+				} catch (IOException e1) {
+					System.err.println("Cannot write Texture Inforamtion into Android Project!");
+				}
+			}
+		});
+		
 		bindButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				final int texIndex=textureList.getSelectedIndex();
 				final String tex=filteredP.get(texIndex);
 				final int modIndex=modelList.getSelectedIndex();
 				final Model mod=filteredM.get(modIndex);
-				
-				boolean successful=false;
-				if(new File("./assets/TextureInfo/"+mod.name+".info").exists())
-					infoBox("There already exists a configuration file\n for the selected Model.\nPlease be cautious!\n\nIf backup is needed, please DON\'t press OK,\n and please copy the file out, NOW!","Warning!");
-				try {
-					OutputStream ostream=new FileOutputStream("./assets/TextureInfo/"+mod.name+".info");
-					OutputStreamWriter writer=new OutputStreamWriter(ostream);
-					writer.write(tex+"\n");
-					writer.close();
-					successful=true;
-				} catch (IOException e1) {
-					System.err.println("Cannot write Texture Inforamtion into Android Project!");
-				}
-				if(successful) {
-					//texturesRelativePath.remove(tex);
-					//textureList.setListData(texturesRelativePath);
-					obj.remove(mod);
-					modelList.setListData(obj);
-					currentModel=null;
-					currentTextureName=null;
-					previewCanvas.repaint();
-					updateList();
-				}
+				bindingResult.put(mod.name, tex);
+				obj.remove(mod);
+				modelList.setListData(obj);
+				currentModel=null;
+				currentTextureName=null;
+				previewCanvas.repaint();
+				updateList();
 			}
 		});
 		
@@ -205,6 +255,7 @@ public class FilenameManager {
 				if(textureListFrame!=null) textureListFrame.setAlwaysOnTop(alwaysOnTop);
 				if(modelListFrame!=null) modelListFrame.setAlwaysOnTop(alwaysOnTop);
 				if(previewFrame!=null) previewFrame.setAlwaysOnTop(alwaysOnTop);
+				if(searchBoxFrame!=null) searchBoxFrame.setAlwaysOnTop(alwaysOnTop);
 				if(alwaysOnTop) stayOnTop.setText("Don\'t stay top");
 				else stayOnTop.setText("Stay on top");
 			}
@@ -236,6 +287,7 @@ public class FilenameManager {
 						String tmp=getRelativePath(f,"./assets/");
 						texturesRelativePath.add(tmp);
 						textureList.setListData(texturesRelativePath);
+						updateList();
 						window2.pack();
 					}
 				}
@@ -245,7 +297,13 @@ public class FilenameManager {
 		window.setLayout(new GridLayout(0,1));
 		window.add(loadTexture);
 		window.add(new JSeparator());
+		window.add(zipButton);
+		window.add(new JSeparator());
 		window.add(bindButton);
+		window.add(new JSeparator());
+		window.add(quickBindButton);
+		window.add(new JSeparator());
+		window.add(saveButton);
 		window.add(new JSeparator());
 		window.add(stayOnTop);
 		window.pack();
@@ -325,7 +383,7 @@ public class FilenameManager {
 		Model[] ans = null;
 		try {
 			System.out.print("Loading");
-			ans = Model.readPartitionedModel(name, 4, new TestCallback());
+			ans = Model.readPartitionedModel(name, new TestCallback());
 			System.out.println();
 			System.out.println("Loading Completed.");
 		} catch (IOException e) {

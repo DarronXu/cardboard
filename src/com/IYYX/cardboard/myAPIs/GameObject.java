@@ -15,13 +15,14 @@ public class GameObject {
 		mUpdater=updater;
 		mTexture=texture;
 	}
-	
-	private GameObject setUpdater(GameObjectUpdater updater) {
-		mUpdater=updater;
-		return this;
+
+	public GameObject(Model prototype,Texture texture) {
+		mPrototype=prototype;
+		mUpdater=null;
+		mTexture=texture;
 	}
 	
-	public static GameObject createSimpleObject(Model prototype,Texture texture) {
-		return new GameObject(prototype,SimpleUpdater.updater,texture);
+	public void addToGLProgram(GLProgram program) {
+		program.objects.add(this);
 	}
 }

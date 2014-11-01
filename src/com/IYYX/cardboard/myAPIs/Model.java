@@ -11,10 +11,11 @@ import java.util.Scanner;
 import com.IYYX.cardboard.R;
 
 public class Model {
-	private Model() {}
+	Model() {}
 	public String name = "(default)";
 	public boolean hasTextureUV=false;
-	public FloatBuffer vertices, textureUVs;
+	public boolean hasNormal=false;
+	public FloatBuffer vertices, textureUVs, normals;
 	public int fCount = 0;
 	
 	public static final Model[] emptyObjFileArray=new Model[]{};
@@ -24,7 +25,7 @@ public class Model {
 		return name;
 	}
 	
-	public static Model readWholeModel(String assetsName, int colorDataSize, MyCallback callback) throws IOException {
+	public static Model readWholeModel(String assetsName, MyCallback callback) throws IOException {
 		
 		InputStream istream=callback.openAssetInput(assetsName);
 		Scanner scan=new Scanner(istream);
@@ -84,7 +85,7 @@ public class Model {
 		ans.textureUVs.position(0);
 		return ans;
 	}
-	public static Model[] readPartitionedModel(String assetsName, int colorDataSize, MyCallback callback) throws IOException {
+	public static Model[] readPartitionedModel(String assetsName, MyCallback callback) throws IOException {
 		//long time=SystemClock.uptimeMillis();
 
 		InputStream istream=callback.openAssetInput(assetsName);

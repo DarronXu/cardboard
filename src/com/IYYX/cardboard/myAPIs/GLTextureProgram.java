@@ -1,7 +1,6 @@
 package com.IYYX.cardboard.myAPIs;
 
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 import android.util.Log;

@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.util.HashMap;
 
 import javax.media.opengl.GL2;
@@ -19,29 +20,49 @@ import com.jogamp.opengl.util.texture.TextureIO;
  * @author c4phone
  */
 class PartitionedGameObject {
-	public static HashMap<String,Texture> database=new HashMap<String,Texture>();
 	public GameObject[] mPartitionedObject;
 	
-	public PartitionedGameObject(Model[] modelForEachPart, GameObjectUpdater commonUpdater, GL2 gl) {
+	public PartitionedGameObject(Model[] modelForEachPart, String textureInfoFilename, GameObjectUpdater commonUpdater, GL2 gl) {
 		final int howManyParts=modelForEachPart.length;
-		mPartitionedObject = new GameObject[howManyParts];
-		for(int i=0;i<howManyParts;i++) {
-			GameObject part = mPartitionedObject[i] = new GameObject(modelForEachPart[i], commonUpdater, null);
-			String name=part.mPrototype.name;
-			if(database.containsKey(name))
-				part.mTexture=database.get(name);
-			else {
-				try{
-				Texture texture = getTexture(getTexFilename("TextureInfo/"+name+".info"),gl);
-				database.put(name, texture);
-				part.mTexture=texture;
-				} catch (Exception err) {
-					err.printStackTrace();
-				}
+		try {
+			HashMap<String,String> nameToTex=loadTexInfo("TextureInfo/"+textureInfoFilename);
+			mPartitionedObject = new GameObject[howManyParts];
+			for(int i=0;i<howManyParts;i++) {
+				GameObject part = mPartitionedObject[i] = new GameObject(modelForEachPart[i], commonUpdater, null);
+				String name=part.mPrototype.name;
+				part.mTexture=getTexture("./assets/"+nameToTex.get(name),gl);
 			}
+		} catch (IOException|ClassNotFoundException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Cannot create PartitionedGameObject!");
 		}
 	}
 
+	public PartitionedGameObject(Model[] modelForEachPart, String textureInfoFilename, GameObjectUpdater[] commonUpdaters, GL2 gl) {
+		final int howManyParts=modelForEachPart.length;
+		try {
+			HashMap<String,String> nameToTex=loadTexInfo("TextureInfo/"+textureInfoFilename);
+			mPartitionedObject = new GameObject[howManyParts];
+			for(int i=0;i<howManyParts;i++) {
+				GameObject part = mPartitionedObject[i] = new GameObject(modelForEachPart[i], commonUpdaters[i], null);
+				String name=part.mPrototype.name;
+				part.mTexture=getTexture("./assets/"+nameToTex.get(name),gl);
+			}
+		} catch (IOException|ClassNotFoundException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Cannot create PartitionedGameObject!");
+		}
+	}
+
+	private static HashMap<String,String> loadTexInfo(String TexInfoFile) throws IOException, ClassNotFoundException {
+		InputStream texinfo=new FileInputStream("./assets/"+TexInfoFile);
+		HashMap<String,String> ans;
+        ObjectInputStream reader=new ObjectInputStream(texinfo);
+        ans=(HashMap<String,String>)reader.readObject();
+		reader.close();
+		return ans;
+	}
+	
 	private String getTexFilename(String TexInfoFile) throws IOException {
 		InputStream texinfo;
 		texinfo=new FileInputStream("./assets/"+TexInfoFile);
@@ -50,23 +71,6 @@ class PartitionedGameObject {
         reader.close();
         return "./assets/"+sInfo;
 	}
-
-	/*public PartitionedGameObject(Model[] modelForEachPart, GameObjectUpdater[] updaterForEachPart, String packageName, boolean zoomTextureForBetterPerformance) {
-		final int howManyParts=modelForEachPart.length;
-		mPartitionedObject = new GameObject[howManyParts];
-		for(int i=0;i<howManyParts;i++) {
-			GameObject part = mPartitionedObject[i] = new GameObject(modelForEachPart[i], updaterForEachPart[i], null);
-			String name=part.mPrototype.name;
-			if(database.containsKey(name))
-				part.mTexture=database.get(name);
-			else {
-				int ID=res.getIdentifier(name, "drawable", packageName);
-				Texture texture = new Texture(res, ID, zoomTextureForBetterPerformance);
-				database.put(name, texture);
-				part.mTexture=texture;
-			}
-		}
-	}*/
 	
 	private static Texture getTexture(String filename, GL2 gl) throws IOException{
         TextureData data = TextureIO.newTextureData(gl.getGLProfile(), new File(filename), false, null);
@@ -77,7 +81,7 @@ class PartitionedGameObject {
 	
 	public void addToGLProgram(GLProgram program) {
 		for(GameObject obj:mPartitionedObject) {
-			program.addGameObject(obj);
+			program.objects.add(obj);
 		}
 	}
 	

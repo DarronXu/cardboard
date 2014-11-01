@@ -28,7 +28,6 @@ import com.IYYX.cardboard.myAPIs.GameObject;
 import com.IYYX.cardboard.myAPIs.GameObjectUpdater;
 import com.IYYX.cardboard.myAPIs.Model;
 import com.IYYX.cardboard.myAPIs.MyCallback;
-import com.IYYX.cardboard.myAPIs.SimpleUpdater;
 import com.IYYX.cardboard.myAPIs.Test_GLTextureProgram;
 import com.IYYX.cardboard.myAPIs.Texture;
 import com.jogamp.opengl.util.FPSAnimator;
@@ -36,6 +35,7 @@ import com.jogamp.opengl.util.FPSAnimator;
 public class Test2 {
 	
 	static String objPath;
+	static String objInfoName;
 
 	static class glEventer implements GLEventListener{
 		
@@ -80,8 +80,8 @@ public class Test2 {
 			//------------------------ Load in Models and Textures --------------------------
 
 			try {
-				floorModel = Model.readWholeModel("floor.obj", 3, new TestCallback());
-				boyModel = Model.readPartitionedModel(objPath, 3, new TestCallback());
+				floorModel = Model.readWholeModel("floor.obj", new TestCallback());
+				boyModel = Model.readPartitionedModel(objPath, new TestCallback());
 			} catch (IOException e) {e.printStackTrace();}
 			
 			GameObjectUpdater commonUpdater=new GameObjectUpdater(){
@@ -116,11 +116,11 @@ public class Test2 {
 				}
 			};
 			
-			boyA = new PartitionedGameObject(boyModel, commonUpdater, gl);
+			boyA = new PartitionedGameObject(boyModel,objInfoName, commonUpdater, gl);
 			GameObject xOyFloor,yOzFloor,zOxFloor;
-			xOyFloor=GameObject.createSimpleObject(floorModel, null);
-			yOzFloor=GameObject.createSimpleObject(floorModel, null);
-			zOxFloor=GameObject.createSimpleObject(floorModel, null);
+			xOyFloor=new GameObject(floorModel, null);
+			yOzFloor=new GameObject(floorModel, null);
+			zOxFloor=new GameObject(floorModel, null);
 			xOyFloor.fbColorArr=new float[]{1.0f,0,0,0.5f};
 			yOzFloor.fbColorArr=new float[]{0,1.0f,0,0.5f};
 			zOxFloor.fbColorArr=new float[]{0,0,1.0f,0.5f};
@@ -189,6 +189,19 @@ public class Test2 {
 				System.exit(0);
 			}
 			objPath = openObj.getSelectedFile().getName();
+		}
+		
+		openObj=new JFileChooser();
+		openObj.setDialogTitle("Choose TextureInfo File");
+		openObj.setCurrentDirectory(new File("./assets/TextureInfo/"));
+		result = openObj.showOpenDialog(null);
+		if(result!=JFileChooser.APPROVE_OPTION) System.exit(0);
+		else {
+			if(!openObj.getSelectedFile().getAbsolutePath().contains(new File("assets/").getAbsolutePath())) {
+				System.err.println("Please select files ONLY in the project ./assets/ folder.");
+				System.exit(0);
+			}
+			objInfoName = openObj.getSelectedFile().getName();
 		}
 		
 		GLProfile glp=GLProfile.getDefault();

@@ -2,83 +2,77 @@ package com.IYYX.cardboard;
 
 import com.IYYX.cardboard.myAPIs.Texture;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.util.HashMap;
-import com.IYYX.cardboard.myAPIs.*;
 
-import android.content.res.AssetManager;
-import android.content.res.Resources;
+import com.IYYX.cardboard.myAPIs.*;
 
 /**
  * Prerequisite: For every element in the GameObject[] passed in, its mPrototype.name corresponds with the resource name of the texture that should be attached to it.
  * @author c4phone
  */
 class PartitionedGameObject {
-	public static HashMap<String,Texture> database=new HashMap<String,Texture>();
 	public GameObject[] mPartitionedObject;
-	Resources res;
-	AssetManager mAssets;
+	static HashMap<String,Texture> openedTextures=new HashMap<String,Texture>();
+	MyCallback helper;
 	
-	public PartitionedGameObject(Model[] modelForEachPart, GameObjectUpdater commonUpdater, Resources res, String packageName, boolean zoomTextureForBetterPerformance) {
-		this.res=res;
-		mAssets=res.getAssets();
-		final int howManyParts=modelForEachPart.length;
-		mPartitionedObject = new GameObject[howManyParts];
-		for(int i=0;i<howManyParts;i++) {
-			GameObject part = mPartitionedObject[i] = new GameObject(modelForEachPart[i], commonUpdater, null);
-			String name=part.mPrototype.name;
-			if(database.containsKey(name))
-				part.mTexture=database.get(name);
-			else {
-				try {
-				Texture texture = new Texture(getInputStream("TextureInfo/"+name+".info",mAssets));
-				database.put(name, texture);
-				part.mTexture=texture;
-				} catch (Exception err) {
-					err.printStackTrace();
-				}
-			}
-		}
+	public static void resetOpenedTextures() {
+		openedTextures=new HashMap<String,Texture>();
 	}
 	
-	private InputStream getInputStream(String TexInfoFile, AssetManager assets) throws IOException {
-		InputStream texinfo;
-		texinfo=assets.open(TexInfoFile);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(texinfo));
-        String sInfo=reader.readLine();			//The first line contains the path of this texture
-        System.err.println(sInfo);
-        reader.close();
-        return assets.open(sInfo);
-	}
-	
-	public PartitionedGameObject(Model[] modelForEachPart, GameObjectUpdater[] updaterForEachPart, Resources res, String packageName, boolean zoomTextureForBetterPerformance) {
-		this.res=res;
-		this.mAssets=res.getAssets();
+	public PartitionedGameObject(Model[] modelForEachPart, String textureInfoFilename, GameObjectUpdater commonUpdater, MyCallback callback) {
+		helper=callback;
 		final int howManyParts=modelForEachPart.length;
-		mPartitionedObject = new GameObject[howManyParts];
-		for(int i=0;i<howManyParts;i++) {
-			GameObject part = mPartitionedObject[i] = new GameObject(modelForEachPart[i], updaterForEachPart[i], null);
-			String name=part.mPrototype.name;
-			if(database.containsKey(name))
-				part.mTexture=database.get(name);
-			else {
-				try {
-				Texture texture = new Texture(getInputStream("TextureInfo/"+name+".info",mAssets));
-				database.put(name, texture);
-				part.mTexture=texture;
-				} catch (Exception err) {
-					err.printStackTrace();
-				}
+		try {
+			HashMap<String,String> nameToTex=loadTexInfo(textureInfoFilename);
+			mPartitionedObject = new GameObject[howManyParts];
+			for(int i=0;i<howManyParts;i++) {
+				callback.showToast3D(R.string.myAPI_LoadingObjFile);
+				GameObject part = mPartitionedObject[i] = new GameObject(modelForEachPart[i], commonUpdater, null);
+				String name=nameToTex.get(part.mPrototype.name);
+				if(openedTextures.containsKey(name))
+					part.mTexture=openedTextures.get(name);
+				else openedTextures.put(name, part.mTexture=new Texture(helper.openAssetInput(name)));
 			}
+		} catch (IOException|ClassNotFoundException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Cannot create PartitionedGameObject!");
 		}
+	}
+
+	public PartitionedGameObject(Model[] modelForEachPart, String textureInfoFilename, GameObjectUpdater[] commonUpdaters, MyCallback callback) {
+		final int howManyParts=modelForEachPart.length;
+		try {
+			HashMap<String,String> nameToTex=loadTexInfo(textureInfoFilename);
+			mPartitionedObject = new GameObject[howManyParts];
+			for(int i=0;i<howManyParts;i++) {
+				callback.showToast3D(R.string.myAPI_LoadingObjFile);
+				GameObject part = mPartitionedObject[i] = new GameObject(modelForEachPart[i], commonUpdaters[i], null);
+				String name=nameToTex.get(part.mPrototype.name);
+				if(openedTextures.containsKey(name))
+					part.mTexture=openedTextures.get(name);
+				else openedTextures.put(name, part.mTexture=new Texture(helper.openAssetInput(name)));
+			}
+		} catch (IOException|ClassNotFoundException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Cannot create PartitionedGameObject!");
+		}
+	}
+
+	private HashMap<String,String> loadTexInfo(String TexInfoFile) throws IOException, ClassNotFoundException {
+		InputStream texinfo=helper.openAssetInput("TextureInfo/"+TexInfoFile);
+		HashMap<String,String> ans;
+        ObjectInputStream reader=new ObjectInputStream(texinfo);
+        ans=(HashMap<String,String>)reader.readObject();
+		reader.close();
+		return ans;
 	}
 	
 	public void addToGLProgram(GLProgram program) {
 		for(GameObject obj:mPartitionedObject) {
-			program.addGameObject(obj);
+			program.objects.add(obj);
 		}
 	}
 	

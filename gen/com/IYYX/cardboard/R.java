@@ -25,17 +25,13 @@ public final class R {
         public static final int mona_lisa=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f090003;
-        public static final int cardboard_view=0x7f090001;
-        public static final int overlay=0x7f090002;
-        public static final int ui_layout=0x7f090000;
+        public static final int cardboard_view=0x7f080001;
+        public static final int overlay=0x7f080002;
+        public static final int ui_layout=0x7f080000;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int common_ui=0x7f030001;
-    }
-    public static final class menu {
-        public static final int main=0x7f080000;
     }
     public static final class raw {
         public static final int grid_fragment=0x7f040000;

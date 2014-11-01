@@ -6,6 +6,7 @@ import java.io.InputStream;
 import javax.microedition.khronos.egl.EGLConfig;
 
 import android.app.Activity;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
 
 import com.IYYX.cardboard.CardboardOverlayView;
@@ -18,11 +19,13 @@ public abstract class MyCardboardRenderer implements CardboardView.StereoRendere
 
 	protected Activity dad;
 	protected Resources res;
+	protected AssetManager assets;
 	protected CardboardOverlayView overlay;
 	protected CardboardView mCardboardView;
 	
 	public MyCardboardRenderer(Resources res,CardboardView cardboardView,CardboardOverlayView overlay, Activity dad){
 		this.res=res;
+		this.assets=res.getAssets();
 		this.overlay=overlay;
 		this.dad=dad;
 		this.mCardboardView=cardboardView;

@@ -10,12 +10,10 @@ public abstract class GLProgram {
 
 	public abstract void loadIntoGLES();
 	
-	ArrayList<GameObject> objects = new ArrayList<GameObject>();
-	public void addGameObject(GameObject object) {
-		objects.add(object);
-	}
+	public ArrayList<GameObject> objects = new ArrayList<GameObject>();
+	
 	public void updateAllGameObjects() {
-		for(GameObject obj:objects)
+		for(GameObject obj:objects) if(obj.mUpdater!=null)
 			obj.mUpdater.update(obj);
 	}
 	public abstract void renderAllGameObjects();
