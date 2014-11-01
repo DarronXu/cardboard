@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.opengl.*;
 import android.os.SystemClock;
+import android.util.Log;
 
 import com.IYYX.cardboard.myAPIs.GLTextureProgram;
 import com.IYYX.cardboard.myAPIs.GameObject;
@@ -19,7 +20,8 @@ import com.IYYX.cardboard.PartitionedGameObject;
 import com.google.vrtoolkit.cardboard.*;
 public class CardboardRenderer extends MyCardboardRenderer { 
 	
-	private float[] mCameraMatrix = new float[16];			//The position and orientation of Camera
+	float[] mViewMatrix = new float[16];
+	float[] mCameraMatrix = new float[16];			//The position and orientation of Camera
 	private float[] mHeadViewMatrix = new float[16];		//Given by Cardboard API, currently not used.
 	
 	GLTextureProgram mTextureProgram;
@@ -31,7 +33,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	}
 	
 	public void onDrawEye(EyeTransform arg0) {
-		float[] viewMatrix = new float[16];
+		float[] viewMatrix = mViewMatrix;
         Matrix.multiplyMM(viewMatrix, 0, arg0.getEyeView(), 0, mCameraMatrix, 0);
 		mTextureProgram.updateAllGameObjects();
         mTextureProgram.resetViewMatrix(viewMatrix);
@@ -40,9 +42,15 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT|GLES20.GL_COLOR_BUFFER_BIT);
 		mTextureProgram.renderAllGameObjects();
 	}
-
+	
+	float[] mHeadUp=new float[3],mHeadForward=new float[3];
+	HeadTransform headInfo;
+	
 	public void onNewFrame(HeadTransform arg0) {
-		arg0.getHeadView(mHeadViewMatrix, 0);				//Currently unused.
+		arg0.getForwardVector(mHeadForward, 0);
+		arg0.getUpVector(mHeadUp, 0);
+		this.headInfo=arg0;
+		//arg0.getHeadView(mHeadViewMatrix, 0);				//Currently unused.
 		mTextureProgram.loadIntoGLES();
 	}
 
