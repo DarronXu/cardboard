@@ -62,7 +62,7 @@ public class MainActivity extends CardboardActivity {
         	Matrix.translateM(translatedView, 0, renderer.mViewMatrix, 0, 0, -0.5f,0);
         	Matrix.rotateM(translatedView, 0, -xyzw[3], xyzw[0], xyzw[1], xyzw[2]);
         	renderer.mCameraMatrix=translatedView;*/
-        	Matrix.
+        	//Matrix.
         }
         
     }
