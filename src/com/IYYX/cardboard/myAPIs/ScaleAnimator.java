@@ -32,6 +32,7 @@ public class ScaleAnimator {
 	public void doAnimation(){
 		//Matrix.scaleM(mObj.mModelMatrix, 0, x, y, z);
 		//Matrix.scaleM(answer, 0, readonlyMatrix, 0, x, y, z);
+		if (pause) return;
 		if ((System.currentTimeMillis() - lastTime) < mDurationMilliseconds)
 			Matrix.scaleM(mObj.mModelMatrix, 0, mZoomSpeeds[0]*((System.currentTimeMillis() - lastTime)/1000L), mZoomSpeeds[1]*((System.currentTimeMillis() - lastTime)/1000L), mZoomSpeeds[2]*((System.currentTimeMillis() - lastTime)/1000L));
 		else
