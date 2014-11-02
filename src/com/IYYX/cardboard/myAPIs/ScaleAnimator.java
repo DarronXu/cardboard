@@ -7,13 +7,13 @@ public class ScaleAnimator {
 	long mDurationMilliseconds;
 	int mFramePerSecond;
 	boolean pause = true;
-	long lastTime;
+	long beginTime;
 	public ScaleAnimator(GameObject obj) {mObj=obj;}
 	public void setAnimation(float[] zoomSpeeds){
 		mZoomSpeeds = zoomSpeeds;
 	}
 	public void startAnimation(long durationMilliseconds){
-		lastTime = System.currentTimeMillis();
+		beginTime = System.currentTimeMillis();
 		mDurationMilliseconds = durationMilliseconds;
 	}
 	public void pauseAnimation(){
@@ -33,8 +33,8 @@ public class ScaleAnimator {
 		//Matrix.scaleM(mObj.mModelMatrix, 0, x, y, z);
 		//Matrix.scaleM(answer, 0, readonlyMatrix, 0, x, y, z);
 		if (pause) return;
-		if ((System.currentTimeMillis() - lastTime) < mDurationMilliseconds)
-			Matrix.scaleM(mObj.mModelMatrix, 0, mZoomSpeeds[0]*((System.currentTimeMillis() - lastTime)/1000L), mZoomSpeeds[1]*((System.currentTimeMillis() - lastTime)/1000L), mZoomSpeeds[2]*((System.currentTimeMillis() - lastTime)/1000L));
+		if ((System.currentTimeMillis() - beginTime) < mDurationMilliseconds)
+			Matrix.scaleM(mObj.mModelMatrix, 0, mZoomSpeeds[0]*((System.currentTimeMillis() - beginTime)/1000L), mZoomSpeeds[1]*((System.currentTimeMillis() - beginTime)/1000L), mZoomSpeeds[2]*((System.currentTimeMillis() - beginTime)/1000L));
 		else
 			stopAndResetAnimation();
 		
