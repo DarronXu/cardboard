@@ -36,7 +36,7 @@ public abstract class RotateAnimator {
 		//Matrix.rotateM(mObj.mModelMatrix, 0, a, x, y, z);
 		//Matrix.rotateM(answer, 0, readonlyMatrix, 0, a, x, y, z);
 		if (pause) return;
-		if (System.currentTimeMillis()>mDurationMilliseconds)
+		if (System.currentTimeMillis()-lastTime>mDurationMilliseconds)
 			stopAndResetAnimation();
 		else
 			Matrix.rotateM(mObj.mModelMatrix, 0, mAngularSpeed*((System.currentTimeMillis()-lastTime)/1000L), mAxis[0],mAxis[1],mAxis[2]);
