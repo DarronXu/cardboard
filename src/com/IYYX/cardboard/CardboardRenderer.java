@@ -33,6 +33,8 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	}
 	
 	public void onDrawEye(EyeTransform arg0) {
+		Log.d("Render", "onDrawEye");
+		checkErrorBEFORE();
 		float[] viewMatrix = mViewMatrix;
         Matrix.multiplyMM(viewMatrix, 0, arg0.getEyeView(), 0, mCameraMatrix, 0);
 		mTextureProgram.updateAllGameObjects();
@@ -41,20 +43,26 @@ public class CardboardRenderer extends MyCardboardRenderer {
         
 		GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT|GLES20.GL_COLOR_BUFFER_BIT);
 		mTextureProgram.renderAllGameObjects();
+		checkError();
 	}
 	
 	float[] mHeadUp=new float[3],mHeadForward=new float[3];
 	HeadTransform headInfo;
 	
 	public void onNewFrame(HeadTransform arg0) {
+		Log.d("Render", "onNewFrame");
+		checkErrorBEFORE();
 		arg0.getForwardVector(mHeadForward, 0);
 		arg0.getUpVector(mHeadUp, 0);
 		this.headInfo=arg0;
 		//arg0.getHeadView(mHeadViewMatrix, 0);				//Currently unused.
 		mTextureProgram.loadIntoGLES();
+		checkError();
 	}
 
 	public void onSurfaceCreated(EGLConfig arg0) {
+		Log.d("Render", "OnSurfaceCreated");
+		checkErrorBEFORE();
 		PartitionedGameObject.resetOpenedTextures();		//VERY IMPORTANT. When Activity is Paused, old OpenGL Handls expired and the old Texture 'pointers' can't be used anymore.
 		GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.7f);
 		GLES20.glEnable(GLES20.GL_DEPTH_TEST);
@@ -64,8 +72,8 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		
 		//---------------Set up View Matrix-----------------
 		final float[] eye = {0.0f,0.0f,0.0f};
-		final float[] look = {0f,0f,0.5f};
-		final float[] up = {0.0f,1.0f,0f};
+		final float[] look = {0f,0f,0.05f};
+		final float[] up = {0.0f,0.1f,0f};
 		Matrix.setLookAtM(mCameraMatrix, 0,
 				eye[0], eye[1], eye[2],
 				look[0], look[1], look[2],
@@ -101,12 +109,33 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		chofsecretA= new PartitionedGameObject(chofsecretModel, "chofsecret.obj-info",new GameObjectUpdater(){
 			public void update(GameObject obj) {
 				Matrix.setIdentityM(obj.mModelMatrix, 0);
-				Matrix.scaleM(obj.mModelMatrix, 0, 2, 2, 2);
+				Matrix.scaleM(obj.mModelMatrix, 0, 0.2f, 0.2f, 0.2f);
 			}
 		}, getMyCallback());
 		
 		//boyA.addToGLProgram(mTextureProgram);
 		chofsecretA.addToGLProgram(mTextureProgram);
+		checkError();
+	}
+	
+	void checkError() {
+		int error;
+		boolean hasError=false;
+		while((error=GLES20.glGetError())!=GLES20.GL_NO_ERROR){
+			Log.e("GLERROR",""+error);
+			hasError=true;
+		}
+		if(hasError) throw new RuntimeException("GLES ERROR!");
+	}
+
+	void checkErrorBEFORE() {
+		int error;
+		boolean hasError=false;
+		while((error=GLES20.glGetError())!=GLES20.GL_NO_ERROR){
+			Log.e("GLERROR-BEFORE",""+error);
+			hasError=true;
+		}
+		if(hasError) throw new RuntimeException("GLES ERROR!");
 	}
 
 	@Override

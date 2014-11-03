@@ -1,3 +1,4 @@
+precision mediump float;
 uniform int u_hasTexUV;
 uniform vec4 u_fallbackColor;
 varying vec2 v_UV;

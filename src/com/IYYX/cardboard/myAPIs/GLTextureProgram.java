@@ -48,7 +48,7 @@ public class GLTextureProgram extends GLProgram {
 		GLES20.glShaderSource(fragmentShaderHandle, mFragmentShader);
 		GLES20.glCompileShader(fragmentShaderHandle);
 		GLES20.glGetShaderiv(fragmentShaderHandle, GLES20.GL_COMPILE_STATUS, compileStatus, 0);
-		if(compileStatus[0]==0){
+		if(compileStatus[0]==GLES20.GL_FALSE){
 			String error=GLES20.glGetShaderInfoLog(fragmentShaderHandle);
 			GLES20.glDeleteShader(fragmentShaderHandle);
 			throw new RuntimeException("Error compiling GL Fragment Shader!"+error);
@@ -58,7 +58,7 @@ public class GLTextureProgram extends GLProgram {
 		GLES20.glAttachShader(programHandle, fragmentShaderHandle);
 		GLES20.glLinkProgram(programHandle);
 		GLES20.glGetProgramiv(programHandle, GLES20.GL_LINK_STATUS, compileStatus, 0);
-		if(compileStatus[0]==0){
+		if(compileStatus[0]==GLES20.GL_FALSE){
 			GLES20.glDeleteProgram(programHandle);
 			throw  new RuntimeException("Error linking GL Program!");
 		}
