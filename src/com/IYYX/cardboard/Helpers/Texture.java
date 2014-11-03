@@ -9,7 +9,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
-import android.util.Log;
 
 class Texture extends com.IYYX.cardboard.myAPIs.Texture {
 	
@@ -53,19 +52,8 @@ class Texture extends com.IYYX.cardboard.myAPIs.Texture {
 		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
 		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);		
 		GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, image, 0);
-		checkError();
 		return newTextureHandles[0];
 	} 
-
-	static void checkError() {
-		int error;
-		boolean hasError=false;
-		while((error=GLES20.glGetError())!=GLES20.GL_NO_ERROR){
-			Log.e("GLERROR-TEXTURE",""+error);
-			hasError=true;
-		}
-		if(hasError) throw new RuntimeException("GLES ERROR!");
-	}
 	
 	public static void deleteGLTexture(int textureHandle) {
 		int[] handles = new int[]{textureHandle};
