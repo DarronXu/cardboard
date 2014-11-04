@@ -40,7 +40,7 @@ public abstract class TranslateAnimator {
 			mStartTime=System.currentTimeMillis();
 			mDurationMS=durationMilliseconds;
 			mPaused=false;
-		} else System.err.println("[ScaleAnimator] User attempted to call startAnimation() before setAnimation().");
+		} else System.err.println("[TranslateAnimator] User attempted to call startAnimation() before setAnimation().");
 	}
 	/**
 	 * Start animation by specifying velocities.<br/>
@@ -54,7 +54,7 @@ public abstract class TranslateAnimator {
 			double durationSeconds=0;
 			if(mLine!=null) {
 				if(isAngularVelocity) {
-					System.err.println("[ScaleAnimator] Invalid argument! You cannot specify angular velocity for a Line-shaped Translate Animation!");
+					System.err.println("[TranslateAnimator] Invalid argument! You cannot specify angular velocity for a Line-shaped Translate Animation!");
 					return;
 				}
 				durationSeconds=mLine.mLength/velocityUnitPerSecond;
@@ -67,7 +67,7 @@ public abstract class TranslateAnimator {
 			mStartTime=System.currentTimeMillis();
 			mDurationMS=(long)(durationSeconds*1000.0);
 			mPaused=false;
-		} else System.err.println("[ScaleAnimator] User attempted to call startAnimation() before setAnimation().");
+		} else System.err.println("[TranslateAnimator] User attempted to call startAnimation() before setAnimation().");
 	}
 	public void pauseAnimation(){
 		mPaused=true;
@@ -75,7 +75,7 @@ public abstract class TranslateAnimator {
 	public void resumeAnimation(){
 		if(mIsValid)
 			mPaused=false;
-		else System.err.println("[ScaleAnimator] User attempted to call resumeAnimation() before setAnimation().");
+		else System.err.println("[TranslateAnimator] User attempted to call resumeAnimation() before setAnimation().");
 	}
 	public void stopAndResetAnimation(){
 		mIsValid=false;
