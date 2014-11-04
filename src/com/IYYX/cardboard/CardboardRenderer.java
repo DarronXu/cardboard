@@ -81,22 +81,11 @@ public class CardboardRenderer extends MyCardboardRenderer {
 			chofsecretModel = ModelIO.loadPartitioned(assets.open("chofsecret.objpp"), getMyCallback());
 		} catch (IOException | ClassNotFoundException e) {e.printStackTrace();}
 		
-		boyA = new PartitionedGameObject(boyModel, "boy.obj-info", new GameObjectUpdater(){
-			public void update(GameObject obj) {
-				float angleInDegreesA,angleInDegreesB,angleInDegreesC;
-				long time=SystemClock.uptimeMillis()%10000L;
-				angleInDegreesA = (360.0f / 10000.0f) * ((int) time);
-				time=SystemClock.uptimeMillis()%5000L;
-				angleInDegreesB = (360.0f / 5000.0f) * ((int) time);
-				time=SystemClock.uptimeMillis()%3000L;
-				angleInDegreesC = (360.0f / 3000.0f) * ((int) time);
-				Matrix.setIdentityM(obj.mModelMatrix, 0);
-				Matrix.translateM(obj.mModelMatrix, 0, 0.0f, 3.0f, 0.8f);
-				Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesA, 1.0f, 0.0f, 0.0f);
-				Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesB, 0.0f, 1.0f, 0.0f);
-				Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesC, 0.0f, 0.0f, 1.0f);
-			}
-		}, getMyCallback());
+		boyA = new PartitionedGameObject(boyModel, "boy.obj-info", new BoyUpdater(), getMyCallback());
+		
+		GameObjectUpdater[] boyUpdaters=new GameObjectUpdater[10];
+		for(int i=0;i<10;i++) boyUpdaters[i]=new BoyUpdater();
+		PartitionedGameObject boyB = new PartitionedGameObject(boyModel,"boy.obj-info", boyUpdaters, getMyCallback());
 		
 		chofsecretA= new PartitionedGameObject(chofsecretModel, "chofsecret.obj-info",new GameObjectUpdater(){
 			public void update(GameObject obj) {
@@ -113,4 +102,24 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	public void onRendererShutdown() {}
 	public void onFinishFrame(Viewport arg0) {}
 	public void onSurfaceChanged(int width, int height) {}
+}
+
+
+class BoyUpdater implements GameObjectUpdater {
+	public void update(GameObject obj) {
+		float angleInDegreesA,angleInDegreesB,angleInDegreesC;
+		long time=SystemClock.uptimeMillis()%10000L;
+		angleInDegreesA = (360.0f / 10000.0f) * ((int) time);
+		time=SystemClock.uptimeMillis()%5000L;
+		angleInDegreesB = (360.0f / 5000.0f) * ((int) time);
+		time=SystemClock.uptimeMillis()%3000L;
+		angleInDegreesC = (360.0f / 3000.0f) * ((int) time);
+		Matrix.setIdentityM(obj.mModelMatrix, 0);
+		Matrix.translateM(obj.mModelMatrix, 0, 0.0f, 3.0f, 0.8f);
+		Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesA, 1.0f, 0.0f, 0.0f);
+		Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesB, 0.0f, 1.0f, 0.0f);
+		Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesC, 0.0f, 0.0f, 1.0f);
+		if(obj.mPrototype.name.contains("c7d648bf")){
+		}
+	}
 }
