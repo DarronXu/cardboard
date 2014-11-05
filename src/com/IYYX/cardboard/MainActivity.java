@@ -4,24 +4,57 @@ package com.IYYX.cardboard;
 import java.util.ArrayList;
 
 import com.IYYX.cardboard.myAPIs.GameObject;
+import com.example.android.sip.IncomingCallReceiver;
 import com.google.vrtoolkit.cardboard.CardboardActivity;
 import com.google.vrtoolkit.cardboard.CardboardView;
 
+import android.content.IntentFilter;
 import android.graphics.PixelFormat;
+import android.net.sip.SipAudioCall;
+import android.net.sip.SipManager;
+import android.net.sip.SipProfile;
 import android.opengl.Matrix;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 
 public class MainActivity extends CardboardActivity {
 
 	CardboardView cardboardView=null;
 	CardboardOverlayView mOverlayView=null;
 	CardboardRenderer renderer=null;
-	
+
+    public String sipAddress = null;
+
+    public SipManager manager = null;
+    public SipProfile me = null;
+    public SipAudioCall call = null;
+    public IncomingCallReceiver callReceiver;
+
+    private static final int CALL_ADDRESS = 1;
+    private static final int SET_AUTH_INFO = 2;
+    private static final int UPDATE_SETTINGS_DIALOG = 3;
+    private static final int HANG_UP = 4;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+
+        // Set up the intent filter.  This will be used to fire an
+        // IncomingCallReceiver when someone calls the SIP address used by this
+        // application.
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("android.SipDemo.INCOMING_CALL");
+        callReceiver = new IncomingCallReceiver();
+        this.registerReceiver(callReceiver, filter);
+
+        // "Push to talk" can be a serious pain when the screen keeps turning off.
+        // Let's prevent that.
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        initializeManager();
+		
         setContentView(R.layout.common_ui);
         cardboardView = (CardboardView) findViewById(R.id.cardboard_view);
         mOverlayView = (CardboardOverlayView) findViewById(R.id.overlay);

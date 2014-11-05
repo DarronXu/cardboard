@@ -1,36 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Copyright (C) 2010 The Android Open Source Project
-
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
- -->
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.android.sip">
-    <application android:icon="@drawable/icon" android:label="SipDemo">
-      <activity android:name=".WalkieTalkieActivity"
-          android:configChanges="orientation|keyboardHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        <activity android:name=".SipSettings" android:label="set_preferences"/>
-
-
-        <receiver android:name=".IncomingCallReceiver" android:label="Call Receiver"/>
-    </application>
-    <uses-sdk android:minSdkVersion="9" />
+    package="com.IYYX.cardboard"
+    android:versionCode="1"
+    android:versionName="1.0" >
+	<uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.USE_SIP" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -41,4 +14,29 @@
     <uses-feature android:name="android.hardware.sip.voip" android:required="true" />
     <uses-feature android:name="android.hardware.wifi" android:required="true" />
     <uses-feature android:name="android.hardware.microphone" android:required="true" />
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+	<uses-feature android:glEsVersion="0x00020000" android:required="true" />
+	<supports-gl-texture android:name="GL_OES_compressed_ETC1_RGB8_texture" />
+	<supports-gl-texture android:name="GL_OES_compressed_paletted_texture" />
+    <application
+        android:allowBackup="true"
+        android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name">
+        <activity
+            android:name=".MainActivity"
+			android:screenOrientation="landscape"
+            android:label="@string/app_name" 
+          	android:configChanges="orientation|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SipSettings" android:label="set_preferences"/>
+        <receiver android:name=".IncomingCallReceiver" android:label="Call Receiver"/>
+    </application>
+
 </manifest>
