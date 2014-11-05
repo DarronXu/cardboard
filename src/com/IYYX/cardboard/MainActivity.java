@@ -51,18 +51,20 @@ public class MainActivity extends CardboardActivity {
 
 	float[] eye=new float[]{0,0,0};
 	float[] center=new float[]{0,0,0.5f};
+	float[] oldHeadQuaternion=null;
 	
     @Override
     public void onCardboardTrigger() {
         Log.i("MainActivity", "onCardboardTrigger");
-        if(renderer!=null) if(renderer.mTextureProgram!=null){
-        	/*float[] xyzw=new float[4];
-        	renderer.headInfo.getQuaternion(xyzw, 0);
-        	float[] translatedView=new float[16];
-        	Matrix.translateM(translatedView, 0, renderer.mViewMatrix, 0, 0, -0.5f,0);
-        	Matrix.rotateM(translatedView, 0, -xyzw[3], xyzw[0], xyzw[1], xyzw[2]);
-        	renderer.mCameraMatrix=translatedView;*/
-        	//Matrix.
+        if(renderer!=null) if(renderer.mTextureProgram!=null) if(renderer.headInfo!=null){
+        	if(oldHeadQuaternion==null) {
+        		oldHeadQuaternion=new float[4];
+        		renderer.headInfo.getQuaternion(oldHeadQuaternion, 0);
+        	}
+        	else {
+        		float[] currentQuaternion=new float[4];
+        		renderer.headInfo.getQuaternion(currentQuaternion, 0);
+        	}
         }
         
     }

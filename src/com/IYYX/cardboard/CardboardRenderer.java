@@ -6,6 +6,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.net.sip.SipManager;
 import android.opengl.*;
 import android.os.SystemClock;
 import android.util.Log;
@@ -20,9 +21,8 @@ import com.IYYX.cardboard.PartitionedGameObject;
 import com.google.vrtoolkit.cardboard.*;
 public class CardboardRenderer extends MyCardboardRenderer { 
 	
-	float[] mViewMatrix = new float[16];
-	float[] mCameraMatrix = new float[16];			//The position and orientation of Camera
-	private float[] mHeadViewMatrix = new float[16];		//Given by Cardboard API, currently not used.
+	private float[] mViewMatrix = new float[16];
+	private float[] mCameraMatrix = new float[16];			//The position and orientation of Camera
 	
 	GLTextureProgram mTextureProgram;
 	Model[] boyModel,policeModel,chofsecretModel;
@@ -33,28 +33,39 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	}
 	
 	public void onDrawEye(EyeTransform arg0) {
-		float[] viewMatrix = mViewMatrix;
-        Matrix.multiplyMM(viewMatrix, 0, arg0.getEyeView(), 0, mCameraMatrix, 0);
+        Matrix.multiplyMM(mViewMatrix, 0, arg0.getEyeView(), 0, mCameraMatrix, 0);
 		mTextureProgram.updateAllGameObjects();
-        mTextureProgram.resetViewMatrix(viewMatrix);
+        mTextureProgram.resetViewMatrix(mViewMatrix);
         mTextureProgram.resetProjectionMatrix(arg0.getPerspective());
         
 		GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT|GLES20.GL_COLOR_BUFFER_BIT);
 		mTextureProgram.renderAllGameObjects();
 	}
 	
-	float[] mHeadUp=new float[3],mHeadForward=new float[3];
 	HeadTransform headInfo;
 	
+	final float[] initEye = {0.0f,0.0f,0.0f};
+	final float[] initLook = {0f,0f,0.5f};
+	final float[] initUp = {0.0f,1.0f,0f};
+	
+	float[] initHeadRotate = null;
+	float[] currentEyeDirection = new float[3];
+	
 	public void onNewFrame(HeadTransform arg0) {
-		arg0.getForwardVector(mHeadForward, 0);
-		arg0.getUpVector(mHeadUp, 0);
 		this.headInfo=arg0;
-		//arg0.getHeadView(mHeadViewMatrix, 0);				//Currently unused.
+		if(initHeadRotate==null) {
+			initHeadRotate=new float[4];
+			headInfo.getQuaternion(initHeadRotate, 0);
+		}
+		else {
+			float[] currentHeadRotate=new float[4];
+			headInfo.getQuaternion(currentHeadRotate, 0);
+		}
 		mTextureProgram.loadIntoGLES();
 	}
 
 	public void onSurfaceCreated(EGLConfig arg0) {
+		initHeadRotate=null;
 		PartitionedGameObject.resetOpenedTextures();		//VERY IMPORTANT. When Activity is Paused, old OpenGL Handls expired and the old Texture 'pointers' can't be used anymore.
 		GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.7f);
 		GLES20.glEnable(GLES20.GL_DEPTH_TEST);
@@ -63,13 +74,10 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);		//IMPORTANT for Alpha !! 
 		
 		//---------------Set up View Matrix-----------------
-		final float[] eye = {0.0f,0.0f,0.0f};
-		final float[] look = {0f,0f,0.5f};
-		final float[] up = {0.0f,1.0f,0f};
 		Matrix.setLookAtM(mCameraMatrix, 0,
-				eye[0], eye[1], eye[2],
-				look[0], look[1], look[2],
-				up[0], up[1], up[2]);
+				initEye[0], initEye[1], initEye[2],
+				initLook[0], initLook[1], initLook[2],
+				initUp[0], initUp[1], initUp[2]);
 		
 		mTextureProgram = new GLTextureProgram(res);
 		
