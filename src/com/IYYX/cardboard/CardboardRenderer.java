@@ -19,10 +19,11 @@ import com.IYYX.cardboard.myAPIs.ModelIO;
 import com.IYYX.cardboard.myAPIs.MyCardboardRenderer;
 import com.IYYX.cardboard.PartitionedGameObject;
 import com.google.vrtoolkit.cardboard.*;
+import com.jogamp.opengl.math.Quaternion;
 public class CardboardRenderer extends MyCardboardRenderer { 
 	
 	private float[] mViewMatrix = new float[16];
-	private float[] mCameraMatrix = new float[16];			//The position and orientation of Camera
+	float[] mCameraMatrix = new float[16];			//The position and orientation of Camera
 	
 	GLTextureProgram mTextureProgram;
 	Model[] boyModel,policeModel,chofsecretModel;
@@ -44,22 +45,63 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	
 	HeadTransform headInfo;
 	
-	final float[] initEye = {0.0f,0.0f,0.0f};
-	final float[] initLook = {0f,0f,0.5f};
-	final float[] initUp = {0.0f,1.0f,0f};
+	float[] initEye = {0.0f,0.0f,0.0f};
+	float[] initLook = {0f,0f,0.5f};
+	float[] initUp = {0.0f,1.0f,0f};
 	
 	float[] initHeadRotate = null;
-	float[] currentEyeDirection = new float[3];
+	float[] currentEyeDirection = new float[4];
 	
+	void normalizeV(float[] vector) {
+		double length=Math.sqrt(
+				Math.pow(vector[0], 2.0)+
+				Math.pow(vector[1], 2.0)+
+				Math.pow(vector[2], 2.0));
+		vector[0]=(float)((double)vector[0]/length);
+		vector[1]=(float)((double)vector[1]/length);
+		vector[2]=(float)((double)vector[2]/length);
+	}
+	
+	/**
+	 * get rotation parameters in AxisAngle from Quaternion
+	 * @param quaternion, float[4] { qx, qy, qz, qw}
+	 * @return float[4] { angle, x, y ,z}
+	 */
+	float[] getAxisAngleFromQuaternion(float[] quaternion) {
+		float[] ans=new float[4];
+		ans[0]=(float)(2.0*(Math.acos(quaternion[3])/Math.PI*180.0));
+		ans[1]=(float)(quaternion[0]/Math.sqrt(1-quaternion[3]*quaternion[3]));
+		ans[2]=(float)(quaternion[1]/Math.sqrt(1-quaternion[3]*quaternion[3]));
+		ans[3]=(float)(quaternion[2]/Math.sqrt(1-quaternion[3]*quaternion[3]));
+		return ans;
+	}
+	boolean resetInitHeadRotate=false;
 	public void onNewFrame(HeadTransform arg0) {
 		this.headInfo=arg0;
-		if(initHeadRotate==null) {
+		if(resetInitHeadRotate||initHeadRotate==null) {
 			initHeadRotate=new float[4];
 			headInfo.getQuaternion(initHeadRotate, 0);
+			initHeadRotate=getAxisAngleFromQuaternion(initHeadRotate);
+			resetInitHeadRotate=false;
 		}
 		else {
 			float[] currentHeadRotate=new float[4];
+			float[] oldEyeDirection=new float[4];
+			oldEyeDirection[0]=initLook[0]-initEye[0];
+			oldEyeDirection[1]=initLook[1]-initEye[1];
+			oldEyeDirection[2]=initLook[2]-initEye[2];
+			oldEyeDirection[3]=0;
+			normalizeV(oldEyeDirection);
+			
 			headInfo.getQuaternion(currentHeadRotate, 0);
+			currentHeadRotate=getAxisAngleFromQuaternion(currentHeadRotate);
+			
+			//Log.e("getQuaternion:=", currentHeadRotate[0]+","+currentHeadRotate[1]+","+currentHeadRotate[2]+","+currentHeadRotate[3]+"!");
+			float[] matrix=new float[16];
+			Matrix.setRotateM(matrix, 0, -initHeadRotate[0], initHeadRotate[1], initHeadRotate[2], initHeadRotate[2]);
+			Matrix.rotateM(matrix, 0, currentHeadRotate[0], currentHeadRotate[1], currentHeadRotate[2], currentHeadRotate[3]);
+			Matrix.multiplyMV(currentEyeDirection, 0, matrix, 0, oldEyeDirection, 0);
+			normalizeV(currentEyeDirection);
 		}
 		mTextureProgram.loadIntoGLES();
 	}

@@ -48,23 +48,39 @@ public class MainActivity extends CardboardActivity {
 		super.onResume();
 		if(cardboardView!=null) cardboardView.onResume();
 	}
-
-	float[] eye=new float[]{0,0,0};
-	float[] center=new float[]{0,0,0.5f};
-	float[] oldHeadQuaternion=null;
 	
     @Override
     public void onCardboardTrigger() {
         Log.i("MainActivity", "onCardboardTrigger");
         if(renderer!=null) if(renderer.mTextureProgram!=null) if(renderer.headInfo!=null){
-        	if(oldHeadQuaternion==null) {
-        		oldHeadQuaternion=new float[4];
-        		renderer.headInfo.getQuaternion(oldHeadQuaternion, 0);
-        	}
-        	else {
-        		float[] currentQuaternion=new float[4];
-        		renderer.headInfo.getQuaternion(currentQuaternion, 0);
-        	}
+
+			Log.e("EYE-Direction", renderer.currentEyeDirection[0]+","+renderer.currentEyeDirection[1]+","+renderer.currentEyeDirection[2]);
+        	/*
+        	 * METHOD 1
+        	 * 
+        	 * renderer.initEye[0]+=renderer.currentEyeDirection[0]*0.3f;
+        	renderer.initEye[1]+=renderer.currentEyeDirection[1]*0.3f;
+        	renderer.initEye[2]+=renderer.currentEyeDirection[2]*0.3f;
+        	renderer.initLook[0]+=renderer.currentEyeDirection[0]*0.3f;
+        	renderer.initLook[1]+=renderer.currentEyeDirection[1]*0.3f;
+        	renderer.initLook[2]+=renderer.currentEyeDirection[2]*0.3f;
+
+    		Matrix.setLookAtM(renderer.mCameraMatrix, 0,
+    				renderer.initEye[0], renderer.initEye[1], renderer.initEye[2],
+    				renderer.initLook[0], renderer.initLook[1], renderer.initLook[2],
+    				renderer.initUp[0], renderer.initUp[1], renderer.initUp[2]);*/
+			/*
+			 * METHOD 2
+			 * 
+			 * float[] matrix=new float[16];
+			float[] ans=new float[16];
+			Matrix.setIdentityM(matrix, 0);
+			Matrix.translateM(matrix, 0, -renderer.currentEyeDirection[0], -renderer.currentEyeDirection[1], -renderer.currentEyeDirection[2]);
+			Matrix.multiplyMM(ans, 0, renderer.mCameraMatrix, 0, matrix, 0);
+			renderer.mCameraMatrix=ans;*/
+    		
+			
+			//COMMON COMMAND: renderer.resetInitHeadRotate=true;
         }
         
     }
