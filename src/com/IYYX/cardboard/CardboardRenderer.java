@@ -46,7 +46,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	HeadTransform headInfo;
 	
 	float[] initEye = {0.0f,0.0f,0.0f};
-	float[] initLook = {0f,0f,0.5f};
+	float[] initLook = {0.5f,0f,0f};
 	float[] initUp = {0.0f,1.0f,0f};
 	
 	float[] initHeadRotate = null;
@@ -70,9 +70,9 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	float[] getAxisAngleFromQuaternion(float[] quaternion) {
 		float[] ans=new float[4];
 		ans[0]=(float)(2.0*(Math.acos(quaternion[3])/Math.PI*180.0));
-		ans[1]=(float)(quaternion[0]/Math.sqrt(1-quaternion[3]*quaternion[3]));
-		ans[2]=(float)(quaternion[1]/Math.sqrt(1-quaternion[3]*quaternion[3]));
-		ans[3]=(float)(quaternion[2]/Math.sqrt(1-quaternion[3]*quaternion[3]));
+		ans[1]=(float)(quaternion[0]/Math.sqrt(1.0-quaternion[3]*quaternion[3]));
+		ans[2]=(float)(quaternion[1]/Math.sqrt(1.0-quaternion[3]*quaternion[3]));
+		ans[3]=(float)(quaternion[2]/Math.sqrt(1.0-quaternion[3]*quaternion[3]));
 		return ans;
 	}
 	boolean resetInitHeadRotate=false;
@@ -98,7 +98,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 			
 			//Log.e("getQuaternion:=", currentHeadRotate[0]+","+currentHeadRotate[1]+","+currentHeadRotate[2]+","+currentHeadRotate[3]+"!");
 			float[] matrix=new float[16];
-			Matrix.setRotateM(matrix, 0, -initHeadRotate[0], initHeadRotate[1], initHeadRotate[2], initHeadRotate[2]);
+			Matrix.setRotateM(matrix, 0, -initHeadRotate[0], initHeadRotate[1], initHeadRotate[2], initHeadRotate[3]);
 			Matrix.rotateM(matrix, 0, currentHeadRotate[0], currentHeadRotate[1], currentHeadRotate[2], currentHeadRotate[3]);
 			Matrix.multiplyMV(currentEyeDirection, 0, matrix, 0, oldEyeDirection, 0);
 			normalizeV(currentEyeDirection);
