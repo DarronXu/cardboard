@@ -43,6 +43,7 @@ public class NetB {
 		try {
 			writer.write(clientName+"\n");
 			writer.flush();
+			System.out.print("Please input your friend's name: ");
 			String listener = stdin.next();
 			writer.write(listener + "\n");
 			writer.flush();
@@ -61,10 +62,14 @@ public class NetB {
 		while(true)
 		{
 			try {
-				if (reader.hasNextLine()) reader.nextLine();
-				String str=stdin.nextLine();
-				writer.write(str+System.lineSeparator());
-				writer.flush();
+				if (reader.hasNextLine()){
+					System.out.println(reader.nextLine());
+				}
+				if(System.in.available()>0) if(stdin.hasNextLine()) {
+					String str=stdin.nextLine();
+					writer.write(str+System.lineSeparator());
+					writer.flush();
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

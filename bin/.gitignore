@@ -1,5 +1,6 @@
 /DarronCommit.class
 /NetA.class
+/NetB.class
 /NetServer$ServerSpeaker.class
 /NetServer.class
 /PiClientA.class
@@ -9,4 +10,3 @@
 /PiServerB$ServerSpeaker.class
 /PiServerB.class
 /Test.class
-/NetB.class
