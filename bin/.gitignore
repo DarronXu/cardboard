@@ -1,4 +1,6 @@
 /DarronCommit.class
+/DarronNetServer$ServerSpeaker.class
+/DarronNetServer.class
 /NetA.class
 /NetB.class
 /NetServer$ServerSpeaker.class
@@ -10,5 +12,3 @@
 /PiServerB$ServerSpeaker.class
 /PiServerB.class
 /Test.class
-/DarronNetServer.class
-/DarronNetServer$ServerSpeaker.class

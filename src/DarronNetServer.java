@@ -30,7 +30,7 @@ public class DarronNetServer {
 				String name=scan.nextLine();
 				map.put(name, client);
 				map2.put(name, new OutputStreamWriter(client.getOutputStream()));
-				Thread speaker=new Thread(new ServerSpeaker(client,scan));
+				Thread speaker=new Thread(new ServerSpeaker(client,scan,name));
 				speaker.start();
 				System.out.println("["+client.getInetAddress()+"] CLIENT ACCEPTED.");
 			} catch(Exception err) {
@@ -42,9 +42,11 @@ public class DarronNetServer {
 	static class ServerSpeaker implements Runnable{
 		Socket client;
 		Scanner mScan;
-		public ServerSpeaker(Socket sClient, Scanner scan) {
+		String mMyName;
+		public ServerSpeaker(Socket sClient, Scanner scan, String myName) {
 			client=sClient;
 			mScan=scan;
+			mMyName=myName;
 		}
 		public void run() {
 			String to=mScan.nextLine();
@@ -52,6 +54,7 @@ public class DarronNetServer {
 				String line=mScan.nextLine();
 				OutputStreamWriter writer=map2.get(to);
 				try {
+					writer.write(mMyName+'\n');
 					writer.write(line+"\n");
 					writer.flush();
 				} catch (IOException e) {
