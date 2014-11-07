@@ -119,22 +119,22 @@ public class MainActivity extends CardboardActivity {
 
             manager.setRegistrationListener(me.getUriString(), new SipRegistrationListener() {
                     public void onRegistering(String localProfileUri) {
-                        updateStatus("Registering with SIP Server...");
+                        //updateStatus("Registering with SIP Server...");
                     }
 
                     public void onRegistrationDone(String localProfileUri, long expiryTime) {
-                        updateStatus("Ready");
+                        //updateStatus("Ready");
                     }
 
                     public void onRegistrationFailed(String localProfileUri, int errorCode,
                             String errorMessage) {
-                        updateStatus("Registration failed.  Please check settings.");
+                        //updateStatus("Registration failed.  Please check settings.");
                     }
                 });
         } catch (ParseException pe) {
-            updateStatus("Connection Error.");
+            //updateStatus("Connection Error.");
         } catch (SipException se) {
-            updateStatus("Connection error.");
+            //updateStatus("Connection error.");
         }
     }
 
@@ -160,7 +160,7 @@ public class MainActivity extends CardboardActivity {
      */
     public void initiateCall() {
 
-        updateStatus(sipAddress);
+        //updateStatus(sipAddress);
 
         try {
             SipAudioCall.Listener listener = new SipAudioCall.Listener() {
@@ -172,13 +172,15 @@ public class MainActivity extends CardboardActivity {
                     call.startAudio();
                     call.setSpeakerMode(true);
                     call.toggleMute();
-                    updateStatus(call);
+                    //updateStatus(call);
                 }
 
                 @Override
+                
                 public void onCallEnded(SipAudioCall call) {
-                    updateStatus("Ready.");
+                    //updateStatus("Ready.");
                 }
+                
             };
 
             call = manager.makeAudioCall(me.getUriString(), sipAddress, listener, 30);
@@ -205,6 +207,7 @@ public class MainActivity extends CardboardActivity {
      * Updates the status box at the top of the UI with a messege of your choice.
      * @param status The String to display in the status box.
      */
+    /*
     public void updateStatus(final String status) {
         // Be a good citizen.  Make sure UI changes fire on the UI thread.
         this.runOnUiThread(new Runnable() {
@@ -214,11 +217,12 @@ public class MainActivity extends CardboardActivity {
             }
         });
     }
-
+	*/
     /**
      * Updates the status box with the SIP address of the current call.
      * @param call The current, active call.
      */
+    /*
     public void updateStatus(SipAudioCall call) {
         String useName = call.getPeerProfile().getDisplayName();
         if(useName == null) {
@@ -226,7 +230,7 @@ public class MainActivity extends CardboardActivity {
         }
         updateStatus(useName + "@" + call.getPeerProfile().getSipDomain());
     }
-
+	*/
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, CALL_ADDRESS, 0, "Call someone");
         menu.add(0, SET_AUTH_INFO, 0, "Edit your SIP Info.");

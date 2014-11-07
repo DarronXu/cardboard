@@ -43,6 +43,7 @@ class PartitionedGameObject {
 	}
 
 	public PartitionedGameObject(Model[] modelForEachPart, String textureInfoFilename, GameObjectUpdater[] commonUpdaters, MyCallback callback) {
+		helper=callback;
 		final int howManyParts=modelForEachPart.length;
 		try {
 			HashMap<String,String> nameToTex=loadTexInfo(textureInfoFilename);
