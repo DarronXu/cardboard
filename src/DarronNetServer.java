@@ -60,7 +60,7 @@ public class DarronNetServer {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				if(line != null && line.length()>0) System.out.println("["+client.getInetAddress()+"] "+line);
+				if(line != null && line.length()>0) System.out.println("["+mMyName+" => "+to+"] "+line);
 			}
 		}
 	}

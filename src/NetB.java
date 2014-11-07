@@ -1,3 +1,4 @@
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
@@ -47,48 +48,50 @@ public class NetB {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		/*
-		 * Important reading from server.
-		 */
-		try {
-			socket.setSoTimeout(50);
-		} catch (SocketException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		String calledFrom=null;
+		Thread thread=new Thread(new ThreadTwo(reader));
+		thread.start();
 		boolean initiated=false;
 		while(true)
 		{
 			try {
-				if (reader.hasNextLine()){
-					calledFrom=reader.nextLine();
-					System.out.println(reader.nextLine());
+				String str=stdin.nextLine();
+				if(str.equals("^^^")) {
+					System.out.print("Please input your friend's name: ");
+					String listener = stdin.next();
+					writer.write(listener + "\n");
+					writer.flush();
+					initiated=true;
 				}
-				if(System.in.available()>0) if(stdin.hasNextLine()) {
-					String str=stdin.nextLine();
-					if(str.equals("^^^")) {
-						System.out.print("Please input your friend's name: ");
-						String listener = stdin.next();
-						writer.write(listener + "\n");
+				else {
+					if(!initiated) {
+						if(calledFrom==null) continue;
+						writer.write(calledFrom+'\n');
 						writer.flush();
 						initiated=true;
 					}
-					else {
-						if(!initiated) {
-							if(calledFrom==null) continue;
-							writer.write(calledFrom+'\n');
-							writer.flush();
-							initiated=true;
-						}
-						writer.write(str+System.lineSeparator());
-						writer.flush();
-					}
+					writer.write(str+System.lineSeparator());
+					writer.flush();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
+				System.err.println("ERR");
 			}
 		}
 	} 
 
+	static String calledFrom=null;
+	static class ThreadTwo implements Runnable {
+		Scanner readSock;
+		public ThreadTwo(Scanner readSock) {this.readSock=readSock;}
+		public void run() {
+			while(true) {
+				if (readSock.hasNextLine()){
+					calledFrom=readSock.nextLine();
+					String line=readSock.nextLine();
+					System.out.println(line);
+					System.out.flush();
+				}
+			}
+		}
+	}
 }
