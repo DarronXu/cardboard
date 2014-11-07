@@ -35,7 +35,7 @@ public class DarronNetServer1 {
 				map2.put(name, obj);
 				Thread speaker=new Thread(new ServerSpeaker(client,scan,name));
 				speaker.start();
-				System.out.println("["+client.getInetAddress()+"] CLIENT ACCEPTED.");
+				System.out.println("["+name+"] CLIENT ACCEPTED.");
 			} catch(Exception err) {
 				System.err.println("Failed to start a conversation thread with a client.\n"+err.toString());
 			}
@@ -69,6 +69,9 @@ public class DarronNetServer1 {
 					writer.flush();
 				} catch (IOException|ClassNotFoundException e) {
 					e.printStackTrace();
+					map.remove(mMyName);
+					map2.remove(mMyName);
+					return;
 				}
 				if(line != null && line.length()>0) System.out.println("["+mMyName+" => "+to+"] "+line);
 			}
