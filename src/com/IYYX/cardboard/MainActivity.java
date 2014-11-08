@@ -11,6 +11,9 @@ import android.graphics.PixelFormat;
 import android.opengl.Matrix;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 
 public class MainActivity extends CardboardActivity {
 
@@ -31,6 +34,14 @@ public class MainActivity extends CardboardActivity {
         cardboardView.setRenderer(renderer=new CardboardRenderer(getResources(),cardboardView,mOverlayView,this));
         setCardboardView(cardboardView);
         mOverlayView.show3DToast("Please hold you phone so that it's vertical to the ground.\nThen, please turn your head around to search for the object.");
+        cardboardView.setOnTouchListener(new OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+				v.performClick();
+				onCardboardTrigger();
+				return false;
+			}
+        	
+        });
 	}
 	
 	/*
@@ -58,21 +69,23 @@ public class MainActivity extends CardboardActivity {
         	/*
         	 * METHOD 1
         	 * 
-        	 * renderer.initEye[0]+=renderer.currentEyeDirection[0]*0.3f;
+        	 */
+			renderer.initEye[0]+=renderer.currentEyeDirection[0]*0.3f;
         	renderer.initEye[1]+=renderer.currentEyeDirection[1]*0.3f;
         	renderer.initEye[2]+=renderer.currentEyeDirection[2]*0.3f;
-        	renderer.initLook[0]+=renderer.currentEyeDirection[0]*0.3f;
-        	renderer.initLook[1]+=renderer.currentEyeDirection[1]*0.3f;
-        	renderer.initLook[2]+=renderer.currentEyeDirection[2]*0.3f;
+        	renderer.initLook[0]=renderer.initEye[0]+renderer.currentEyeDirection[0]*0.3f;
+        	renderer.initLook[1]=renderer.initEye[1]+renderer.currentEyeDirection[1]*0.3f;
+        	renderer.initLook[2]=renderer.initEye[2]+renderer.currentEyeDirection[2]*0.3f;
 
     		Matrix.setLookAtM(renderer.mCameraMatrix, 0,
     				renderer.initEye[0], renderer.initEye[1], renderer.initEye[2],
     				renderer.initLook[0], renderer.initLook[1], renderer.initLook[2],
-    				renderer.initUp[0], renderer.initUp[1], renderer.initUp[2]);*/
+    				renderer.initUp[0], renderer.initUp[1], renderer.initUp[2]);
 			/*
 			 * METHOD 2
 			 * 
-			 * float[] matrix=new float[16];
+			 *
+			float[] matrix=new float[16];
 			float[] ans=new float[16];
 			Matrix.setIdentityM(matrix, 0);
 			Matrix.translateM(matrix, 0, -renderer.currentEyeDirection[0], -renderer.currentEyeDirection[1], -renderer.currentEyeDirection[2]);
@@ -80,7 +93,8 @@ public class MainActivity extends CardboardActivity {
 			renderer.mCameraMatrix=ans;*/
     		
 			
-			//COMMON COMMAND: renderer.resetInitHeadRotate=true;
+			//COMMON COMMAND: 
+			renderer.resetInitHeadRotate=true;
         }
         
     }

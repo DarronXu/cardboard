@@ -55,6 +55,14 @@ public class Test2 {
 			gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 			gl.glEnable(GL2.GL_DEPTH_TEST);
 			gl.glDepthFunc(GL2.GL_LESS);
+			
+			gl.glPointSize(8);
+			gl.glLineWidth(5);
+			
+			gl.glEnable(GL2.GL_POINT_SMOOTH);
+			gl.glEnable(GL2.GL_LINE_SMOOTH);
+			gl.glHint(GL2.GL_POINT_SMOOTH_HINT, GL2.GL_NICEST);
+			gl.glHint(GL2.GL_LINE_SMOOTH_HINT, GL2.GL_NICEST);
 			gl.glEnable(GL2.GL_BLEND);
 			gl.glBlendFunc(GL2.GL_ONE, GL2.GL_ONE_MINUS_SRC_ALPHA);
 		}
