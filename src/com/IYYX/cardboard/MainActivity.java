@@ -119,23 +119,32 @@ public class MainActivity extends CardboardActivity {
 
             manager.setRegistrationListener(me.getUriString(), new SipRegistrationListener() {
                     public void onRegistering(String localProfileUri) {
-                        //updateStatus("Registering with SIP Server...");
+                    	show3DToast("Registering with SIP Server...");
                     }
 
                     public void onRegistrationDone(String localProfileUri, long expiryTime) {
-                        //updateStatus("Ready");
+                    	show3DToast("Ready");
                     }
 
                     public void onRegistrationFailed(String localProfileUri, int errorCode,
                             String errorMessage) {
-                        //updateStatus("Registration failed.  Please check settings.");
+                    	show3DToast("Registration failed.  Please check settings.");
                     }
                 });
         } catch (ParseException pe) {
-            //updateStatus("Connection Error.");
+            show3DToast("Connection Error.");
         } catch (SipException se) {
-            //updateStatus("Connection error.");
+        	show3DToast("Connection error.");
         }
+    }
+    
+    void show3DToast(final String message){
+    	Runnable run=new Runnable(){
+    		public void run(){
+    			mOverlayView.show3DToast(message);
+    		}
+    	};
+    	this.runOnUiThread(run);
     }
 
     /**
@@ -160,7 +169,7 @@ public class MainActivity extends CardboardActivity {
      */
     public void initiateCall() {
 
-        //updateStatus(sipAddress);
+    	show3DToast(sipAddress);
 
         try {
             SipAudioCall.Listener listener = new SipAudioCall.Listener() {
@@ -171,14 +180,14 @@ public class MainActivity extends CardboardActivity {
                 public void onCallEstablished(SipAudioCall call) {
                     call.startAudio();
                     call.setSpeakerMode(true);
-                    call.toggleMute();
-                    //updateStatus(call);
+                    //call.toggleMute();
+                    updateStatus(call);
                 }
 
                 @Override
                 
                 public void onCallEnded(SipAudioCall call) {
-                    //updateStatus("Ready.");
+                	show3DToast("Ready.");
                 }
                 
             };
@@ -222,15 +231,15 @@ public class MainActivity extends CardboardActivity {
      * Updates the status box with the SIP address of the current call.
      * @param call The current, active call.
      */
-    /*
+    
     public void updateStatus(SipAudioCall call) {
         String useName = call.getPeerProfile().getDisplayName();
         if(useName == null) {
           useName = call.getPeerProfile().getUserName();
         }
-        updateStatus(useName + "@" + call.getPeerProfile().getSipDomain());
+        show3DToast(useName + "@" + call.getPeerProfile().getSipDomain());
     }
-	*/
+	
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, CALL_ADDRESS, 0, "Call someone");
         menu.add(0, SET_AUTH_INFO, 0, "Edit your SIP Info.");
