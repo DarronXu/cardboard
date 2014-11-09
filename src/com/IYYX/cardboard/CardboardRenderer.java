@@ -33,7 +33,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	}
 	
 	public void onDrawEye(EyeTransform arg0) {
-        Matrix.multiplyMM(mViewMatrix, 0, arg0.getEyeView(), 0, MessageQueue.share.mCameraMatrix, 0);
+        Matrix.multiplyMM(mViewMatrix, 0, arg0.getEyeView(), 0, MessageQueue.sCameraMatrix, 0);
 		mTextureProgram.updateAllGameObjects();
         mTextureProgram.resetViewMatrix(mViewMatrix);
         mTextureProgram.resetProjectionMatrix(arg0.getPerspective());
@@ -45,23 +45,15 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	public void onNewFrame(HeadTransform arg0) {
 		if(!MessageQueue.isStartedUp()) {
 			MessageQueue.startupInit(startupEye.clone(),startupLook.clone(),startupCameraMatrix.clone());
-			MessageQueue.CardboardRendererPackage pkg=new MessageQueue.CardboardRendererPackage();
-			pkg.headQuaternion=new float[4];
-			pkg.headForwardVector=new float[3];
-			pkg.rotateMatrix=new float[16];
-			arg0.getQuaternion(pkg.headQuaternion, 0);
-			arg0.getForwardVector(pkg.headForwardVector, 0);
-			arg0.getHeadView(pkg.rotateMatrix, 0);
+			CardboardRendererMessagePackage pkg=new CardboardRendererMessagePackage();
+			pkg.mRotateMatrix=new float[16];
+			arg0.getHeadView(pkg.mRotateMatrix, 0);
 			MessageQueue.instance.addPackage(pkg);
 		}
 		if (!MessageQueue.isNewFramePaused()){
-			MessageQueue.CardboardRendererPackage pkg=new MessageQueue.CardboardRendererPackage();
-			pkg.headQuaternion=new float[4];
-			pkg.headForwardVector=new float[3];
-			pkg.rotateMatrix=new float[16];
-			arg0.getQuaternion(pkg.headQuaternion, 0);
-			arg0.getForwardVector(pkg.headForwardVector, 0);
-			arg0.getHeadView(pkg.rotateMatrix, 0);
+			CardboardRendererMessagePackage pkg=new CardboardRendererMessagePackage();
+			pkg.mRotateMatrix=new float[16];
+			arg0.getHeadView(pkg.mRotateMatrix, 0);
 			MessageQueue.instance.addPackage(pkg);
 		}
 		mTextureProgram.loadIntoGLES();

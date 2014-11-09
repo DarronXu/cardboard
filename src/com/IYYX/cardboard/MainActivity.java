@@ -3,7 +3,6 @@ package com.IYYX.cardboard;
 
 import java.util.ArrayList;
 
-import com.IYYX.cardboard.MessageQueue.MainActivityPackage;
 import com.IYYX.cardboard.myAPIs.GameObject;
 import com.google.vrtoolkit.cardboard.CardboardActivity;
 import com.google.vrtoolkit.cardboard.CardboardView;

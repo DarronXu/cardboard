@@ -18,9 +18,9 @@ public class MessageQueue implements Runnable {
 	private static boolean startedUp=false;
 	public static boolean isStartedUp() {return startedUp;}
 	public static Thread startupInit(float[] startUpEye, float[] startUpLook, float[] startupCameraMatrix) {
-		share.mCameraMatrix=startupCameraMatrix;
-		share.initEye=startUpEye;
-		share.initLook=startUpLook;
+		sCameraMatrix=startupCameraMatrix;
+		sEye=startUpEye;
+		sLook=startUpLook;
         Thread messageQueue=new Thread(MessageQueue.instance);
         messageQueue.start();
         logArray(startUpEye,"startUpEye");
@@ -58,29 +58,6 @@ public class MessageQueue implements Runnable {
 		vector[1]=(float)((double)vector[1]/length);
 		vector[2]=(float)((double)vector[2]/length);
 	}
-	/**
-	 * get rotation parameters in AxisAngle from Quaternion
-	 * @param quaternion, float[4] { qx, qy, qz, qw}
-	 * @return float[4] { angle, x, y ,z}
-	 */
-	static float[] getAxisAngleFromQuaternion(float[] quaternion) {
-		//Log.e("QUATERNION", "Qw="+quaternion[3]);
-		//logArray(quaternion,"QUATERNION");
-		if(quaternion[3]==0) return new float[]{0,0,0,0};
-		float[] ans=new float[4];
-		double s=Math.sqrt(1.0-quaternion[3]*quaternion[3]);
-		ans[0]=(float)(2.0*(Math.acos(quaternion[3])/Math.PI*180.0));
-		if(s<0.001) {
-			ans[1]=quaternion[0];
-			ans[2]=quaternion[1];
-			ans[3]=quaternion[2];
-		} else {
-			ans[1]=(float)(quaternion[0]/s);
-			ans[2]=(float)(quaternion[1]/s);
-			ans[3]=(float)(quaternion[2]/s);
-		}
-		return ans;
-	}
 	
 	public static boolean isNewFramePaused(){
 		return mIsNewFramePaused;
@@ -96,71 +73,47 @@ public class MessageQueue implements Runnable {
 					mIsNewFramePaused = true;
 					mIsMainPaused = true;
 					Log.e("hasM!!!","hasM!!!");
-					MainActivityPackage LastM=null;
 					int indexOfLastM=0;
-					for(int i=list.size()-1;i>=0;i--) if(list.get(i).getType()==1) {
-						LastM=(MainActivityPackage)list.get(i);
+					for(int i=list.size()-1;i>=0;i--) if(list.get(i).mType==1) {
 						indexOfLastM=i;
 						break;
 					}
-					CardboardRendererPackage crHead=null,crEnd=null;
-					for(int i=0;i<list.size();i++) if(list.get(i).getType()==0) {
-						crHead=(CardboardRendererPackage)list.get(i);
-						break;
-					}
-					for(int i=indexOfLastM-1;i>=0;i--) if(list.get(i).getType()==0) {
-						crEnd=(CardboardRendererPackage)list.get(i);
+					CardboardRendererMessagePackage lastCR=null;
+					for(int i=indexOfLastM-1;i>=0;i--) if(list.get(i).mType==0) {
+						lastCR=(CardboardRendererMessagePackage)list.get(i);
 						break;
 					}
 					//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 					
-					/*float[] initRot=getAxisAngleFromQuaternion(crHead.headQuaternion);
-					float[] currRot=getAxisAngleFromQuaternion(crEnd.headQuaternion);
-					logArray(initRot,"INIT-rot");
-					logArray(crHead.headForwardVector,"INIT=forward");
-					logArray(currRot,"CURR-rot");
-					logArray(crEnd.headForwardVector,"CURR=forward");*/
-					
 					float[] oldEyeDirection=new float[4];
 					float[] newEyeDirection=new float[4];
-					oldEyeDirection[0]=share.initLook[0]-share.initEye[0];
-					oldEyeDirection[1]=share.initLook[1]-share.initEye[1];
-					oldEyeDirection[2]=share.initLook[2]-share.initEye[2];
+					oldEyeDirection[0]=sLook[0]-sEye[0];
+					oldEyeDirection[1]=sLook[1]-sEye[1];
+					oldEyeDirection[2]=sLook[2]-sEye[2];
 					oldEyeDirection[3]=0;
-
-					Log.e("OLD=EYE-Direction", oldEyeDirection[0]+","+oldEyeDirection[1]+","+oldEyeDirection[2]);
 					
-					Matrix.multiplyMV(newEyeDirection, 0, crEnd.rotateMatrix, 0, oldEyeDirection, 0);
-					normalizeV(newEyeDirection);
-					logArray(newEyeDirection,"newEyeDirection");
-					
-					//float[] tmp=new float[16];
-					//Log.e("CURRENT ROT MATRIX INVERSE-ABLE", "BOOLEAN:"+Matrix.invertM(tmp, 0, crEnd.rotateMatrix, 0));
+					Matrix.multiplyMV(newEyeDirection, 0, lastCR.mRotateMatrix, 0, oldEyeDirection, 0);
 
 					normalizeV(oldEyeDirection);
 					normalizeV(newEyeDirection);
 					
-					share.initEye[0]+=newEyeDirection[0]*0.3f;
-					//share.initEye[1]+=newEyeDirection[1]*0.3f;
-					share.initEye[2]-=newEyeDirection[2]*0.3f;
-
-					share.initLook[0]=share.initEye[0]+oldEyeDirection[0]*0.3f;
-					share.initLook[1]=share.initEye[1]+oldEyeDirection[1]*0.3f;
-					share.initLook[2]=share.initEye[2]+oldEyeDirection[2]*0.3f;
+					logArray(newEyeDirection,"newEyeDirection");
 					
-					Matrix.setLookAtM(share.mCameraMatrix, 0,
-							share.initEye[0], share.initEye[1], share.initEye[2],
-							share.initLook[0], share.initLook[1], share.initLook[2],
+					sEye[0]+=newEyeDirection[0]*0.3f;
+					//sEye[1]+=newEyeDirection[1]*0.3f;					//This line must be commented.						
+					sEye[2]-=newEyeDirection[2]*0.3f;
+
+					sLook[0]=sEye[0]+oldEyeDirection[0]*0.3f;
+					sLook[1]=sEye[1]+oldEyeDirection[1]*0.3f;		//This line must NOT be commented.
+					sLook[2]=sEye[2]+oldEyeDirection[2]*0.3f;
+					
+					Matrix.setLookAtM(sCameraMatrix, 0,
+							sEye[0], sEye[1], sEye[2],
+							sLook[0], sLook[1], sLook[2],
 							0, 1f, 0);
 					 
 		    		//          VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-		    		CardboardRendererPackage nextCrHead=null;
-		    		for(int i=indexOfLastM+1;i<list.size();i++) if(list.get(i).getType()==0) {
-		    			nextCrHead=(CardboardRendererPackage)list.get(i);
-		    			break;
-		    		}
 		    		list.clear();
-		    		if(nextCrHead!=null) list.add(nextCrHead);
 					hasM = false;
 					mIsNewFramePaused = false;
 					mIsMainPaused = false;
@@ -176,42 +129,36 @@ public class MessageQueue implements Runnable {
 	}
 	ArrayList<Package> list=new ArrayList<Package>();
 	
-	public static SharedVar share=new SharedVar();
-	
-	public void addPackage(MainActivityPackage pkg){
-		if(MessageQueue.mIsMainPaused) return;
+	public void addPackage(MainActivityMessagePackage pkg){
+		if(mIsMainPaused) return;
 		list.add(pkg);
-		if(MessageQueue.mIsMainPaused) {list.remove(pkg);}
+		if(mIsMainPaused) {list.remove(pkg);}
 		else hasM = true;
-		Log.e("addPackage", "ADDED M "+hasM);
-	}
-	public static CardboardRendererPackage latestCR=null;
-	public void addPackage(CardboardRendererPackage pkg){
-		if(MessageQueue.mIsNewFramePaused) return;
-		list.add(latestCR=pkg);
-		if(MessageQueue.mIsNewFramePaused) {list.remove(pkg);}
-	}
-	public static abstract class Package{
-		public abstract int getType();
-	}
-	public static class MainActivityPackage extends Package{
-		public int getType() {return 1;}
-	}
-	public static MainActivityPackage MPackage=new MainActivityPackage();
-	public static class CardboardRendererPackage extends Package{
-		float[] headQuaternion;
-		float[] headForwardVector;
-		float[] rotateMatrix;
-		public int getType() {return 0;}
-	}
-	public static class SharedVar{
-		HeadTransform headInfo;
-		//float[] currentHeadRotate = new float[4];
-		//float[] currentEyeDirection = new float[4];
-		float[] initEye = new float[3];
-		float[] initLook = new float[3];
-		float[] mCameraMatrix = new float[16];
 	}
 	
+	public void addPackage(CardboardRendererMessagePackage pkg){
+		if(mIsNewFramePaused) return;
+		list.add(pkg);
+		if(mIsNewFramePaused) {list.remove(pkg);}
+	}
+	public static MainActivityMessagePackage MPackage=new MainActivityMessagePackage();
 	
+	//		The following variables are shared by MainActivity and CardboardRenderer.
+	static float[] sEye = new float[3];
+	static float[] sLook = new float[3];
+	static float[] sCameraMatrix = new float[16];
+}
+
+abstract class Package{
+	int mType;
+}
+
+class MainActivityMessagePackage extends Package{
+	protected MainActivityMessagePackage() {mType=1;}
+}
+
+class CardboardRendererMessagePackage extends Package{
+	float[] mRotateMatrix;
+	public CardboardRendererMessagePackage() {mType=0;}
+	public CardboardRendererMessagePackage(float[] rotateMatrix) {mType=0;mRotateMatrix=rotateMatrix;}
 }
