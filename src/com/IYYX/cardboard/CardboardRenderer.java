@@ -23,7 +23,6 @@ import com.jogamp.opengl.math.Quaternion;
 public class CardboardRenderer extends MyCardboardRenderer { 
 	
 	private float[] mViewMatrix = new float[16];
-	float[] mCameraMatrix = new float[16];			//The position and orientation of Camera
 	
 	GLTextureProgram mTextureProgram;
 	Model[] boyModel,policeModel,chofsecretModel;
@@ -34,7 +33,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	}
 	
 	public void onDrawEye(EyeTransform arg0) {
-        Matrix.multiplyMM(mViewMatrix, 0, arg0.getEyeView(), 0, mCameraMatrix, 0);
+        Matrix.multiplyMM(mViewMatrix, 0, arg0.getEyeView(), 0, MessageQueue.share.mCameraMatrix, 0);
 		mTextureProgram.updateAllGameObjects();
         mTextureProgram.resetViewMatrix(mViewMatrix);
         mTextureProgram.resetProjectionMatrix(arg0.getPerspective());
@@ -78,7 +77,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 			headInfo.getQuaternion(initHeadRotate, 0);
 			initHeadRotate=getAxisAngleFromQuaternion(initHeadRotate);
 			normalizeV(initHeadRotate);
-			MessageQueue.startupInit(initHeadRotate,startupEye,startupLook);
+			MessageQueue.startupInit(initHeadRotate,startupEye,startupLook,startupCameraMatrix);
 		}
 		if (!MessageQueue.isNewFramePaused()){
 			HeadTransform headInfo=arg0;
@@ -111,6 +110,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	
 	final float[] startupEye=new float[]{0,0,0};
 	final float[] startupLook=new float[]{0.5f,0,0};
+	final float[] startupCameraMatrix = new float[16];			//The position and orientation of Camera
 
 	public void onSurfaceCreated(EGLConfig arg0) {
 		MessageQueue.onRestart();
@@ -122,8 +122,8 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);		//IMPORTANT for Alpha !! 
 		
 		//---------------Set up View Matrix-----------------
-		
-		Matrix.setLookAtM(mCameraMatrix, 0,
+
+		Matrix.setLookAtM(startupCameraMatrix, 0,
 				startupEye[0], startupEye[1], startupEye[2],
 				startupLook[0], startupLook[1], startupLook[2],
 				0, 1f, 0);

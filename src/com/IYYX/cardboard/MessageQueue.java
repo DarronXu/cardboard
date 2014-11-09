@@ -15,7 +15,8 @@ public class MessageQueue implements Runnable {
 	private static boolean mIsMainPaused = true;
 	private static boolean startedUp=false;
 	public static boolean isStartedUp() {return startedUp;}
-	public static Thread startupInit(float[] startupHeadRotate,float[] startUpEye, float[] startUpLook) {
+	public static Thread startupInit(float[] startupHeadRotate,float[] startUpEye, float[] startUpLook, float[] startupCameraMatrix) {
+		share.mCameraMatrix=startupCameraMatrix;
 		share.initHeadRotate=startupHeadRotate;
 		share.initEye=startUpEye;
 		share.initLook=startUpLook;
@@ -23,6 +24,7 @@ public class MessageQueue implements Runnable {
         messageQueue.start();
         mIsNewFramePaused=false;
         mIsMainPaused=false;
+        startedUp=true;
         return messageQueue;
 	}
 	public static void onRestart() {
@@ -60,9 +62,9 @@ public class MessageQueue implements Runnable {
 						crEnd=(CardboardRendererPackage)list.get(i);
 						break;
 					}
-					//ÐÞÕýM      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+					//ï¿½ï¿½ï¿½ï¿½M      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	
-					LastM.initEye[0]-=crHead.currentHeadRotate[0]*0.3f;
+					/*LastM.initEye[0]-=crHead.currentHeadRotate[0]*0.3f;
 					LastM.initEye[1]-=crHead.currentHeadRotate[1]*0.3f;
 					LastM.initEye[2]-=crHead.currentHeadRotate[2]*0.3f;
 					float eyeX=(LastM.initEye[0]+=crEnd.currentHeadRotate[0]*0.3f);
@@ -75,14 +77,14 @@ public class MessageQueue implements Runnable {
 							eyeX, eyeY, eyeZ,
 							centerX, centerY, centerZ,
 							0, 1f, 0);
-					LastM.initHeadRotate=crEnd.currentHeadRotate.clone();
+					LastM.initHeadRotate=crEnd.currentHeadRotate.clone();*/
 		    		//          VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-					//Ð´Èë2		^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+					//Ð´ï¿½ï¿½2		^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 					
-					/*shares[1].initEye=shares[2].initEye.clone();
-					shares[1].initLook=shares[2].initLook.clone();
-					shares[1].mCameraMatrix=shares[2].mCameraMatrix.clone();
-					shares[1].initHeadRotate=shares[2].initHeadRotate.clone();*/
+					share.initEye=LastM.initEye.clone();
+					share.initLook=LastM.initLook.clone();
+					share.mCameraMatrix=LastM.mCameraMatrix.clone();
+					share.initHeadRotate=LastM.initHeadRotate.clone();
 					
 					//           VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
 		    		CardboardRendererPackage nextCrHead=null;
@@ -95,7 +97,7 @@ public class MessageQueue implements Runnable {
 					hasM = false;
 					mIsNewFramePaused = false;
 					mIsMainPaused = false;
-				} else {
+				} /*else {
 					mIsMainPaused=true;
 					mIsNewFramePaused =true;
 					
@@ -107,7 +109,7 @@ public class MessageQueue implements Runnable {
 					
 					mIsNewFramePaused = false;
 					mIsMainPaused = false;
-				}
+				}*/
 			} catch (Exception e) {
 				e.printStackTrace();
 			} try {
@@ -128,9 +130,10 @@ public class MessageQueue implements Runnable {
 		else hasM = true;
 		Log.e("addPackage", "ADDED M "+hasM);
 	}
+	public static CardboardRendererPackage latestCR=null;
 	public void addPackage(CardboardRendererPackage pkg){
 		if(MessageQueue.mIsNewFramePaused) return;
-		list.add(pkg);
+		list.add(latestCR=pkg);
 		if(MessageQueue.mIsNewFramePaused) {list.remove(pkg);}
 	}
 	public static abstract class Package{

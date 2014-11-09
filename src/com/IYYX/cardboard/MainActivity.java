@@ -66,7 +66,7 @@ public class MainActivity extends CardboardActivity {
         Log.i("MainActivity", "onCardboardTrigger");
         if(renderer!=null) if(renderer.mTextureProgram!=null) if(!MessageQueue.isMainPaused()){
 
-			Log.e("EYE-Direction", MessageQueue.share.currentEyeDirection[0]+","+MessageQueue.share.currentEyeDirection[1]+","+MessageQueue.share.currentEyeDirection[2]);
+			Log.e("EYE-Direction", MessageQueue.latestCR.currentEyeDirection[0]+","+MessageQueue.latestCR.currentEyeDirection[1]+","+MessageQueue.latestCR.currentEyeDirection[2]);
         	/*
         	 * METHOD 1
         	 * 
@@ -74,12 +74,12 @@ public class MainActivity extends CardboardActivity {
 			float eye[]=new float[3];
 			float look[]=new float[3];
 			float camera[] =new float[16];
-			eye[0]=MessageQueue.share.initEye[0]+MessageQueue.share.currentEyeDirection[0]*0.3f;
-			eye[1]=MessageQueue.share.initEye[1]+MessageQueue.share.currentEyeDirection[1]*0.3f;
-			eye[2]=MessageQueue.share.initEye[2]+MessageQueue.share.currentEyeDirection[2]*0.3f;
-			look[0]=eye[0]+MessageQueue.share.currentEyeDirection[0]*0.3f;
-			look[1]=eye[1]+MessageQueue.share.currentEyeDirection[1]*0.3f;
-			look[2]=eye[2]+MessageQueue.share.currentEyeDirection[2]*0.3f;
+			eye[0]=MessageQueue.share.initEye[0]+MessageQueue.latestCR.currentEyeDirection[0]*0.3f;
+			eye[1]=MessageQueue.share.initEye[1]+MessageQueue.latestCR.currentEyeDirection[1]*0.3f;
+			eye[2]=MessageQueue.share.initEye[2]+MessageQueue.latestCR.currentEyeDirection[2]*0.3f;
+			look[0]=eye[0]+MessageQueue.latestCR.currentEyeDirection[0]*0.3f;
+			look[1]=eye[1]+MessageQueue.latestCR.currentEyeDirection[1]*0.3f;
+			look[2]=eye[2]+MessageQueue.latestCR.currentEyeDirection[2]*0.3f;
 			
     		Matrix.setLookAtM(camera, 0,
     				eye[0], eye[1], eye[2],
@@ -87,7 +87,7 @@ public class MainActivity extends CardboardActivity {
     				0, 1f, 0);
     		
 			MessageQueue.instance.addPackage(new MessageQueue.MainActivityPackage(eye,look,
-					MessageQueue.share.currentHeadRotate.clone(),camera));
+					MessageQueue.latestCR.currentHeadRotate.clone(),camera));
 			
 			/*
 			 * METHOD 2
