@@ -43,15 +43,6 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		mTextureProgram.renderAllGameObjects();
 	}
 	
-	HeadTransform headInfo;
-	
-	float[] initEye = {0.0f,0.0f,0.0f};
-	float[] initLook = {0.5f,0f,0f};
-	float[] initUp = {0.0f,1.0f,0f};
-	
-	float[] initHeadRotate = null;
-	float[] currentEyeDirection = new float[4];
-	
 	void normalizeV(float[] vector) {
 		double length=Math.sqrt(
 				Math.pow(vector[0], 2.0)+
@@ -65,7 +56,6 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		vector[1]=(float)((double)vector[1]/length);
 		vector[2]=(float)((double)vector[2]/length);
 	}
-	
 	/**
 	 * get rotation parameters in AxisAngle from Quaternion
 	 * @param quaternion, float[4] { qx, qy, qz, qw}
@@ -80,41 +70,50 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		ans[3]=(float)(quaternion[2]/Math.sqrt(1.0-quaternion[3]*quaternion[3]));
 		return ans;
 	}
-	boolean resetInitHeadRotate=false;
+	//boolean resetInitHeadRotate=false;
 	public void onNewFrame(HeadTransform arg0) {
-		this.headInfo=arg0;
-		if(resetInitHeadRotate||initHeadRotate==null) {
-			initHeadRotate=new float[4];
+		if(!MessageQueue.isStartedUp()) {
+			HeadTransform headInfo=arg0;
+			float[] initHeadRotate=new float[4];
 			headInfo.getQuaternion(initHeadRotate, 0);
 			initHeadRotate=getAxisAngleFromQuaternion(initHeadRotate);
 			normalizeV(initHeadRotate);
-			resetInitHeadRotate=false;
+			MessageQueue.startupInit(initHeadRotate,startupEye,startupLook);
 		}
-		else {
+		if (!MessageQueue.isNewFramePaused()){
+			HeadTransform headInfo=arg0;
+			MessageQueue.CardboardRendererPackage pkg=new MessageQueue.CardboardRendererPackage();
 			float[] currentHeadRotate=new float[4];
+			float[] currentEyeDirection=new float[4];
 			float[] oldEyeDirection=new float[4];
-			oldEyeDirection[0]=initLook[0]-initEye[0];
-			oldEyeDirection[1]=initLook[1]-initEye[1];
-			oldEyeDirection[2]=initLook[2]-initEye[2];
+			oldEyeDirection[0]=MessageQueue.share.initLook[0]-MessageQueue.share.initEye[0];
+			oldEyeDirection[1]=MessageQueue.share.initLook[1]-MessageQueue.share.initEye[1];
+			oldEyeDirection[2]=MessageQueue.share.initLook[2]-MessageQueue.share.initEye[2];
 			oldEyeDirection[3]=0;
 			normalizeV(oldEyeDirection);
 			
 			headInfo.getQuaternion(currentHeadRotate, 0);
 			currentHeadRotate=getAxisAngleFromQuaternion(currentHeadRotate);
 			
-			//Log.e("getQuaternion:=", currentHeadRotate[0]+","+currentHeadRotate[1]+","+currentHeadRotate[2]+","+currentHeadRotate[3]+"!");
 			float[] matrix=new float[16];
 			Matrix.setIdentityM(matrix, 0);
-			if(initHeadRotate[0]!=0) Matrix.rotateM(matrix, 0, -initHeadRotate[0], initHeadRotate[1], initHeadRotate[2], -initHeadRotate[3]);
+			if(MessageQueue.share.initHeadRotate[0]!=0) Matrix.rotateM(matrix, 0, -MessageQueue.share.initHeadRotate[0], MessageQueue.share.initHeadRotate[1], MessageQueue.share.initHeadRotate[2], -MessageQueue.share.initHeadRotate[3]);
 			if(currentHeadRotate[0]!=0) Matrix.rotateM(matrix, 0, currentHeadRotate[0], currentHeadRotate[1], currentHeadRotate[2], -currentHeadRotate[3]);
 			Matrix.multiplyMV(currentEyeDirection, 0, matrix, 0, oldEyeDirection, 0);
 			normalizeV(currentEyeDirection);
+			
+			pkg.currentEyeDirection=currentEyeDirection;
+			pkg.currentHeadRotate=currentHeadRotate;
+			MessageQueue.instance.addPackage(pkg);
 		}
 		mTextureProgram.loadIntoGLES();
 	}
+	
+	final float[] startupEye=new float[]{0,0,0};
+	final float[] startupLook=new float[]{0.5f,0,0};
 
 	public void onSurfaceCreated(EGLConfig arg0) {
-		initHeadRotate=null;
+		MessageQueue.onRestart();
 		PartitionedGameObject.resetOpenedTextures();		//VERY IMPORTANT. When Activity is Paused, old OpenGL Handls expired and the old Texture 'pointers' can't be used anymore.
 		GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.7f);
 		GLES20.glEnable(GLES20.GL_DEPTH_TEST);
@@ -123,10 +122,11 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);		//IMPORTANT for Alpha !! 
 		
 		//---------------Set up View Matrix-----------------
+		
 		Matrix.setLookAtM(mCameraMatrix, 0,
-				initEye[0], initEye[1], initEye[2],
-				initLook[0], initLook[1], initLook[2],
-				initUp[0], initUp[1], initUp[2]);
+				startupEye[0], startupEye[1], startupEye[2],
+				startupLook[0], startupLook[1], startupLook[2],
+				0, 1f, 0);
 		
 		mTextureProgram = new GLTextureProgram(res);
 		

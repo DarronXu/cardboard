@@ -3,6 +3,7 @@ package com.IYYX.cardboard;
 
 import java.util.ArrayList;
 
+import com.IYYX.cardboard.MessageQueue.MainActivityPackage;
 import com.IYYX.cardboard.myAPIs.GameObject;
 import com.google.vrtoolkit.cardboard.CardboardActivity;
 import com.google.vrtoolkit.cardboard.CardboardView;
@@ -63,24 +64,31 @@ public class MainActivity extends CardboardActivity {
     @Override
     public void onCardboardTrigger() {
         Log.i("MainActivity", "onCardboardTrigger");
-        if(renderer!=null) if(renderer.mTextureProgram!=null) if(renderer.headInfo!=null){
+        if(renderer!=null) if(renderer.mTextureProgram!=null) if(!MessageQueue.isMainPaused()){
 
-			Log.e("EYE-Direction", renderer.currentEyeDirection[0]+","+renderer.currentEyeDirection[1]+","+renderer.currentEyeDirection[2]);
+			Log.e("EYE-Direction", MessageQueue.share.currentEyeDirection[0]+","+MessageQueue.share.currentEyeDirection[1]+","+MessageQueue.share.currentEyeDirection[2]);
         	/*
         	 * METHOD 1
         	 * 
         	 */
-			renderer.initEye[0]+=renderer.currentEyeDirection[0]*0.3f;
-        	renderer.initEye[1]+=renderer.currentEyeDirection[1]*0.3f;
-        	renderer.initEye[2]+=renderer.currentEyeDirection[2]*0.3f;
-        	renderer.initLook[0]=renderer.initEye[0]+renderer.currentEyeDirection[0]*0.3f;
-        	renderer.initLook[1]=renderer.initEye[1]+renderer.currentEyeDirection[1]*0.3f;
-        	renderer.initLook[2]=renderer.initEye[2]+renderer.currentEyeDirection[2]*0.3f;
-
-    		Matrix.setLookAtM(renderer.mCameraMatrix, 0,
-    				renderer.initEye[0], renderer.initEye[1], renderer.initEye[2],
-    				renderer.initLook[0], renderer.initLook[1], renderer.initLook[2],
-    				renderer.initUp[0], renderer.initUp[1], renderer.initUp[2]);
+			float eye[]=new float[3];
+			float look[]=new float[3];
+			float camera[] =new float[16];
+			eye[0]=MessageQueue.share.initEye[0]+MessageQueue.share.currentEyeDirection[0]*0.3f;
+			eye[1]=MessageQueue.share.initEye[1]+MessageQueue.share.currentEyeDirection[1]*0.3f;
+			eye[2]=MessageQueue.share.initEye[2]+MessageQueue.share.currentEyeDirection[2]*0.3f;
+			look[0]=eye[0]+MessageQueue.share.currentEyeDirection[0]*0.3f;
+			look[1]=eye[1]+MessageQueue.share.currentEyeDirection[1]*0.3f;
+			look[2]=eye[2]+MessageQueue.share.currentEyeDirection[2]*0.3f;
+			
+    		Matrix.setLookAtM(camera, 0,
+    				eye[0], eye[1], eye[2],
+    				look[0], look[1], look[2],
+    				0, 1f, 0);
+    		
+			MessageQueue.instance.addPackage(new MessageQueue.MainActivityPackage(eye,look,
+					MessageQueue.share.currentHeadRotate.clone(),camera));
+			
 			/*
 			 * METHOD 2
 			 * 
@@ -94,7 +102,6 @@ public class MainActivity extends CardboardActivity {
     		
 			
 			//COMMON COMMAND: 
-			renderer.resetInitHeadRotate=true;
         }
         
     }
