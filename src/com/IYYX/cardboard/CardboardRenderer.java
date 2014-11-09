@@ -42,67 +42,26 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		mTextureProgram.renderAllGameObjects();
 	}
 	
-	void normalizeV(float[] vector) {
-		double length=Math.sqrt(
-				Math.pow(vector[0], 2.0)+
-				Math.pow(vector[1], 2.0)+
-				Math.pow(vector[2], 2.0));
-		if(length==0) {
-			vector[0]=vector[1]=vector[2]=0;
-			return;
-		}
-		vector[0]=(float)((double)vector[0]/length);
-		vector[1]=(float)((double)vector[1]/length);
-		vector[2]=(float)((double)vector[2]/length);
-	}
-	/**
-	 * get rotation parameters in AxisAngle from Quaternion
-	 * @param quaternion, float[4] { qx, qy, qz, qw}
-	 * @return float[4] { angle, x, y ,z}
-	 */
-	float[] getAxisAngleFromQuaternion(float[] quaternion) {
-		if(quaternion[3]==0) return new float[]{0,0,0,0};
-		float[] ans=new float[4];
-		ans[0]=(float)(2.0*(Math.acos(quaternion[3])/Math.PI*180.0));
-		ans[1]=(float)(quaternion[0]/Math.sqrt(1.0-quaternion[3]*quaternion[3]));
-		ans[2]=(float)(quaternion[1]/Math.sqrt(1.0-quaternion[3]*quaternion[3]));
-		ans[3]=(float)(quaternion[2]/Math.sqrt(1.0-quaternion[3]*quaternion[3]));
-		return ans;
-	}
-	//boolean resetInitHeadRotate=false;
 	public void onNewFrame(HeadTransform arg0) {
 		if(!MessageQueue.isStartedUp()) {
-			HeadTransform headInfo=arg0;
-			float[] initHeadRotate=new float[4];
-			headInfo.getQuaternion(initHeadRotate, 0);
-			initHeadRotate=getAxisAngleFromQuaternion(initHeadRotate);
-			normalizeV(initHeadRotate);
-			MessageQueue.startupInit(initHeadRotate,startupEye,startupLook,startupCameraMatrix);
+			MessageQueue.startupInit(startupEye.clone(),startupLook.clone(),startupCameraMatrix.clone());
+			MessageQueue.CardboardRendererPackage pkg=new MessageQueue.CardboardRendererPackage();
+			pkg.headQuaternion=new float[4];
+			pkg.headForwardVector=new float[3];
+			pkg.rotateMatrix=new float[16];
+			arg0.getQuaternion(pkg.headQuaternion, 0);
+			arg0.getForwardVector(pkg.headForwardVector, 0);
+			arg0.getHeadView(pkg.rotateMatrix, 0);
+			MessageQueue.instance.addPackage(pkg);
 		}
 		if (!MessageQueue.isNewFramePaused()){
-			HeadTransform headInfo=arg0;
 			MessageQueue.CardboardRendererPackage pkg=new MessageQueue.CardboardRendererPackage();
-			float[] currentHeadRotate=new float[4];
-			float[] currentEyeDirection=new float[4];
-			float[] oldEyeDirection=new float[4];
-			oldEyeDirection[0]=MessageQueue.share.initLook[0]-MessageQueue.share.initEye[0];
-			oldEyeDirection[1]=MessageQueue.share.initLook[1]-MessageQueue.share.initEye[1];
-			oldEyeDirection[2]=MessageQueue.share.initLook[2]-MessageQueue.share.initEye[2];
-			oldEyeDirection[3]=0;
-			normalizeV(oldEyeDirection);
-			
-			headInfo.getQuaternion(currentHeadRotate, 0);
-			currentHeadRotate=getAxisAngleFromQuaternion(currentHeadRotate);
-			
-			float[] matrix=new float[16];
-			Matrix.setIdentityM(matrix, 0);
-			if(MessageQueue.share.initHeadRotate[0]!=0) Matrix.rotateM(matrix, 0, -MessageQueue.share.initHeadRotate[0], MessageQueue.share.initHeadRotate[1], MessageQueue.share.initHeadRotate[2], -MessageQueue.share.initHeadRotate[3]);
-			if(currentHeadRotate[0]!=0) Matrix.rotateM(matrix, 0, currentHeadRotate[0], currentHeadRotate[1], currentHeadRotate[2], -currentHeadRotate[3]);
-			Matrix.multiplyMV(currentEyeDirection, 0, matrix, 0, oldEyeDirection, 0);
-			normalizeV(currentEyeDirection);
-			
-			pkg.currentEyeDirection=currentEyeDirection;
-			pkg.currentHeadRotate=currentHeadRotate;
+			pkg.headQuaternion=new float[4];
+			pkg.headForwardVector=new float[3];
+			pkg.rotateMatrix=new float[16];
+			arg0.getQuaternion(pkg.headQuaternion, 0);
+			arg0.getForwardVector(pkg.headForwardVector, 0);
+			arg0.getHeadView(pkg.rotateMatrix, 0);
 			MessageQueue.instance.addPackage(pkg);
 		}
 		mTextureProgram.loadIntoGLES();
