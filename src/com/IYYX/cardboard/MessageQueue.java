@@ -114,12 +114,12 @@ public class MessageQueue implements Runnable {
 					}
 					//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 					
-					float[] initRot=getAxisAngleFromQuaternion(crHead.headQuaternion);
+					/*float[] initRot=getAxisAngleFromQuaternion(crHead.headQuaternion);
 					float[] currRot=getAxisAngleFromQuaternion(crEnd.headQuaternion);
 					logArray(initRot,"INIT-rot");
 					logArray(crHead.headForwardVector,"INIT=forward");
 					logArray(currRot,"CURR-rot");
-					logArray(crEnd.headForwardVector,"CURR=forward");
+					logArray(crEnd.headForwardVector,"CURR=forward");*/
 					
 					float[] oldEyeDirection=new float[4];
 					float[] newEyeDirection=new float[4];
@@ -130,29 +130,29 @@ public class MessageQueue implements Runnable {
 
 					Log.e("OLD=EYE-Direction", oldEyeDirection[0]+","+oldEyeDirection[1]+","+oldEyeDirection[2]);
 					
-					float[] matrix=new float[16];
-					Matrix.setIdentityM(matrix, 0);
-					//if(initRot[0]!=0) Matrix.rotateM(matrix, 0, -initRot[0], initRot[1], initRot[2], -initRot[3]);
-					if(currRot[0]!=0) Matrix.rotateM(matrix, 0,  currRot[0], currRot[1], currRot[2], -currRot[3]);
-					Matrix.multiplyMV(newEyeDirection, 0, matrix, 0, oldEyeDirection, 0);
+					Matrix.multiplyMV(newEyeDirection, 0, crEnd.rotateMatrix, 0, oldEyeDirection, 0);
 					normalizeV(newEyeDirection);
 					logArray(newEyeDirection,"newEyeDirection");
-					float[] tmp=new float[16];
-					Log.e("CURRENT ROT MATRIX INVERSE-ABLE", "BOOLEAN:"+Matrix.invertM(tmp, 0, crEnd.rotateMatrix, 0));
-					//Log.e("EYE-Direction", newEyeDirection[0]+","+newEyeDirection[1]+","+newEyeDirection[2]);
-					/*
+					
+					//float[] tmp=new float[16];
+					//Log.e("CURRENT ROT MATRIX INVERSE-ABLE", "BOOLEAN:"+Matrix.invertM(tmp, 0, crEnd.rotateMatrix, 0));
+
+					normalizeV(oldEyeDirection);
+					normalizeV(newEyeDirection);
+					
 					share.initEye[0]+=newEyeDirection[0]*0.3f;
-					share.initEye[1]+=newEyeDirection[1]*0.3f;
-					share.initEye[2]+=newEyeDirection[2]*0.3f;
-					share.initLook[0]=share.initEye[0]+newEyeDirection[0]*0.3f;
-					share.initLook[1]=share.initEye[1]+newEyeDirection[1]*0.3f;
-					share.initLook[2]=share.initEye[2]+newEyeDirection[2]*0.3f;
+					//share.initEye[1]+=newEyeDirection[1]*0.3f;
+					share.initEye[2]-=newEyeDirection[2]*0.3f;
+
+					share.initLook[0]=share.initEye[0]+oldEyeDirection[0]*0.3f;
+					share.initLook[1]=share.initEye[1]+oldEyeDirection[1]*0.3f;
+					share.initLook[2]=share.initEye[2]+oldEyeDirection[2]*0.3f;
 					
 					Matrix.setLookAtM(share.mCameraMatrix, 0,
 							share.initEye[0], share.initEye[1], share.initEye[2],
 							share.initLook[0], share.initLook[1], share.initLook[2],
 							0, 1f, 0);
-					 */
+					 
 		    		//          VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
 		    		CardboardRendererPackage nextCrHead=null;
 		    		for(int i=indexOfLastM+1;i<list.size();i++) if(list.get(i).getType()==0) {

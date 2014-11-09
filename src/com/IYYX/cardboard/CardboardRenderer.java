@@ -68,7 +68,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	}
 	
 	final float[] startupEye=new float[]{0,0,0};
-	final float[] startupLook=new float[]{0.5f,0,0};
+	final float[] startupLook=new float[]{1f,0f,0};
 	final float[] startupCameraMatrix = new float[16];			//The position and orientation of Camera
 
 	public void onSurfaceCreated(EGLConfig arg0) {
@@ -77,7 +77,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.7f);
 		GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 		GLES20.glDepthFunc(GLES20.GL_LESS);
-		GLES20.glEnable(GLES20.GL_BLEND); 
+		GLES20.glEnable(GLES20.GL_BLEND);
 		GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);		//IMPORTANT for Alpha !! 
 		
 		//---------------Set up View Matrix-----------------
@@ -85,7 +85,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		Matrix.setLookAtM(startupCameraMatrix, 0,
 				startupEye[0], startupEye[1], startupEye[2],
 				startupLook[0], startupLook[1], startupLook[2],
-				0, 1f, 0);
+				0, 1f, 0f);
 		
 		mTextureProgram = new GLTextureProgram(res);
 		
