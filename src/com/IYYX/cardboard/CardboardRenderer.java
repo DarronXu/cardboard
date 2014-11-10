@@ -42,7 +42,8 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		mTextureProgram.renderAllGameObjects();
 	}
 	
-	boolean requestStepForward=false;
+	boolean keepStepping=false;
+	boolean pasueMainActivity=false;
 
 	static void normalizeV(float[] vector) {
 		double length=Math.sqrt(
@@ -69,6 +70,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	}
 	
 	private void stepForward(float scale){						//This function MUST be private
+		pasueMainActivity=true;
 		float[] oldEyeDirection=new float[4];
 		float[] newEyeDirection=new float[4];
 		oldEyeDirection[0]=mLook[0]-mEye[0];
@@ -80,8 +82,6 @@ public class CardboardRenderer extends MyCardboardRenderer {
 
 		normalizeV(oldEyeDirection);
 		normalizeV(newEyeDirection);
-		
-		logArray(newEyeDirection,"newEyeDirection");
 		
 		mEye[0]+=newEyeDirection[0]*scale;
 		//mEye[1]+=newEyeDirection[1]*scale;					//This line must be commented.						
@@ -95,15 +95,15 @@ public class CardboardRenderer extends MyCardboardRenderer {
 				mEye[0], mEye[1], mEye[2],
 				mLook[0], mLook[1], mLook[2],
 				0, 1f, 0);
+		pasueMainActivity=false;
 	}
 	
 	float[] currHeadRotateMatrix=new float[16];
 	
 	public void onNewFrame(HeadTransform arg0) {
 		arg0.getHeadView(currHeadRotateMatrix, 0);
-		if(requestStepForward) {
-			stepForward(0.3f);
-			requestStepForward=false;
+		if(keepStepping) {
+			stepForward(0.1f);
 		}
 		mTextureProgram.loadIntoGLES();
 	}

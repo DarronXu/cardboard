@@ -53,18 +53,27 @@ public class MainActivity extends CardboardActivity {
 	protected void onPause() {
 		super.onPause();
 		if(cardboardView!=null) cardboardView.onPause();
+		if(renderer!=null) {
+			renderer.pasueMainActivity=true;
+			renderer.keepStepping=false;
+		}
 	}
 	
 	protected void onResume() {
 		super.onResume();
 		if(cardboardView!=null) cardboardView.onResume();
+		if(renderer!=null) {
+			renderer.keepStepping=false;
+			renderer.pasueMainActivity=false;
+		}
 	}
 	
     @Override
     public void onCardboardTrigger() {
         Log.i("MainActivity", "onCardboardTrigger");
-        if(renderer!=null) if(renderer.mTextureProgram!=null) if(!renderer.requestStepForward){
-        	renderer.requestStepForward=true; 
+        if(renderer!=null) if(renderer.mTextureProgram!=null) if(!renderer.pasueMainActivity){
+        	renderer.keepStepping=!renderer.keepStepping;
+        	if(renderer.keepStepping) renderer.pasueMainActivity=true;
         }
         
     }
