@@ -1,4 +1,5 @@
 /DarronCommit.class
+<<<<<<< HEAD
 /NetA.class
 /NetServer$ServerSpeaker.class
 /NetServer.class
@@ -9,3 +10,27 @@
 /PiServerB$ServerSpeaker.class
 /PiServerB.class
 /Test.class
+=======
+/DarronNetServer$ServerSpeaker.class
+/DarronNetServer.class
+/NetA.class
+/NetB.class
+/NetServer$ServerSpeaker.class
+/NetServer.class
+/PiClientA.class
+/PiClientB.class
+/PiServerA$ServerSpeaker.class
+/PiServerA.class
+/PiServerB$ServerSpeaker.class
+/PiServerB.class
+/Test.class
+/NetB$ThreadTwo.class
+/CopyOfDarronNetServer1$ServerSpeaker.class
+/CopyOfDarronNetServer1.class
+/CopyOfNetB1$ThreadTwo.class
+/CopyOfNetB1.class
+/NetB1$ThreadTwo.class
+/NetB1.class
+/DarronNetServer1$ServerSpeaker.class
+/DarronNetServer1.class
+>>>>>>> refs/heads/JavaTcpIpExample
