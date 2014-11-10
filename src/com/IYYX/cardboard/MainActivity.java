@@ -63,26 +63,8 @@ public class MainActivity extends CardboardActivity {
     @Override
     public void onCardboardTrigger() {
         Log.i("MainActivity", "onCardboardTrigger");
-        if(renderer!=null) if(renderer.mTextureProgram!=null) if(!MessageQueue.isMainPaused()){
-        	/*
-        	 * METHOD 1
-        	 * 
-        	 */
-			MessageQueue.instance.addPackage(MessageQueue.MPackage);
-			
-			/*
-			 * METHOD 2
-			 * 
-			 *
-			float[] matrix=new float[16];
-			float[] ans=new float[16];
-			Matrix.setIdentityM(matrix, 0);
-			Matrix.translateM(matrix, 0, -renderer.currentEyeDirection[0], -renderer.currentEyeDirection[1], -renderer.currentEyeDirection[2]);
-			Matrix.multiplyMM(ans, 0, renderer.mCameraMatrix, 0, matrix, 0);
-			renderer.mCameraMatrix=ans;*/
-    		
-			
-			//COMMON COMMAND: 
+        if(renderer!=null) if(renderer.mTextureProgram!=null) if(!renderer.requestStepForward){
+        	renderer.requestStepForward=true; 
         }
         
     }

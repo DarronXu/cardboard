@@ -33,7 +33,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	}
 	
 	public void onDrawEye(EyeTransform arg0) {
-        Matrix.multiplyMM(mViewMatrix, 0, arg0.getEyeView(), 0, MessageQueue.sCameraMatrix, 0);
+        Matrix.multiplyMM(mViewMatrix, 0, arg0.getEyeView(), 0, mCameraMatrix, 0);
 		mTextureProgram.updateAllGameObjects();
         mTextureProgram.resetViewMatrix(mViewMatrix);
         mTextureProgram.resetProjectionMatrix(arg0.getPerspective());
@@ -42,29 +42,81 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		mTextureProgram.renderAllGameObjects();
 	}
 	
-	public void onNewFrame(HeadTransform arg0) {
-		if(!MessageQueue.isStartedUp()) {
-			MessageQueue.startupInit(startupEye.clone(),startupLook.clone(),startupCameraMatrix.clone());
-			CardboardRendererMessagePackage pkg=new CardboardRendererMessagePackage();
-			pkg.mRotateMatrix=new float[16];
-			arg0.getHeadView(pkg.mRotateMatrix, 0);
-			MessageQueue.instance.addPackage(pkg);
+	boolean requestStepForward=false;
+
+	static void normalizeV(float[] vector) {
+		double length=Math.sqrt(
+				Math.pow(vector[0], 2.0)+
+				Math.pow(vector[1], 2.0)+
+				Math.pow(vector[2], 2.0));
+		if(length==0) {
+			vector[0]=vector[1]=vector[2]=0;
+			return;
 		}
-		if (!MessageQueue.isNewFramePaused()){
-			CardboardRendererMessagePackage pkg=new CardboardRendererMessagePackage();
-			pkg.mRotateMatrix=new float[16];
-			arg0.getHeadView(pkg.mRotateMatrix, 0);
-			MessageQueue.instance.addPackage(pkg);
+		vector[0]=(float)((double)vector[0]/length);
+		vector[1]=(float)((double)vector[1]/length);
+		vector[2]=(float)((double)vector[2]/length);
+	}
+
+	public static void logArray(float[] arr, String msg) {
+		String str="";
+		for(int i=0;i<arr.length;i++)
+		{
+			str+=arr[i];
+			str+=',';
+		}
+		Log.e(msg,str);
+	}
+	
+	private void stepForward(float scale){						//This function MUST be private
+		float[] oldEyeDirection=new float[4];
+		float[] newEyeDirection=new float[4];
+		oldEyeDirection[0]=mLook[0]-mEye[0];
+		oldEyeDirection[1]=mLook[1]-mEye[1];
+		oldEyeDirection[2]=mLook[2]-mEye[2];
+		oldEyeDirection[3]=0;
+		
+		Matrix.multiplyMV(newEyeDirection, 0, currHeadRotateMatrix, 0, oldEyeDirection, 0);
+
+		normalizeV(oldEyeDirection);
+		normalizeV(newEyeDirection);
+		
+		logArray(newEyeDirection,"newEyeDirection");
+		
+		mEye[0]+=newEyeDirection[0]*scale;
+		//mEye[1]+=newEyeDirection[1]*scale;					//This line must be commented.						
+		mEye[2]-=newEyeDirection[2]*scale;
+
+		mLook[0]=mEye[0]+oldEyeDirection[0]*scale;
+		mLook[1]=mEye[1]+oldEyeDirection[1]*scale;				//This line must NOT be commented.
+		mLook[2]=mEye[2]+oldEyeDirection[2]*scale;
+		
+		Matrix.setLookAtM(mCameraMatrix, 0,
+				mEye[0], mEye[1], mEye[2],
+				mLook[0], mLook[1], mLook[2],
+				0, 1f, 0);
+	}
+	
+	float[] currHeadRotateMatrix=new float[16];
+	
+	public void onNewFrame(HeadTransform arg0) {
+		arg0.getHeadView(currHeadRotateMatrix, 0);
+		if(requestStepForward) {
+			stepForward(0.3f);
+			requestStepForward=false;
 		}
 		mTextureProgram.loadIntoGLES();
 	}
 	
+	float[] mEye;
+	float[] mLook;
+	float[] mCameraMatrix=new float[16];			//The position and orientation of Camera
+	
 	final float[] startupEye=new float[]{0,0,0};
 	final float[] startupLook=new float[]{1f,0f,0};
-	final float[] startupCameraMatrix = new float[16];			//The position and orientation of Camera
 
 	public void onSurfaceCreated(EGLConfig arg0) {
-		MessageQueue.onRestart();
+		//MessageQueue.onRestart();
 		PartitionedGameObject.resetOpenedTextures();		//VERY IMPORTANT. When Activity is Paused, old OpenGL Handls expired and the old Texture 'pointers' can't be used anymore.
 		GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.7f);
 		GLES20.glEnable(GLES20.GL_DEPTH_TEST);
@@ -73,8 +125,10 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);		//IMPORTANT for Alpha !! 
 		
 		//---------------Set up View Matrix-----------------
-
-		Matrix.setLookAtM(startupCameraMatrix, 0,
+		
+		mEye=startupEye.clone();
+		mLook=startupLook.clone();
+		Matrix.setLookAtM(mCameraMatrix, 0,
 				startupEye[0], startupEye[1], startupEye[2],
 				startupLook[0], startupLook[1], startupLook[2],
 				0, 1f, 0f);
