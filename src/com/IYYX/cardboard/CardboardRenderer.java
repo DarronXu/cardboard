@@ -27,6 +27,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	GLTextureProgram mTextureProgram;
 	Model[] boyModel,policeModel,chofsecretModel;
 	PartitionedGameObject boyA,chofsecretA;
+	String myUsername = null,contactUsername = null;
 	
 	public CardboardRenderer(Resources res,CardboardView cardboardView,CardboardOverlayView overlay, Activity dad) {
 		super(res,cardboardView, overlay, dad);
@@ -44,7 +45,57 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	
 	boolean keepStepping=false;
 	boolean pasueMainActivity=false;
+	
+	static float[] crossProduct_rightHanded(float[] vecFrom,float[] vecTo) {
+		float[] vec=new float[3];
+		vec[0]=vecFrom[1]*vecTo[2]-vecFrom[2]*vecTo[1];
+		vec[1]=vecFrom[2]*vecTo[0]-vecFrom[0]*vecTo[2];
+		vec[2]=vecFrom[0]*vecTo[1]-vecTo[0]*vecFrom[1];
+		return vec;
+	}
 
+	static float[] crossProduct_leftHanded(float[] vecFrom,float[] vecTo) {
+		float[] vec=new float[3];
+		vec[0]=-(vecFrom[1]*vecTo[2]-vecFrom[2]*vecTo[1]);
+		vec[1]=-(vecFrom[2]*vecTo[0]-vecFrom[0]*vecTo[2]);
+		vec[2]=-(vecFrom[0]*vecTo[1]-vecTo[0]*vecFrom[1]);
+		return vec;
+	}
+	
+	static float dotProduct(float[] vec1,float[] vec2) {
+		float ans=0;
+		ans+=vec1[0]*vec2[0];
+		ans+=vec1[1]*vec2[1];
+		ans+=vec1[2]*vec2[2];
+		return ans;
+	}
+	
+	static float lengthOfVector(float[] vec) {
+		float ans=0;
+		ans+=vec[0]*vec[0];
+		ans+=vec[1]*vec[1];
+		ans+=vec[2]*vec[2];
+		return (float)Math.sqrt(ans);
+	}
+	
+	/**
+	 * 
+	 * @param vecFrom
+	 * @param vecTo
+	 * @return [angle, x, y, z]
+	 */
+	static float[] getAxisAngleForRotationBetweenVectors(float[] vecFrom, float[] vecTo, boolean isRightHanded){
+		float[] axis;
+		float[] ans=new float[4];
+		if(isRightHanded) axis=crossProduct_rightHanded(vecFrom,vecTo);
+		else axis=crossProduct_leftHanded(vecFrom,vecTo);
+		ans[0]=dotProduct(vecFrom,vecTo)/(lengthOfVector(vecFrom)*lengthOfVector(vecTo));
+		ans[1]=axis[0];
+		ans[2]=axis[1];
+		ans[3]=axis[2];
+		return ans;
+	}
+	
 	static void normalizeV(float[] vector) {
 		double length=Math.sqrt(
 				Math.pow(vector[0], 2.0)+
@@ -158,11 +209,18 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		
 		//boyA.addToGLProgram(mTextureProgram);
 		chofsecretA.addToGLProgram(mTextureProgram);
+		getMyCallback().showToast3D("Hello, "+myUsername+" !");
 	}
 
 	@Override
 	public void onRendererShutdown() {}
-	public void onFinishFrame(Viewport arg0) {}
+	public void onFinishFrame(Viewport arg0) {
+		try {
+			Thread.sleep(20);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 	public void onSurfaceChanged(int width, int height) {}
 }
 
