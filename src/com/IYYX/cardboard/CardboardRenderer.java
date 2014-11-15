@@ -17,6 +17,7 @@ import com.IYYX.cardboard.myAPIs.GameObjectUpdater;
 import com.IYYX.cardboard.myAPIs.Model;
 import com.IYYX.cardboard.myAPIs.ModelIO;
 import com.IYYX.cardboard.myAPIs.MyCardboardRenderer;
+import com.IYYX.cardboard.myAPIs.TcpManager;
 import com.IYYX.cardboard.PartitionedGameObject;
 import com.google.vrtoolkit.cardboard.*;
 import com.jogamp.opengl.math.Quaternion;
@@ -150,8 +151,16 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	}
 	
 	float[] currHeadRotateMatrix=new float[16];
-	
+	public static class Status{
+		public float[] Eyes;
+		public Status(float[] Eyes){
+			this.Eyes = Eyes;
+		}
+	}
 	public void onNewFrame(HeadTransform arg0) {
+		TcpManager.sendObj(new Status(mEye));
+		Status contactStatus = (Status)TcpManager.getLatestObj();
+		
 		arg0.getHeadView(currHeadRotateMatrix, 0);
 		if(keepStepping) {
 			stepForward(0.1f);
@@ -168,6 +177,18 @@ public class CardboardRenderer extends MyCardboardRenderer {
 
 	public void onSurfaceCreated(EGLConfig arg0) {
 		//MessageQueue.onRestart();
+		if (!TcpManager.isInitiated()){
+			TcpManager.initiate("ngrok.com");
+			TcpManager.setListener(new TcpManager.OnBeingCalledListener() {
+				
+				@Override
+				public void OnBeingCalled(String contactName) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+		}
+		
 		PartitionedGameObject.resetOpenedTextures();		//VERY IMPORTANT. When Activity is Paused, old OpenGL Handls expired and the old Texture 'pointers' can't be used anymore.
 		GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.7f);
 		GLES20.glEnable(GLES20.GL_DEPTH_TEST);

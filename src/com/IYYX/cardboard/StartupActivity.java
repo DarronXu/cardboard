@@ -9,24 +9,23 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class StartupActivity extends Activity {
+	Button SIPsettingsButton;
 	Button startButton;
-	EditText username,contactUsername;
+	EditText username;
 	protected void onCreate(Bundle savedInstance){
 		super.onCreate(savedInstance);
 		setContentView(R.layout.startup_ui);
 		startButton=(Button)findViewById(R.id.startButton);
-		someButton=(Button)findViewById(R.id.XXXXXXXXXXXX);
+		SIPsettingsButton=(Button)findViewById(R.id.SIPsettingsButton);
 		username=(EditText)findViewById(R.id.startupUsername);
-		contactUsername=(EditText)findViewById(R.id.startupContactUsername);
 		startButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				Intent intent=new Intent();
 				intent.putExtra("myName", username.getText().toString());
-				intent.putExtra("contactName",contactUsername.getText().toString());
 				callMainActivity(intent,MainActivity.class);
 			}
 		});
-		someButton.setOnClickListener(new OnClickListener(){
+		SIPsettingsButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				Intent intent=new Intent();
 				callMainActivity(intent,SipSettings.class);

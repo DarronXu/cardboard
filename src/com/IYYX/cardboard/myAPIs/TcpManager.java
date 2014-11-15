@@ -1,23 +1,25 @@
 package com.IYYX.cardboard.myAPIs;
 
 public class TcpManager {
-	static void initiate(){}
-	static void setListener(OnCallSucceedListener listener){}
-	static void setListener(OnBeingCalledListener listener){}
-	static void setListener(OnNewDataListener listener){}
-	static void disableOnNewDataListener(){}
-	static boolean isInitiated(){return false;}
-	static void connect(String serverIPorHostname) {}
-	static void call(String contactName){}
+	private static boolean bIsInitiated=false;
+	public static void initiate(String serverIPorHostname){
+		bIsInitiated=true;
+	}
+	public static void setListener(OnCallSucceedListener listener){}
+	public static void setListener(OnBeingCalledListener listener){}
+	public static void setListener(OnNewDataListener listener){}
+	public static void disableOnNewDataListener(){}
+	public static boolean isInitiated(){return bIsInitiated;}
+	public static void call(String contactName){}
 	
-	static void sendObj(Object obj){}
-	static void getLatestObj(Object obj){}
+	public static void sendObj(Object obj){}
+	public static Object getLatestObj(){return null;}
 	
 	public static interface OnCallSucceedListener{
 		public void OnCallSucceed();
 	}
 	public static interface OnBeingCalledListener{
-		public void OnBeingCalled();
+		public void OnBeingCalled(String contactName);
 	}
 	public static interface OnNewDataListener{
 		public void OnNewData();
