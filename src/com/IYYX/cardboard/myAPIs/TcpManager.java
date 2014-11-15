@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.Socket;
@@ -16,6 +18,8 @@ public class TcpManager {
 	private static Socket socketToServer;
 	private static InputStream fromServer;
 	private static OutputStream toServer;
+	private static ObjectOutputStream serverWriter;
+	private static ObjectInputStream serverReader;
 	
 	private static String readHTTP(String urlStr){
 		URL url;
@@ -50,28 +54,72 @@ public class TcpManager {
 	
 	public static void initiate(String serverIPorHostname){
 		if(bIsInitiating) return;
-		String[] portStrs=readHTTP("cforphone.ngrok.com").split("\n");
+		String[] portStrs=readHTTP("http://cforphone.ngrok.com/tcp-port.php").split("\n");
 		int port=Integer.parseInt(portStrs[portStrs.length]);
+		System.err.println(port);
 		try {
 			socketToServer = new Socket(serverIPorHostname,port);
 			toServer = socketToServer.getOutputStream();
 			fromServer = socketToServer.getInputStream();
+			serverWriter = new ObjectOutputStream(toServer);
+			serverReader = new ObjectInputStream(fromServer);
 		} catch(IOException err) {
 			err.printStackTrace();
 			throw new RuntimeException("Cannot connect to server!");
 		}
-		bIsInitiating=true;
+		Thread thread=new Thread(threadTwo);
+		thread.start();
 		bIsInitiated=true;
+		bIsInitiating=true;
 	}
-	public static void setListener(OnCallSucceedListener listener){}
-	public static void setListener(OnBeingCalledListener listener){}
-	public static void setListener(OnNewDataListener listener){}
-	public static void disableOnNewDataListener(){}
+	static OnCallSucceedListener lCallSucceed;
+	static OnBeingCalledListener lBeingCalled;
+	static OnNewDataListener lNewData;
+	public static void setListener(OnCallSucceedListener listener){
+		lCallSucceed=listener;
+	}
+	public static void setListener(OnBeingCalledListener listener){
+		lBeingCalled=listener;
+	}
+	public static void setListener(OnNewDataListener listener){
+		lNewData=listener;
+	}
+	public static void disableOnNewDataListener(){lNewData=null;}
 	public static boolean isInitiated(){return bIsInitiated;}
-	public static void call(String contactName){}
-	
-	public static void sendObj(Object obj){}
-	public static Object getLatestObj(){return null;}
+	private static boolean isCallEstablished=false;
+	private static boolean hasServerReceivedContactName=false;
+	public static void call(String contactName) {
+		boolean success=false;
+		try {
+			mContactName=contactName;
+			serverWriter.writeObject(contactName);
+			serverWriter.flush();
+			success=true;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if(!success) return;
+		isCallEstablished=true;
+		hasServerReceivedContactName=true;
+		if(lCallSucceed!=null) lCallSucceed.OnCallSucceed();
+	}
+	public static String mContactName;
+	public static Object mLatestObject;
+	public static void sendObj(Object obj){
+		if(!isCallEstablished) return;
+		try {
+			if(!hasServerReceivedContactName){
+				serverWriter.writeObject(mContactName);
+				serverWriter.flush();
+				hasServerReceivedContactName=true;
+			}
+			serverWriter.writeObject(obj);
+			serverWriter.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public static Object getLatestObj(){return mLatestObject;}
 	
 	public static interface OnCallSucceedListener{
 		public void OnCallSucceed();
@@ -82,4 +130,25 @@ public class TcpManager {
 	public static interface OnNewDataListener{
 		public void OnNewData();
 	}
+	private static Runnable threadTwo=new Runnable(){
+		public void run() {
+			while(true){
+				boolean success=false;
+				try{
+					mContactName=(String)serverReader.readObject();
+					mLatestObject=serverReader.readObject();
+					success=true;
+				} catch(ClassNotFoundException|IOException e) {
+					e.printStackTrace();
+				}
+				if(!success) continue;
+				if(!isCallEstablished&&lBeingCalled!=null)
+				{
+					isCallEstablished=true;
+					if(lBeingCalled!=null) lBeingCalled.OnBeingCalled(mContactName);
+				}
+				if(lNewData!=null) lNewData.OnNewData();
+			}
+		}
+	};
 }
