@@ -52,10 +52,11 @@ public class TcpManager {
 		}
 	}
 	
-	public static void initiate(String serverIPorHostname){
+	public static void initiate(String serverIPorHostname, String myName){
 		if(bIsInitiating) return;
+		mMyName=myName;
 		String[] portStrs=readHTTP("http://cforphone.ngrok.com/tcp-port.php").split("\n");
-		int port=Integer.parseInt(portStrs[portStrs.length]);
+		int port=Integer.parseInt(portStrs[portStrs.length-1]);
 		System.err.println(port);
 		try {
 			socketToServer = new Socket(serverIPorHostname,port);
@@ -63,6 +64,8 @@ public class TcpManager {
 			fromServer = socketToServer.getInputStream();
 			serverWriter = new ObjectOutputStream(toServer);
 			serverReader = new ObjectInputStream(fromServer);
+			serverWriter.writeObject(myName);
+			serverWriter.flush();
 		} catch(IOException err) {
 			err.printStackTrace();
 			throw new RuntimeException("Cannot connect to server!");
@@ -103,7 +106,7 @@ public class TcpManager {
 		hasServerReceivedContactName=true;
 		if(lCallSucceed!=null) lCallSucceed.OnCallSucceed();
 	}
-	public static String mContactName;
+	public static String mContactName,mMyName;
 	public static Object mLatestObject;
 	public static void sendObj(Object obj){
 		if(!isCallEstablished) return;
@@ -142,7 +145,7 @@ public class TcpManager {
 					e.printStackTrace();
 				}
 				if(!success) continue;
-				if(!isCallEstablished&&lBeingCalled!=null)
+				if(!isCallEstablished)
 				{
 					isCallEstablished=true;
 					if(lBeingCalled!=null) lBeingCalled.OnBeingCalled(mContactName);

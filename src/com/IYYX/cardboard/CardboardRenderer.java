@@ -182,7 +182,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	public void onSurfaceCreated(EGLConfig arg0) {
 		//MessageQueue.onRestart();
 		if (!TcpManager.isInitiated()){
-			TcpManager.initiate("ngrok.com");
+			TcpManager.initiate("ngrok.com",myUsername);
 			TcpManager.setListener(new TcpManager.OnBeingCalledListener() {
 				
 				@Override

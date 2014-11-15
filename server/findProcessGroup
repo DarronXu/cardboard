@@ -1,0 +1,1 @@
+ps x -o  "%p %r %y %x %c "|grep -i -E '(java)|(startCBServer)|(php)|(ngrok)|(PGID)'

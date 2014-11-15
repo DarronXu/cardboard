@@ -1,0 +1,8 @@
+#!/bin/bash
+echo PID=$$
+(cd JavaServer; java DarronNetServer1)&
+(ngrok -proto=tcp -log=.ngrok-tcp 1111)&
+export CARDBOARD_SERVER_HOME=`pwd`
+(cd ngrok-tcp-helper; php -S 0.0.0.0:8080)&
+(ngrok -subdomain=cforphone 8080)&
+echo PID=$$
