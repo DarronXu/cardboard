@@ -346,12 +346,15 @@ public class MainActivity extends CardboardActivity {
         initializeManager();
 		
         setContentView(R.layout.common_ui);
-        cardboardView = (CardboardView) findViewById(R.id.cardboard_view);
         mOverlayView = (CardboardOverlayView) findViewById(R.id.overlay);
+        cardboardView = (CardboardView) findViewById(R.id.cardboard_view);
+        renderer=new CardboardRenderer(getResources(),cardboardView,mOverlayView,this);
+        renderer.myUsername=myUsername=getIntent().getStringExtra("myName");
+        renderer.contactUsername=contactUsername=getIntent().getStringExtra("contactName");
         cardboardView.setEGLContextClientVersion(2);
 		cardboardView.setEGLConfigChooser(8, 8, 8, 8, 0, 0);
         cardboardView.getHolder().setFormat(PixelFormat.RGBA_8888);
-        cardboardView.setRenderer(renderer=new CardboardRenderer(getResources(),cardboardView,mOverlayView,this));
+        cardboardView.setRenderer(renderer);
         setCardboardView(cardboardView);
         mOverlayView.show3DToast("Please hold you phone so that it's vertical to the ground.\nThen, please turn your head around to search for the object.");
         cardboardView.setOnTouchListener(new OnTouchListener() {
@@ -363,7 +366,7 @@ public class MainActivity extends CardboardActivity {
         	
         });
 	}
-	
+	String myUsername,contactUsername;
 	/*
 	 * I misunderstood that the cardboardView can automatically pause and resume OpenGL,
 	 * but actually we still have to do this manually.
