@@ -152,15 +152,19 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	
 	float[] currHeadRotateMatrix=new float[16];
 	public static class Status{
-		public float[] Eyes;
-		public Status(float[] Eyes){
+		public float[] Eyes,Look;
+		public Status(float[] Eyes, float[] Look){
 			this.Eyes = Eyes;
+			this.Look = Look;
 		}
 	}
+	Status contactStatus;
+	boolean isCallSucceed = false;
 	public void onNewFrame(HeadTransform arg0) {
-		TcpManager.sendObj(new Status(mEye));
-		Status contactStatus = (Status)TcpManager.getLatestObj();
-		
+		if (isCallSucceed){
+			TcpManager.sendObj(new Status(mEye,mLook));
+			contactStatus = (Status)TcpManager.getLatestObj();
+		}
 		arg0.getHeadView(currHeadRotateMatrix, 0);
 		if(keepStepping) {
 			stepForward(0.1f);
@@ -184,7 +188,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 				@Override
 				public void OnBeingCalled(String contactName) {
 					// TODO Auto-generated method stub
-					
+					isCallSucceed = true;
 				}
 			});
 		}
@@ -215,11 +219,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 			chofsecretModel = ModelIO.loadPartitioned(assets.open("chofsecret.objpp"), getMyCallback());
 		} catch (IOException | ClassNotFoundException e) {e.printStackTrace();}
 		
-		boyA = new PartitionedGameObject(boyModel, "boy.obj-info", new BoyUpdater(), getMyCallback());
-		
-		GameObjectUpdater[] boyUpdaters=new GameObjectUpdater[10];
-		for(int i=0;i<10;i++) boyUpdaters[i]=new BoyUpdater();
-		PartitionedGameObject boyB = new PartitionedGameObject(boyModel,"boy.obj-info", boyUpdaters, getMyCallback());
+		boyA = new PartitionedGameObject(boyModel, "boy.obj-info", new ContactUpdater(), getMyCallback());
 		
 		chofsecretA= new PartitionedGameObject(chofsecretModel, "chofsecret.obj-info",new GameObjectUpdater(){
 			public void update(GameObject obj) {
@@ -230,6 +230,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		
 		//boyA.addToGLProgram(mTextureProgram);
 		chofsecretA.addToGLProgram(mTextureProgram);
+		boyA.addToGLProgram(mTextureProgram);
 		getMyCallback().showToast3D("Hello, "+myUsername+" !");
 	}
 
@@ -243,24 +244,18 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		}
 	}
 	public void onSurfaceChanged(int width, int height) {}
-}
 
-
-class BoyUpdater implements GameObjectUpdater {
-	public void update(GameObject obj) {
-		float angleInDegreesA,angleInDegreesB,angleInDegreesC;
-		long time=SystemClock.uptimeMillis()%10000L;
-		angleInDegreesA = (360.0f / 10000.0f) * ((int) time);
-		time=SystemClock.uptimeMillis()%5000L;
-		angleInDegreesB = (360.0f / 5000.0f) * ((int) time);
-		time=SystemClock.uptimeMillis()%3000L;
-		angleInDegreesC = (360.0f / 3000.0f) * ((int) time);
-		Matrix.setIdentityM(obj.mModelMatrix, 0);
-		Matrix.translateM(obj.mModelMatrix, 0, 0.0f, 3.0f, 0.8f);
-		Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesA, 1.0f, 0.0f, 0.0f);
-		Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesB, 0.0f, 1.0f, 0.0f);
-		Matrix.rotateM(obj.mModelMatrix, 0, angleInDegreesC, 0.0f, 0.0f, 1.0f);
-		if(obj.mPrototype.name.contains("c7d648bf")){
+	class ContactUpdater implements GameObjectUpdater {
+		public void update(GameObject obj) {
+			float[] eyes = contactStatus.Eyes;
+			float[] look = contactStatus.Look;
+			float[] angle = getAxisAngleForRotationBetweenVectors(eyes, look, true);
+			Matrix.setIdentityM(obj.mModelMatrix, 0);
+			Matrix.translateM(obj.mModelMatrix, 0, eyes[0], eyes[1], eyes[2]);
+			Matrix.rotateM(obj.mModelMatrix, 0, angle[0], angle[1], angle[2], angle[3]);
+			if(obj.mPrototype.name.contains("c7d648bf")){
+			}
 		}
 	}
 }
+
