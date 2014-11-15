@@ -1,0 +1,1107 @@
+[2014/11/15 03:37:13 CST] [WARN] (ngrok/log.Warn:93) Failed to get user's home directory: user: Current not implemented on linux/386. Using $HOME: /home/c4phone
+[2014/11/15 03:37:13 CST] [INFO] (ngrok/log.Info:89) Reading configuration file /home/c4phone/.ngrok
+[2014/11/15 03:37:13 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Trusting root CAs: [assets/client/tls/ngrokroot.crt]
+[2014/11/15 03:37:13 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [view] [web] Serving web interface on 127.0.0.1:4040
+[2014/11/15 03:37:13 CST] [INFO] (ngrok/log.Info:89) Checking for update
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] New connection to: 96.126.125.171:443
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Writing message: {"Type":"Auth","Payload":{"Version":"2","MmVersion":"1.7","User":"3i-lTmSelgjPKOLULMti","Password":"","OS":"linux","Arch":"386","ClientId":""}}
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Waiting to read message
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Reading message with length: 120
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Read message {"Type":"AuthResp","Payload":{"Version":"2","MmVersion":"1.6","ClientId":"b64329828081f7f98470b5102491c39f","Error":""}}
+[2014/11/15 03:37:13 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Authenticated with server, client id: b64329828081f7f98470b5102491c39f
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Writing message: {"Type":"ReqTunnel","Payload":{"ReqId":"f9d3ea62e2c4f8e8","Protocol":"tcp","Hostname":"","Subdomain":"","HttpAuth":"","RemotePort":0}}
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Waiting to read message
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Reading message with length: 32
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Read message {"Type":"ReqProxy","Payload":{}}
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Waiting to read message
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Reading message with length: 117
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Read message {"Type":"NewTunnel","Payload":{"ReqId":"f9d3ea62e2c4f8e8","Url":"tcp://ngrok.com:40499","Protocol":"tcp","Error":""}}
+[2014/11/15 03:37:13 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Tunnel established at tcp://ngrok.com:40499
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Waiting to read message
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:709ef5b2] New connection to: 96.126.125.171:443
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:709ef5b2] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b64329828081f7f98470b5102491c39f"}}
+[2014/11/15 03:37:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:709ef5b2] Waiting to read message
+[2014/11/15 03:37:16 CST] [INFO] (ngrok/log.Info:89) No update available
+[2014/11/15 03:37:29 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:709ef5b2] Reading message with length: 98
+[2014/11/15 03:37:29 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Reading message with length: 32
+[2014/11/15 03:37:29 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:709ef5b2] Read message {"Type":"StartProxy","Payload":{"Url":"tcp://ngrok.com:40499","ClientAddr":"216.171.23.21:41703"}}
+[2014/11/15 03:37:29 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [prv:57e5fa77] New connection to: 127.0.0.1:1111
+[2014/11/15 03:37:29 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [prv:57e5fa77] Joined with connection pxy:709ef5b2
+[2014/11/15 03:37:29 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Read message {"Type":"ReqProxy","Payload":{}}
+[2014/11/15 03:37:29 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Waiting to read message
+[2014/11/15 03:37:29 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 03:37:29 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:3e8d3b59] New connection to: 96.126.125.171:443
+[2014/11/15 03:37:29 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:3e8d3b59] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b64329828081f7f98470b5102491c39f"}}
+[2014/11/15 03:37:29 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:3e8d3b59] Waiting to read message
+[2014/11/15 03:37:33 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 03:37:33 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Reading message with length: 28
+[2014/11/15 03:37:33 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 03:37:33 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Waiting to read message
+[2014/11/15 03:37:40 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:3e8d3b59] Reading message with length: 98
+[2014/11/15 03:37:40 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Reading message with length: 32
+[2014/11/15 03:37:40 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Read message {"Type":"ReqProxy","Payload":{}}
+[2014/11/15 03:37:40 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Waiting to read message
+[2014/11/15 03:37:40 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:3e8d3b59] Read message {"Type":"StartProxy","Payload":{"Url":"tcp://ngrok.com:40499","ClientAddr":"216.171.23.21:53023"}}
+[2014/11/15 03:37:40 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [prv:50911f98] New connection to: 127.0.0.1:1111
+[2014/11/15 03:37:40 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [prv:50911f98] Joined with connection pxy:3e8d3b59
+[2014/11/15 03:37:40 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 03:37:40 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:2732e8ca] New connection to: 96.126.125.171:443
+[2014/11/15 03:37:40 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:2732e8ca] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b64329828081f7f98470b5102491c39f"}}
+[2014/11/15 03:37:40 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:2732e8ca] Waiting to read message
+[2014/11/15 03:37:53 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 03:37:53 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Reading message with length: 28
+[2014/11/15 03:37:53 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 03:37:53 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Waiting to read message
+[2014/11/15 03:38:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 03:38:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Reading message with length: 28
+[2014/11/15 03:38:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 03:38:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Waiting to read message
+[2014/11/15 03:38:33 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 03:38:33 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Reading message with length: 28
+[2014/11/15 03:38:33 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 03:38:33 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Waiting to read message
+[2014/11/15 03:38:53 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 03:38:53 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Reading message with length: 28
+[2014/11/15 03:38:53 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 03:38:53 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Waiting to read message
+[2014/11/15 03:39:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 03:39:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Reading message with length: 28
+[2014/11/15 03:39:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 03:39:13 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Waiting to read message
+[2014/11/15 03:39:33 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 03:39:33 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Reading message with length: 28
+[2014/11/15 03:39:33 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 03:39:33 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Waiting to read message
+[2014/11/15 03:39:53 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 03:39:53 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Reading message with length: 28
+[2014/11/15 03:39:53 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 03:39:53 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Waiting to read message
+[2014/11/15 09:16:41 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:16:53 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:17:09 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Last ping: 2014-11-15 09:16:53.76927087 -0600 CST, Last pong: 2014-11-15 03:39:53.802949282 -0600 CST
+[2014/11/15 09:17:09 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Connection stale, haven't gotten PongMsg in 15 seconds
+[2014/11/15 09:17:09 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:50b658f7] Closing
+[2014/11/15 09:17:09 CST] [EROR] (ngrok/log.Error:97) control recovering from failure read tcp 96.126.125.171:443: use of closed network connection
+[2014/11/15 09:17:09 CST] [INFO] (ngrok/log.Info:89) Waiting 1 seconds before reconnecting
+[2014/11/15 09:17:10 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 09:17:10 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com on [127.0.1.1]:53: server misbehaving
+[2014/11/15 09:17:10 CST] [INFO] (ngrok/log.Info:89) Waiting 2 seconds before reconnecting
+[2014/11/15 09:17:12 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 09:17:12 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com on [127.0.1.1]:53: server misbehaving
+[2014/11/15 09:17:12 CST] [INFO] (ngrok/log.Info:89) Waiting 4 seconds before reconnecting
+[2014/11/15 09:17:16 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] New connection to: 96.126.125.171:443
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Auth","Payload":{"Version":"2","MmVersion":"1.7","User":"3i-lTmSelgjPKOLULMti","Password":"","OS":"linux","Arch":"386","ClientId":"b64329828081f7f98470b5102491c39f"}}
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 120
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"AuthResp","Payload":{"Version":"2","MmVersion":"1.6","ClientId":"b64329828081f7f98470b5102491c39f","Error":""}}
+[2014/11/15 09:17:17 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Authenticated with server, client id: b64329828081f7f98470b5102491c39f
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"ReqTunnel","Payload":{"ReqId":"5a33a7a9d2e57769","Protocol":"tcp","Hostname":"","Subdomain":"","HttpAuth":"","RemotePort":0}}
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 32
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"ReqProxy","Payload":{}}
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:1974c507] New connection to: 96.126.125.171:443
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:1974c507] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b64329828081f7f98470b5102491c39f"}}
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 117
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"NewTunnel","Payload":{"ReqId":"5a33a7a9d2e57769","Url":"tcp://ngrok.com:40499","Protocol":"tcp","Error":""}}
+[2014/11/15 09:17:17 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Tunnel established at tcp://ngrok.com:40499
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 09:17:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:1974c507] Waiting to read message
+[2014/11/15 09:17:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:17:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:17:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:17:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:17:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:17:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:17:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:17:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:18:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:18:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:18:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:18:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:18:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:18:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:18:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:18:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:18:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:18:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:18:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:18:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:19:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:19:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:19:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:19:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:19:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:19:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:19:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:19:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:19:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:19:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:19:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:19:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:20:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:20:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:20:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:20:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:20:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:20:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:20:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:20:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:20:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:20:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:20:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:20:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:21:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:21:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:21:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:21:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:21:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:21:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:21:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:21:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:21:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:21:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:21:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:21:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:22:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:22:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:22:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:22:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:22:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:22:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:22:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:22:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:22:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:22:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:22:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:22:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:23:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:23:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:23:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:23:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:23:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:23:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:23:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:23:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:23:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:23:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:23:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:23:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:24:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:24:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:24:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:24:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:24:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:24:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:24:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:24:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:24:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:24:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:24:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:24:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:25:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:25:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:25:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:25:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:25:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:25:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:25:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:25:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:25:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:25:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:25:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:25:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:26:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:26:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:26:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:26:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:26:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:26:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:26:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:26:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:26:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:26:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:26:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:26:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:27:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:27:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:27:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:27:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:27:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:27:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:27:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:27:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:27:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:27:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:27:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:27:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:28:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:28:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:28:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:28:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:28:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:28:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:28:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:28:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:28:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:28:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:28:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:28:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:29:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:29:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:29:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:29:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:29:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:29:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:29:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:29:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:29:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:29:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:29:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:29:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:30:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:30:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:30:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:30:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:30:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:30:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:30:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:30:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:30:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:30:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:30:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:30:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:31:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:31:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:31:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:31:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:31:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:31:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:31:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:31:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:31:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:31:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:31:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:31:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:32:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:32:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Reading message with length: 28
+[2014/11/15 09:32:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:32:17 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Waiting to read message
+[2014/11/15 09:32:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:32:53 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Last ping: 2014-11-15 09:32:37.169337882 -0600 CST, Last pong: 2014-11-15 09:32:17.197359466 -0600 CST
+[2014/11/15 09:32:53 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Connection stale, haven't gotten PongMsg in 15 seconds
+[2014/11/15 09:32:53 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:2274f786] Closing
+[2014/11/15 09:32:53 CST] [EROR] (ngrok/log.Error:97) control recovering from failure read tcp 96.126.125.171:443: use of closed network connection
+[2014/11/15 09:32:53 CST] [INFO] (ngrok/log.Info:89) Waiting 1 seconds before reconnecting
+[2014/11/15 09:32:54 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 09:32:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] New connection to: 96.126.125.171:443
+[2014/11/15 09:32:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Auth","Payload":{"Version":"2","MmVersion":"1.7","User":"3i-lTmSelgjPKOLULMti","Password":"","OS":"linux","Arch":"386","ClientId":"b64329828081f7f98470b5102491c39f"}}
+[2014/11/15 09:32:57 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:32:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 120
+[2014/11/15 09:32:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"AuthResp","Payload":{"Version":"2","MmVersion":"1.6","ClientId":"b64329828081f7f98470b5102491c39f","Error":""}}
+[2014/11/15 09:32:58 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Authenticated with server, client id: b64329828081f7f98470b5102491c39f
+[2014/11/15 09:32:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"ReqTunnel","Payload":{"ReqId":"1aed88b9147c81a2","Protocol":"tcp","Hostname":"","Subdomain":"","HttpAuth":"","RemotePort":0}}
+[2014/11/15 09:32:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:32:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 09:32:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 32
+[2014/11/15 09:32:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"ReqProxy","Payload":{}}
+[2014/11/15 09:32:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:32:59 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 117
+[2014/11/15 09:32:59 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"NewTunnel","Payload":{"ReqId":"1aed88b9147c81a2","Url":"tcp://ngrok.com:40499","Protocol":"tcp","Error":""}}
+[2014/11/15 09:32:59 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Tunnel established at tcp://ngrok.com:40499
+[2014/11/15 09:32:59 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:32:59 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 09:32:59 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:5402373b] New connection to: 96.126.125.171:443
+[2014/11/15 09:32:59 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:5402373b] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b64329828081f7f98470b5102491c39f"}}
+[2014/11/15 09:33:00 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:5402373b] Waiting to read message
+[2014/11/15 09:33:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:33:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:33:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:33:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:33:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:33:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:33:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:33:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:33:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:33:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:33:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:33:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:34:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:34:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:34:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:34:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:34:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:34:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:34:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:34:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:34:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:34:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:34:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:34:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:35:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:35:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:35:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:35:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:35:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:35:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:35:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:35:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:35:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:35:59 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:35:59 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:35:59 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:36:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:36:19 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:36:19 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:36:19 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:36:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:36:39 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:36:39 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:36:39 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:36:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:36:59 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:36:59 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:36:59 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:37:16 CST] [INFO] (ngrok/log.Info:89) Checking for update
+[2014/11/15 09:37:17 CST] [INFO] (ngrok/log.Info:89) No update available
+[2014/11/15 09:37:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:37:19 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:37:19 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:37:19 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:37:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:37:41 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:37:41 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:37:41 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:37:58 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:37:59 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:37:59 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:37:59 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:38:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:38:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Reading message with length: 28
+[2014/11/15 09:38:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:38:18 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Waiting to read message
+[2014/11/15 09:38:38 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:38:54 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Last ping: 2014-11-15 09:38:38.738049769 -0600 CST, Last pong: 2014-11-15 09:38:18.982833701 -0600 CST
+[2014/11/15 09:38:54 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Connection stale, haven't gotten PongMsg in 15 seconds
+[2014/11/15 09:38:54 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:125a6c01] Closing
+[2014/11/15 09:38:54 CST] [EROR] (ngrok/log.Error:97) control recovering from failure read tcp 96.126.125.171:443: use of closed network connection
+[2014/11/15 09:38:54 CST] [INFO] (ngrok/log.Info:89) Waiting 1 seconds before reconnecting
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] New connection to: 96.126.125.171:443
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Auth","Payload":{"Version":"2","MmVersion":"1.7","User":"3i-lTmSelgjPKOLULMti","Password":"","OS":"linux","Arch":"386","ClientId":"b64329828081f7f98470b5102491c39f"}}
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 120
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"AuthResp","Payload":{"Version":"2","MmVersion":"1.6","ClientId":"b64329828081f7f98470b5102491c39f","Error":""}}
+[2014/11/15 09:38:55 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Authenticated with server, client id: b64329828081f7f98470b5102491c39f
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"ReqTunnel","Payload":{"ReqId":"ddb07c70372ce94d","Protocol":"tcp","Hostname":"","Subdomain":"","HttpAuth":"","RemotePort":0}}
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 32
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"ReqProxy","Payload":{}}
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:61f96469] New connection to: 96.126.125.171:443
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:61f96469] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b64329828081f7f98470b5102491c39f"}}
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 117
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"NewTunnel","Payload":{"ReqId":"ddb07c70372ce94d","Url":"tcp://ngrok.com:40499","Protocol":"tcp","Error":""}}
+[2014/11/15 09:38:55 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Tunnel established at tcp://ngrok.com:40499
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 09:38:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:61f96469] Waiting to read message
+[2014/11/15 09:39:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:39:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:39:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:39:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:39:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:39:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:39:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:39:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:39:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:39:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:39:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:39:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:40:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:40:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:40:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:40:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:40:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:40:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:40:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:40:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:40:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:40:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:40:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:40:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:41:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:41:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:41:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:41:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:41:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:41:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:41:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:41:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:41:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:41:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:41:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:41:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:42:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:42:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:42:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:42:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:42:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:42:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:42:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:42:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:42:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:42:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:42:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:42:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:43:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:43:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:43:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:43:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:43:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:43:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:43:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:43:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:43:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:43:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:43:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:43:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:44:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:44:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:44:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:44:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:44:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:44:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:44:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:44:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:44:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:44:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:44:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:44:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:45:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:45:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:45:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:45:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:45:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:45:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:45:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:45:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:45:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:45:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:45:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:45:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:46:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:46:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:46:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:46:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:46:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:46:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:46:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:46:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:46:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:46:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:46:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:46:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:47:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:47:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:47:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:47:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:47:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:47:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:47:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:47:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:47:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:47:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:47:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:47:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:48:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:48:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:48:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:48:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:48:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:48:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:48:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:48:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:48:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:48:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:48:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:48:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:49:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:49:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:49:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:49:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:49:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:49:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:49:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:49:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:49:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:49:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:49:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:49:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:50:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:50:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:50:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:50:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:50:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:50:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:50:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:50:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:50:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:50:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:50:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:50:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:51:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:51:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:51:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:51:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:51:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:51:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:51:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:51:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:51:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:51:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:51:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:51:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:52:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:52:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:52:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:52:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:52:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:52:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:52:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:52:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:52:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:52:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:52:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:52:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:53:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:53:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:53:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:53:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:53:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:53:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:53:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:53:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:53:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:53:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:53:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:53:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:54:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:54:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:54:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:54:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:54:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:54:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:54:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:54:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:54:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:54:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:54:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:54:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:55:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:55:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:55:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:55:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:55:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:55:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:55:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:55:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:55:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:55:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:55:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:55:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:56:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:56:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:56:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:56:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:56:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:56:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:56:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:56:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:56:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:56:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:56:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:56:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:57:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:57:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:57:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:57:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:57:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:57:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:57:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:57:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:57:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:57:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:57:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:57:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:58:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:58:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:58:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:58:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:58:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:58:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:58:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:58:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:58:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:58:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:58:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:58:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:59:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:59:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:59:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:59:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:59:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:59:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:59:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:59:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 09:59:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 09:59:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 09:59:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 09:59:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:00:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:00:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:00:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:00:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:00:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:00:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:00:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:00:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:00:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:00:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:00:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:00:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:01:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:01:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:01:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:01:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:01:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:01:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:01:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:01:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:01:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:01:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:01:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:01:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:02:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:02:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:02:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:02:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:02:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:02:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:02:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:02:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:02:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:02:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:02:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:02:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:03:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:03:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:03:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:03:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:03:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:03:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:03:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:03:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:03:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:03:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:03:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:03:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:04:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:04:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:04:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:04:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:04:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:04:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:04:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:04:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:04:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:04:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:04:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:04:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:05:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:05:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:05:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:05:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:05:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:05:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:05:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:05:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:05:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:05:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:05:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:05:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:06:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:06:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:06:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:06:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:06:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:06:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:06:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:06:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:06:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:06:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:06:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:06:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:07:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:07:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:07:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:07:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:07:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:07:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:07:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:07:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:07:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:07:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:07:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:07:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:08:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:08:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:08:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:08:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:08:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:08:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:08:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:08:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:08:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:08:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:08:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:08:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:09:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:09:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:09:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:09:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:09:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:09:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:09:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:09:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:09:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:09:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:09:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:09:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:10:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:10:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:10:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:10:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:10:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:10:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:10:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:10:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:10:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:10:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:10:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:10:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:11:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:11:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:11:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:11:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:11:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:11:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:11:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:11:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:11:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:11:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:11:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:11:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:12:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:12:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:12:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:12:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:12:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:12:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:12:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:12:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:12:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:12:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:12:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:12:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:13:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:13:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:13:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:13:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:13:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:13:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:13:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:13:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:13:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:13:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:13:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:13:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:14:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:14:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:14:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:14:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:14:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:14:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:14:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:14:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:14:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:14:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:14:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:14:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:15:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:15:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:15:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:15:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:15:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:15:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:15:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:15:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:15:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:15:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:15:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:15:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:16:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:16:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:16:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:16:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:16:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:16:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:16:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:16:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:16:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:16:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:16:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:16:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:17:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:17:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:17:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:17:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:17:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:17:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:17:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:17:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:17:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:17:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:17:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:17:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:18:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:18:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:18:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:18:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:18:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:18:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:18:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:18:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:18:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:18:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:18:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:18:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:19:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:19:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:19:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:19:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:19:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:19:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:19:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:19:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:19:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:19:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:19:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:19:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:20:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:20:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:20:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:20:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:20:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:20:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:20:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:20:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:20:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:20:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:20:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:20:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:21:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:21:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:21:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:21:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:21:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:21:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:21:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:21:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:21:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:21:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:21:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:21:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:22:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:22:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:22:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:22:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:22:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:22:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:22:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:22:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:22:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:22:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:22:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:22:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:23:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:23:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:23:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:23:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:23:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:23:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:23:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:23:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:23:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:23:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:23:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:23:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:24:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:24:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:24:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:24:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:24:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:24:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:24:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:24:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:24:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:24:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:24:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:24:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:25:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:25:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:25:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:25:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:25:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:25:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:25:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:25:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:25:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:25:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:25:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:25:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:26:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:26:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:26:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:26:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:26:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:26:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:26:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:26:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:26:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:26:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:26:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:26:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:27:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:27:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:27:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:27:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:27:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:27:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:27:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:27:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:27:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:27:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:27:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:27:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:28:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:28:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:28:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:28:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:28:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:28:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:28:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:28:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:28:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:28:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:28:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:28:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:29:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:29:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:29:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:29:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:29:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:29:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:29:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:29:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:29:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:29:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:29:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:29:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:30:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:30:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:30:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:30:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:30:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:30:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:30:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:30:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:30:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:30:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:30:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:30:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:31:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:31:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:31:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:31:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:31:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:31:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:31:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:31:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:31:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:31:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:31:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:31:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:32:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:32:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:32:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:32:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:32:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:32:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:32:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:32:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:32:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:32:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:32:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:32:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:33:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:33:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:33:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:33:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:33:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:33:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:33:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:33:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:33:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:33:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:33:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:33:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:34:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:34:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:34:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:34:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:34:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:34:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:34:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:34:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:34:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:34:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:34:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:34:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:35:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:35:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:35:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:35:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:35:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:35:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:35:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:35:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:35:55 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:35:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:35:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:35:56 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:36:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:36:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:36:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:36:15 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message
+[2014/11/15 10:36:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Writing message: {"Type":"Ping","Payload":{}}
+[2014/11/15 10:36:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Reading message with length: 28
+[2014/11/15 10:36:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Read message {"Type":"Pong","Payload":{}}
+[2014/11/15 10:36:35 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:113fa2b0] Waiting to read message

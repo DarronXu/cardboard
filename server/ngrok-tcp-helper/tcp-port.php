@@ -9,7 +9,7 @@ while($token!==false) {
 		$token=strtok("\n");
 		continue;
 	}
-	if(preg_match("/tcp/i",$token,$ans))
+	if(preg_match("/tcp/i",$token,$ans)&&preg_match("/\\[info\\]/i",$token,$ans))
 		$finalAns=$token;
 	$token=strtok("\n");
 }

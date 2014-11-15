@@ -1,6 +1,8 @@
 package com.IYYX.cardboard;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.Scanner;
 
 import javax.microedition.khronos.egl.EGLConfig;
 
@@ -63,7 +65,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		return vec;
 	}
 	
-	static float dotProduct(float[] vec1,float[] vec2) {
+	public static float dotProduct(float[] vec1,float[] vec2) {
 		float ans=0;
 		ans+=vec1[0]*vec2[0];
 		ans+=vec1[1]*vec2[1];
@@ -71,7 +73,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		return ans;
 	}
 	
-	static float lengthOfVector(float[] vec) {
+	public static float lengthOfVector(float[] vec) {
 		float ans=0;
 		ans+=vec[0]*vec[0];
 		ans+=vec[1]*vec[1];
@@ -85,19 +87,19 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	 * @param vecTo
 	 * @return [angle, x, y, z]
 	 */
-	static float[] getAxisAngleForRotationBetweenVectors(float[] vecFrom, float[] vecTo, boolean isRightHanded){
+	public static float[] getAxisAngleForRotationBetweenVectors(float[] vecFrom, float[] vecTo, boolean isRightHanded){
 		float[] axis;
 		float[] ans=new float[4];
 		if(isRightHanded) axis=crossProduct_rightHanded(vecFrom,vecTo);
 		else axis=crossProduct_leftHanded(vecFrom,vecTo);
-		ans[0]=dotProduct(vecFrom,vecTo)/(lengthOfVector(vecFrom)*lengthOfVector(vecTo));
+		ans[0]=(float) (Math.acos(dotProduct(vecFrom,vecTo)/(lengthOfVector(vecFrom)*lengthOfVector(vecTo)))/Math.PI*180f);
 		ans[1]=axis[0];
 		ans[2]=axis[1];
 		ans[3]=axis[2];
 		return ans;
 	}
 	
-	static void normalizeV(float[] vector) {
+	public static void normalizeV(float[] vector) {
 		double length=Math.sqrt(
 				Math.pow(vector[0], 2.0)+
 				Math.pow(vector[1], 2.0)+
@@ -136,6 +138,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		normalizeV(newEyeDirection);
 		
 		mEye[0]+=newEyeDirection[0]*scale;
+		newEyeDirection[1]=0;
 		//mEye[1]+=newEyeDirection[1]*scale;					//This line must be commented.						
 		mEye[2]-=newEyeDirection[2]*scale;
 
@@ -151,18 +154,45 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	}
 	
 	float[] currHeadRotateMatrix=new float[16];
-	public static class Status{
-		public float[] Eyes,Look;
-		public Status(float[] Eyes, float[] Look){
-			this.Eyes = Eyes;
-			this.Look = Look;
+	public static class Status implements Serializable{
+		/**
+		 * Generated UID for serializing on Nov.15
+		 */
+		private static final long serialVersionUID = -1376141047158480687L;
+		public float[] Eyes,Direction;
+		public Status(float[] Eyes, float[] Direction){
+			this.Eyes = Eyes.clone();
+			this.Direction = Direction.clone();
+		}
+		public String toString(){
+			StringBuilder sb= new StringBuilder();
+			sb.append("[Eye=");
+			for(int i=0;i<Eyes.length;i++) {sb.append(Eyes[i]);sb.append(",");}
+			sb.append("]  [Direction=");
+			for(int i=0;i<Direction.length;i++) {sb.append(Direction[i]);sb.append(",");}
+			sb.append("]");
+			
+			return sb.toString();
 		}
 	}
 	Status contactStatus;
 	boolean isCallSucceed = false;
 	public void onNewFrame(HeadTransform arg0) {
 		if (isCallSucceed){
-			TcpManager.sendObj(new Status(mEye,mLook));
+			float[] oldEyeDirection=new float[4];
+			float[] newEyeDirection=new float[4];
+			oldEyeDirection[0]=mLook[0]-mEye[0];
+			oldEyeDirection[1]=mLook[1]-mEye[1];
+			oldEyeDirection[2]=mLook[2]-mEye[2];
+			oldEyeDirection[3]=0;
+			
+			Matrix.multiplyMV(newEyeDirection, 0, currHeadRotateMatrix, 0, oldEyeDirection, 0);
+
+			normalizeV(oldEyeDirection);
+			normalizeV(newEyeDirection);
+			newEyeDirection[1]=0;
+			newEyeDirection[2]=-newEyeDirection[2];
+			TcpManager.sendObj(new Status(mEye,newEyeDirection));
 			contactStatus = (Status)TcpManager.getLatestObj();
 		}
 		arg0.getHeadView(currHeadRotateMatrix, 0);
@@ -178,6 +208,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	
 	final float[] startupEye=new float[]{0,0,0};
 	final float[] startupLook=new float[]{1f,0f,0};
+	final float[] startupEyeDirection=new float[] {1f,0f,0};
 
 	public void onSurfaceCreated(EGLConfig arg0) {
 		//MessageQueue.onRestart();
@@ -189,6 +220,15 @@ public class CardboardRenderer extends MyCardboardRenderer {
 				public void OnBeingCalled(String contactName) {
 					// TODO Auto-generated method stub
 					isCallSucceed = true;
+				}
+			});
+			TcpManager.setListener(new TcpManager.OnCallSucceedListener() {
+				
+				@Override
+				public void OnCallSucceed() {
+					// TODO Auto-generated method stub
+					isCallSucceed = true;
+					
 				}
 			});
 		}
@@ -247,12 +287,16 @@ public class CardboardRenderer extends MyCardboardRenderer {
 
 	class ContactUpdater implements GameObjectUpdater {
 		public void update(GameObject obj) {
+			if(contactStatus==null||contactStatus.Direction==null) {
+				for(int i=0;i<16;i++) obj.mModelMatrix[i]=0;
+				return;
+			}
 			float[] eyes = contactStatus.Eyes;
-			float[] look = contactStatus.Look;
-			float[] angle = getAxisAngleForRotationBetweenVectors(eyes, look, true);
+			float[] Direction = contactStatus.Direction;
+			float[] angle = getAxisAngleForRotationBetweenVectors(startupEyeDirection, Direction, true);
 			Matrix.setIdentityM(obj.mModelMatrix, 0);
-			Matrix.translateM(obj.mModelMatrix, 0, eyes[0], eyes[1], eyes[2]);
 			Matrix.rotateM(obj.mModelMatrix, 0, angle[0], angle[1], angle[2], angle[3]);
+			Matrix.translateM(obj.mModelMatrix, 0, eyes[0], eyes[1], eyes[2]);
 			if(obj.mPrototype.name.contains("c7d648bf")){
 			}
 		}
