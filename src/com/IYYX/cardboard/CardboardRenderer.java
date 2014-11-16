@@ -293,10 +293,10 @@ public class CardboardRenderer extends MyCardboardRenderer {
 			}
 			float[] eyes = contactStatus.Eyes;
 			float[] Direction = contactStatus.Direction;
-			float[] angle = getAxisAngleForRotationBetweenVectors(startupEyeDirection, Direction, true);
+			float[] angle = getAxisAngleForRotationBetweenVectors(new float[]{0,0,1}, Direction, true);
 			Matrix.setIdentityM(obj.mModelMatrix, 0);
-			Matrix.rotateM(obj.mModelMatrix, 0, angle[0], angle[1], angle[2], angle[3]);
 			Matrix.translateM(obj.mModelMatrix, 0, eyes[0], eyes[1], eyes[2]);
+			Matrix.rotateM(obj.mModelMatrix, 0, angle[0], angle[1], angle[2], angle[3]);
 			if(obj.mPrototype.name.contains("c7d648bf")){
 			}
 		}
