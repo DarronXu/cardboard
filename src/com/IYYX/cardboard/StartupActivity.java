@@ -15,9 +15,9 @@ public class StartupActivity extends Activity {
 		super.onCreate(savedInstance);
 		setContentView(R.layout.startup_ui);
 		startButton=(Button)findViewById(R.id.startButton);
-		someButton=(Button)findViewById(R.id.XXXXXXXXXXXX);
+		//someButton=(Button)findViewById(R.id.XXXXXXXXXXXX);
 		username=(EditText)findViewById(R.id.startupUsername);
-		contactUsername=(EditText)findViewById(R.id.startupContactUsername);
+		//contactUsername=(EditText)findViewById(R.id.startupContactUsername);
 		startButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				Intent intent=new Intent();
@@ -26,12 +26,12 @@ public class StartupActivity extends Activity {
 				callMainActivity(intent,MainActivity.class);
 			}
 		});
-		someButton.setOnClickListener(new OnClickListener(){
+		/*someButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				Intent intent=new Intent();
 				callMainActivity(intent,SipSettings.class);
 			}
-		});
+		});*/
 	}
 	void callMainActivity(Intent src, Class<?> activity) {
 		Intent intent=new Intent(this,activity);

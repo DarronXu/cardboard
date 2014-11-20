@@ -2,6 +2,9 @@ package com.IYYX.cardboard.Helpers;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
 import javax.media.opengl.GL2;
@@ -66,6 +69,7 @@ class Test_GLShadingProgram extends GLProgram {
 		gl.glCompileShader(fragmentShaderHandle);
 		gl.glGetShaderiv(fragmentShaderHandle, GL2.GL_COMPILE_STATUS, compileStatus, 0);
 		if(compileStatus[0]==0){
+			//gl.glgetshaderinfo
 			gl.glDeleteShader(fragmentShaderHandle);
 			throw new RuntimeException("Error compiling GL Fragment Shader!");
 		}
@@ -79,6 +83,14 @@ class Test_GLShadingProgram extends GLProgram {
 			throw  new RuntimeException("Error linking GL Program!");
 		}
 		mProgramHandle = programHandle;
+		sunLights_Direction=ByteBuffer.allocateDirect(mMaximumSunCount*4*mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
+		bulbLights_Location=ByteBuffer.allocateDirect(mMaximumBulbCount*4*mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
+		sunLights_Direction.position(0);
+		bulbLights_Location.position(0);
+		for(int i=0;i<mMaximumSunCount*4;i++) sunLights_Direction.put(0);
+		for(int i=0;i<mMaximumBulbCount*4;i++) bulbLights_Location.put(0);
+		sunLights_Direction.position(0);
+		bulbLights_Location.position(0);
 	}
 	public void loadIntoGLES() {
 		gl.glUseProgram(mProgramHandle);
@@ -86,9 +98,14 @@ class Test_GLShadingProgram extends GLProgram {
 	public void renderAllGameObjects() {
 		for(GameObject obj:objects) {
 			int mPositionHandle, mUVHandle, mNormalHandle;
-			int mMVPMatrixHandle;
-			
-			mMVPMatrixHandle = gl.glGetUniformLocation(mProgramHandle, "u_MVPMatrix");
+			int mModelMatrixHandle,mViewMatrixHandle,mProjectionMatrixHandle;
+			int mSunLightsHandle,mBulbLightsHandle;
+
+			mModelMatrixHandle = gl.glGetUniformLocation(mProgramHandle, "u_ViewMatrix");
+			mViewMatrixHandle = gl.glGetUniformLocation(mProgramHandle, "u_ModelMatrix");
+			mProjectionMatrixHandle = gl.glGetUniformLocation(mProgramHandle, "u_ProjectionMatrix");
+			mSunLightsHandle = gl.glGetUniformLocation(mProgramHandle, "u_sunLights_worldSpace");
+			mBulbLightsHandle = gl.glGetUniformLocation(mProgramHandle, "u_bulbLights_worldSpace");
 			
 			mPositionHandle = gl.glGetAttribLocation(mProgramHandle, "a_Position");
 			mUVHandle = gl.glGetAttribLocation(mProgramHandle, "a_UV");
@@ -99,20 +116,12 @@ class Test_GLShadingProgram extends GLProgram {
 			gl.glEnableVertexAttribArray(mPositionHandle);
 			gl.glEnableVertexAttribArray(mUVHandle);
 			gl.glEnableVertexAttribArray(mNormalHandle);
-
-			gl.glMatrixMode(GL2.GL_MODELVIEW);
-			gl.glPushMatrix();
 			
-			gl.glLoadMatrixf(mViewMatrix, 0);
-			gl.glMultMatrixf(obj.mModelMatrix, 0);
-			gl.glGetFloatv(GL2.GL_MODELVIEW_MATRIX, mMVPMatrix, 0);
-			gl.glLoadMatrixf(mProjectionMatrix, 0);
-			gl.glMultMatrixf(mMVPMatrix, 0);
-			gl.glGetFloatv(GL2.GL_MODELVIEW_MATRIX, mMVPMatrix, 0);
-			
-			gl.glPopMatrix();
-			
-			gl.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mMVPMatrix, 0);
+			gl.glUniformMatrix4fv(mModelMatrixHandle, 1, false, obj.mModelMatrix, 0);
+			gl.glUniformMatrix4fv(mViewMatrixHandle, 1, false, mViewMatrix, 0);
+			gl.glUniformMatrix4fv(mProjectionMatrixHandle, 1, false, mProjectionMatrix, 0);
+			gl.glUniform4fv(mSunLightsHandle, mMaximumSunCount, sunLights_Direction);
+			gl.glUniform4fv(mBulbLightsHandle, mMaximumSunCount, bulbLights_Location);
 			
 			gl.glActiveTexture(GL2.GL_TEXTURE0);
 			if(obj.mTexture!=null) gl.glBindTexture(GL2.GL_TEXTURE_2D, obj.mTexture.mTextureHandle);
@@ -132,8 +141,35 @@ class Test_GLShadingProgram extends GLProgram {
 			gl.glDisableVertexAttribArray(mNormalHandle);
 		}
 	}
-	ArrayList<Float[]> sunLights_Direction;		//Parallel
-	ArrayList<Float[]> bulbLights_Location;		//Divergent
+	public static final int mMaximumSunCount=6;
+	public static final int mMaximumBulbCount=6;
+	public static final int mBytesPerFloat=Float.SIZE/8;
+	private FloatBuffer sunLights_Direction;	//Parallel
+	private FloatBuffer bulbLights_Location;	//Divergent
+	/**
+	 * 
+	 * @param sunID
+	 * @param sunLightDirectionVec
+	 * Important:<strong>Vector[3] is the intensity of the light</strong>
+	 */
+	public void setSunLight(int sunID,float[] sunLightDirectionVec){
+		int base=sunID*4;
+		for(int i=0;i<4&&i<sunLightDirectionVec.length;i++) {
+			sunLights_Direction.put(base+i,sunLightDirectionVec[i]);
+		}
+	}
+	/**
+	 * 
+	 * @param bulbID
+	 * @param bulbLightLocationVec
+	 * Important:<strong>Vector[3] is the intensity of the light</strong>
+	 */
+	public void setBulbLight(int bulbID,float[] bulbLightLocationVec){
+		int base=bulbID*4;
+		for(int i=0;i<4&&i<bulbLightLocationVec.length;i++) {
+			bulbLights_Location.put(base+i,bulbLightLocationVec[i]);
+		}
+	}
 	public void resetViewMatrix(float[] viewMatrix){
 		mViewMatrix = viewMatrix;
 	}
