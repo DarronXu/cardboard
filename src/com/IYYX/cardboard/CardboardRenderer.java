@@ -256,15 +256,16 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		try {
 			//These new IO functions can read Models much faster.
 			boyModel = ModelIO.loadPartitioned(assets.open("boy.objpp"), getMyCallback());
-			chofsecretModel = ModelIO.loadPartitioned(assets.open("chofsecret.objpp"), getMyCallback());
+			chofsecretModel = ModelIO.loadPartitioned(assets.open("map.objpp"), getMyCallback());
 		} catch (IOException | ClassNotFoundException e) {e.printStackTrace();}
 		
 		boyA = new PartitionedGameObject(boyModel, "boy.obj-info", new ContactUpdater(), getMyCallback());
 		
-		chofsecretA= new PartitionedGameObject(chofsecretModel, "chofsecret.obj-info",new GameObjectUpdater(){
+		chofsecretA= new PartitionedGameObject(chofsecretModel, "map.obj-info",new GameObjectUpdater(){
 			public void update(GameObject obj) {
 				Matrix.setIdentityM(obj.mModelMatrix, 0);
-				Matrix.scaleM(obj.mModelMatrix, 0, 2, 2, 2);
+				Matrix.scaleM(obj.mModelMatrix, 0, 0.3f, 0.3f, 0.3f);
+				Matrix.translateM(obj.mModelMatrix, 0, -2f, -2f, -2f);
 			}
 		}, getMyCallback());
 		
