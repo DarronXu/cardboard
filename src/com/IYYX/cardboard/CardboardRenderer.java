@@ -122,7 +122,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		}
 		Log.e(msg,str);
 	}
-	
+
 	private void stepForward(float scale){						//This function MUST be private
 		pasueMainActivity=true;
 		float[] oldEyeDirection=new float[4];
@@ -131,7 +131,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		oldEyeDirection[1]=mLook[1]-mEye[1];
 		oldEyeDirection[2]=mLook[2]-mEye[2];
 		oldEyeDirection[3]=0;
-		
+		float[] tempEye = mEye.clone();
 		Matrix.multiplyMV(newEyeDirection, 0, currHeadRotateMatrix, 0, oldEyeDirection, 0);
 
 		normalizeV(oldEyeDirection);
@@ -141,7 +141,11 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		newEyeDirection[1]=0;
 		//mEye[1]+=newEyeDirection[1]*scale;					//This line must be commented.						
 		mEye[2]-=newEyeDirection[2]*scale;
-
+		if (((mEye[0]/2-1.693)*(mEye[0]/2-1.693)+(mEye[2]/2-2.445)*(mEye[2]/2-2.445)) > 10f){
+			mEye[0] = tempEye[0];
+			mEye[2] = tempEye[2];
+			return;
+		}
 		mLook[0]=mEye[0]+oldEyeDirection[0]*scale;
 		mLook[1]=mEye[1]+oldEyeDirection[1]*scale;				//This line must NOT be commented.
 		mLook[2]=mEye[2]+oldEyeDirection[2]*scale;
@@ -252,15 +256,22 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		mTextureProgram = new GLTextureProgram(res);
 		
 		//------------------------ Load in Models and Textures --------------------------
-
+		Model earthModel=null;
 		try {
 			//These new IO functions can read Models much faster.
 			boyModel = ModelIO.loadPartitioned(assets.open("boy.objpp"), getMyCallback());
+			earthModel=ModelIO.loadWhole(assets.open("earth.objpp"), getMyCallback());
 			chofsecretModel = ModelIO.loadPartitioned(assets.open("chofsecret.objpp"), getMyCallback());
 		} catch (IOException | ClassNotFoundException e) {e.printStackTrace();}
 		
 		boyA = new PartitionedGameObject(boyModel, "boy.obj-info", new ContactUpdater(), getMyCallback());
-		
+		GameObject ptA = new GameObject(earthModel, new GameObjectUpdater(){
+			public void update(GameObject obj) {
+				Matrix.setIdentityM(obj.mModelMatrix, 0);
+				Matrix.scaleM(obj.mModelMatrix, 0, 0.3f, 0.3f, 0.3f);
+				Matrix.translateM(obj.mModelMatrix, 0, 1.693f*2f, 0, 2.445f*2f);
+			}
+		},new Texture(res,R.drawable.earth_texture,false));
 		chofsecretA= new PartitionedGameObject(chofsecretModel, "chofsecret.obj-info",new GameObjectUpdater(){
 			public void update(GameObject obj) {
 				Matrix.setIdentityM(obj.mModelMatrix, 0);
@@ -271,6 +282,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		//boyA.addToGLProgram(mTextureProgram);
 		chofsecretA.addToGLProgram(mTextureProgram);
 		boyA.addToGLProgram(mTextureProgram);
+		mTextureProgram.objects.add(ptA);
 		getMyCallback().showToast3D("Hello, "+myUsername+" !");
 	}
 
