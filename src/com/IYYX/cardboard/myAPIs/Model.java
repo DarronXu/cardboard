@@ -69,7 +69,7 @@ public class Model {
 						for(int j=uvIndex*2;j<uvIndex*2+2;j++)
 							ansTextureUVs.add(uv.get(j));
 					}
-					final int normalIndex=Integer.parseInt(split[3+i*3]);
+					final int normalIndex=Integer.parseInt(split[3+i*3]) - 1;
 					ans.hasNormal=true;
 					for(int j=normalIndex*3;j<normalIndex*3+3;j++)
 						ansNormals.add(normal.get(j));
@@ -154,7 +154,7 @@ public class Model {
 						currentObj.hasTextureUV=true;
 						ansTextureUVs.add(uv.get(uvIndex));
 					}
-					final int normalIndex=Integer.parseInt(split[3+i*3]);
+					final int normalIndex=Integer.parseInt(split[3+i*3]) - 1;
 					currentObj.hasNormal=true;
 					ansNormals.add(normal.get(normalIndex));
 				}

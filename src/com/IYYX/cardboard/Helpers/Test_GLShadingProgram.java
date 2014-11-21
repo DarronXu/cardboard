@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 
 import javax.media.opengl.GL2;
@@ -21,10 +22,31 @@ class Test_GLShadingProgram extends GLProgram {
 	private final int mUVDataSize = 2;
 	private final int mNormalDataSize = 3;
 	
-	private final float[] mMVPMatrix = new float[16];
 	private float[] mViewMatrix;
 	private float[] mProjectionMatrix;
 	private GL2 gl;
+	
+	private String checkLogInfo(GL2 gl, int programObject) {
+        IntBuffer intValue = ByteBuffer.allocateDirect(1*Integer.SIZE/8).order(ByteOrder.nativeOrder()).asIntBuffer();
+        gl.glGetObjectParameterivARB(programObject, GL2.GL_INFO_LOG_LENGTH, intValue);
+
+        int lengthWithNull = intValue.get();
+
+        if (lengthWithNull <= 1) {
+            return "";
+        }
+
+        ByteBuffer infoLog = ByteBuffer.allocateDirect(lengthWithNull).order(ByteOrder.nativeOrder());
+
+        intValue.flip();
+        gl.glGetShaderInfoLog(programObject, lengthWithNull, intValue, infoLog);
+
+        int actualLength = intValue.get();
+
+        byte[] infoBytes = new byte[actualLength];
+        infoLog.get(infoBytes);
+        return new String(infoBytes);
+    }
 	
 	public Test_GLShadingProgram(GL2 gl) {
 		this.gl=gl;
@@ -70,8 +92,9 @@ class Test_GLShadingProgram extends GLProgram {
 		gl.glGetShaderiv(fragmentShaderHandle, GL2.GL_COMPILE_STATUS, compileStatus, 0);
 		if(compileStatus[0]==0){
 			//gl.glgetshaderinfo
+			String err=checkLogInfo(gl,fragmentShaderHandle);
 			gl.glDeleteShader(fragmentShaderHandle);
-			throw new RuntimeException("Error compiling GL Fragment Shader!");
+			throw new RuntimeException("Error compiling GL Fragment Shader! "+err);
 		}
 		//-----------------GL Program------------------
 		gl.glAttachShader(programHandle, vertexShaderHandle);
@@ -79,8 +102,9 @@ class Test_GLShadingProgram extends GLProgram {
 		gl.glLinkProgram(programHandle);
 		gl.glGetProgramiv(programHandle, GL2.GL_LINK_STATUS, compileStatus, 0);
 		if(compileStatus[0]==0){
+			String err=checkLogInfo(gl,programHandle);
 			gl.glDeleteProgram(programHandle);
-			throw  new RuntimeException("Error linking GL Program!");
+			throw  new RuntimeException("Error linking GL Program! "+err);
 		}
 		mProgramHandle = programHandle;
 		sunLights_Direction=ByteBuffer.allocateDirect(mMaximumSunCount*4*mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();

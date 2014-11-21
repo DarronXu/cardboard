@@ -23,23 +23,23 @@ void main()
 	vec4 color=vec4(0,0,0,0);
 	
 	mat4 MVMatrix=u_ViewMatrix*u_ModelMatrix;
+	vec4 normal=MVMatrix*vec4(v_Normal,0);
 	float totIntensity=0.0;
 	
 	for(int i=0;i<6;i++)
 	{
+		vec4 uSun_world=u_sunLights_worldSpace[i];
+		vec4 uBulb_world=u_bulbLights_worldSpace[i];
 		vec4 sunDirection_cameraSpace;
 		vec4 bulbLocation_cameraSpace;
 		vec4 bulbDirection_cameraSpace;
-		vec4 normal=MVMatrix*v_Normal;
-		float sunIntensity=u_sunLights_worldSpace[i][3];
-		float bulbIntensity=u_bulbLights_worldSpace[i][3];
-		u_sunLights_worldSpace[i][3]=0;
-		u_bulbLights_worldSpace[i][3]=1;
+		float sunIntensity=uBulb_world[3];
+		float bulbIntensity=uBulb_world[3];
+		uSun_world[3]=0.0;
+		uBulb_world[3]=1.0;
 		sunDirection_cameraSpace=u_ViewMatrix*u_sunLights_worldSpace[i];
 		bulbLocation_cameraSpace=u_ViewMatrix*u_bulbLights_worldSpace[i];
 		bulbDirection_cameraSpace=v_Position_CameraSpace-bulbLocation_cameraSpace;
-		u_sunLights_worldSpace[i][3]=sunIntensity;
-		u_bulbLights_worldSpace[i][3]=bulbIntensity;
 		float sunCosTheta=clamp(dot(normal,sunDirection_cameraSpace),0,1);
 		float bulbCosTheta=clamp(dot(normal,bulbDirection_cameraSpace),0,1);
 		color+=materialColor*sunCosTheta*sunIntensity;
