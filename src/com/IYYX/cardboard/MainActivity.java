@@ -3,6 +3,7 @@ package com.IYYX.cardboard;
 
 import java.text.ParseException;
 
+import com.IYYX.cardboard.myAPIs.TcpManager;
 import com.google.vrtoolkit.cardboard.CardboardActivity;
 import com.google.vrtoolkit.cardboard.CardboardView;
 
@@ -49,6 +50,7 @@ public class MainActivity extends CardboardActivity {
     private static final int SET_AUTH_INFO = 2;
     private static final int UPDATE_SETTINGS_DIALOG = 3;
     private static final int HANG_UP = 4;
+    private static final int CONNECT_CB_CLIENT = 5;
     
 
 
@@ -246,6 +248,7 @@ public class MainActivity extends CardboardActivity {
         menu.add(0, CALL_ADDRESS, 0, "Call someone");
         menu.add(0, SET_AUTH_INFO, 0, "Edit your SIP Info.");
         menu.add(0, HANG_UP, 0, "End Current Call.");
+        menu.add(0, CONNECT_CB_CLIENT, 0, "[DBG] Connect CB Client.");
 
         return true;
     }
@@ -269,6 +272,8 @@ public class MainActivity extends CardboardActivity {
                     call.close();
                 }
                 break;
+            case CONNECT_CB_CLIENT:
+                showDialog(CONNECT_CB_CLIENT);
         }
         return true;
     }
@@ -301,6 +306,28 @@ public class MainActivity extends CardboardActivity {
                         })
                         .create();
 
+            case CONNECT_CB_CLIENT:
+
+                LayoutInflater factory2 = LayoutInflater.from(this);
+                final View textBoxView2 = factory2.inflate(R.layout.call_address_dialog, null);
+                return new AlertDialog.Builder(this)
+                        .setTitle("Call Someone.")
+                        .setView(textBoxView2)
+                        .setPositiveButton(
+                                android.R.string.ok, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        EditText textField = (EditText)
+                                                (textBoxView2.findViewById(R.id.calladdress_edit));
+                                        TcpManager.call(textField.getText().toString());
+                                    }
+                        })
+                        .setNegativeButton(
+                                android.R.string.cancel, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        // Noop.
+                                    }
+                        })
+                        .create();
             case UPDATE_SETTINGS_DIALOG:
                 return new AlertDialog.Builder(this)
                         .setMessage("Please update your SIP Account Settings.")
@@ -346,12 +373,15 @@ public class MainActivity extends CardboardActivity {
         initializeManager();
 		
         setContentView(R.layout.common_ui);
-        cardboardView = (CardboardView) findViewById(R.id.cardboard_view);
         mOverlayView = (CardboardOverlayView) findViewById(R.id.overlay);
+        cardboardView = (CardboardView) findViewById(R.id.cardboard_view);
+        renderer=new CardboardRenderer(getResources(),cardboardView,mOverlayView,this);
+        renderer.myUsername=myUsername=getIntent().getStringExtra("myName");
+        renderer.contactUsername=contactUsername=getIntent().getStringExtra("contactName");
         cardboardView.setEGLContextClientVersion(2);
 		cardboardView.setEGLConfigChooser(8, 8, 8, 8, 0, 0);
         cardboardView.getHolder().setFormat(PixelFormat.RGBA_8888);
-        cardboardView.setRenderer(renderer=new CardboardRenderer(getResources(),cardboardView,mOverlayView,this));
+        cardboardView.setRenderer(renderer);
         setCardboardView(cardboardView);
         mOverlayView.show3DToast("Please hold you phone so that it's vertical to the ground.\nThen, please turn your head around to search for the object.");
         cardboardView.setOnTouchListener(new OnTouchListener() {
@@ -363,7 +393,7 @@ public class MainActivity extends CardboardActivity {
         	
         });
 	}
-	
+	String myUsername,contactUsername;
 	/*
 	 * I misunderstood that the cardboardView can automatically pause and resume OpenGL,
 	 * but actually we still have to do this manually.

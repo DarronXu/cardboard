@@ -1,4 +1,5 @@
 package PureTcpIp;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -61,9 +62,9 @@ public class DarronNetServer1 {
 				return;
 			}
 			while(client.isConnected()){
-				String line=null;
+				Object line=null;
 				try {
-					line=(String)mScan.readObject();
+					line=mScan.readObject();
 					ObjectOutputStream writer=map2.get(to);
 					writer.writeObject(mMyName);
 					writer.writeObject(line);
@@ -74,7 +75,7 @@ public class DarronNetServer1 {
 					map2.remove(mMyName);
 					return;
 				}
-				if(line != null && line.length()>0) System.out.println("["+mMyName+" => "+to+"] "+line);
+				if(line != null) System.out.println("["+mMyName+" => "+to+"] "+line.toString());
 			}
 		}
 	}

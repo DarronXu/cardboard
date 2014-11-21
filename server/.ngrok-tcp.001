@@ -1,0 +1,25 @@
+[2014/11/15 02:42:52 CST] [WARN] (ngrok/log.Warn:93) Failed to get user's home directory: user: Current not implemented on linux/386. Using $HOME: /home/c4phone
+[2014/11/15 02:42:52 CST] [INFO] (ngrok/log.Info:89) Reading configuration file /home/c4phone/.ngrok
+[2014/11/15 02:42:52 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Trusting root CAs: [assets/client/tls/ngrokroot.crt]
+[2014/11/15 02:42:52 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [view] [web] Serving web interface on 127.0.0.1:4040
+[2014/11/15 02:42:52 CST] [INFO] (ngrok/log.Info:89) Checking for update
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:1b96ff2e] New connection to: 96.126.125.171:443
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:1b96ff2e] Writing message: {"Type":"Auth","Payload":{"Version":"2","MmVersion":"1.7","User":"3i-lTmSelgjPKOLULMti","Password":"","OS":"linux","Arch":"386","ClientId":""}}
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:1b96ff2e] Waiting to read message
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:1b96ff2e] Reading message with length: 120
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:1b96ff2e] Read message {"Type":"AuthResp","Payload":{"Version":"2","MmVersion":"1.6","ClientId":"396caa063dd41a2f5ffef2e4f1f46325","Error":""}}
+[2014/11/15 02:42:52 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Authenticated with server, client id: 396caa063dd41a2f5ffef2e4f1f46325
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:1b96ff2e] Writing message: {"Type":"ReqTunnel","Payload":{"ReqId":"64c73c568a35e601","Protocol":"tcp","Hostname":"","Subdomain":"","HttpAuth":"","RemotePort":0}}
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:1b96ff2e] Waiting to read message
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:1b96ff2e] Reading message with length: 32
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:1b96ff2e] Read message {"Type":"ReqProxy","Payload":{}}
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:1b96ff2e] Waiting to read message
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:1b96ff2e] Reading message with length: 117
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:1b96ff2e] Read message {"Type":"NewTunnel","Payload":{"ReqId":"64c73c568a35e601","Url":"tcp://ngrok.com:37063","Protocol":"tcp","Error":""}}
+[2014/11/15 02:42:52 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Tunnel established at tcp://ngrok.com:37063
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:1b96ff2e] Waiting to read message
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:1e50acea] New connection to: 96.126.125.171:443
+[2014/11/15 02:42:52 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:1e50acea] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"396caa063dd41a2f5ffef2e4f1f46325"}}
