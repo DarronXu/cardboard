@@ -125,8 +125,8 @@ class Test_GLShadingProgram extends GLProgram {
 			int mModelMatrixHandle,mViewMatrixHandle,mProjectionMatrixHandle;
 			int mSunLightsHandle,mBulbLightsHandle;
 
-			mModelMatrixHandle = gl.glGetUniformLocation(mProgramHandle, "u_ViewMatrix");
-			mViewMatrixHandle = gl.glGetUniformLocation(mProgramHandle, "u_ModelMatrix");
+			mModelMatrixHandle = gl.glGetUniformLocation(mProgramHandle, "u_ModelMatrix");
+			mViewMatrixHandle = gl.glGetUniformLocation(mProgramHandle, "u_ViewMatrix");
 			mProjectionMatrixHandle = gl.glGetUniformLocation(mProgramHandle, "u_ProjectionMatrix");
 			mSunLightsHandle = gl.glGetUniformLocation(mProgramHandle, "u_sunLights_worldSpace");
 			mBulbLightsHandle = gl.glGetUniformLocation(mProgramHandle, "u_bulbLights_worldSpace");
