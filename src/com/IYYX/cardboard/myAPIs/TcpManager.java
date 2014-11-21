@@ -20,6 +20,27 @@ public class TcpManager {
 	private static OutputStream toServer;
 	private static ObjectOutputStream serverWriter;
 	private static ObjectInputStream serverReader;
+
+	public static void reset(){
+		bIsInitiated=false;
+		bIsInitiating=false;
+		socketToServer=null;
+		fromServer=null;
+		toServer=null;
+		serverWriter=null;
+		serverReader=null;
+		lCallSucceed=null;
+		lBeingCalled=null;
+		lNewData=null;
+		mContactName=null;
+		mLatestObject=null;
+		mMyName=null;
+		isCallEstablished=false;
+		hasServerReceivedContactName=false;
+		requestThreadPause=true;
+		while(!threadPaused) try{Thread.sleep(20);} catch(Exception err) {err.printStackTrace();}
+		threadObject=null;
+	}
 	
 	private static String readHTTP(String urlStr){
 		URL url;
@@ -51,7 +72,7 @@ public class TcpManager {
 				connection.disconnect();
 		}
 	}
-	
+	private static Thread threadObject;
 	public static void initiate(String serverIPorHostname, String myName){
 		if(bIsInitiating) return;
 		mMyName=myName;
@@ -70,8 +91,8 @@ public class TcpManager {
 			err.printStackTrace();
 			throw new RuntimeException("Cannot connect to server!");
 		}
-		Thread thread=new Thread(threadTwo);
-		thread.start();
+		threadObject=new Thread(threadTwo);
+		threadObject.start();
 		bIsInitiated=true;
 		bIsInitiating=true;
 	}
@@ -133,9 +154,11 @@ public class TcpManager {
 	public static interface OnNewDataListener{
 		public void OnNewData();
 	}
+	
+	private static boolean requestThreadPause=false, threadPaused=false;
 	private static Runnable threadTwo=new Runnable(){
 		public void run() {
-			while(true){
+			while(!requestThreadPause){
 				boolean success=false;
 				try{
 					mContactName=(String)serverReader.readObject();
@@ -152,6 +175,8 @@ public class TcpManager {
 				}
 				if(lNewData!=null) lNewData.OnNewData();
 			}
+			requestThreadPause=false;
+			threadPaused=true;
 		}
 	};
 }

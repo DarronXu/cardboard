@@ -407,6 +407,7 @@ public class MainActivity extends CardboardActivity {
 			renderer.pasueMainActivity=true;
 			renderer.keepStepping=false;
 		}
+		TcpManager.reset();
 	}
 	
 	protected void onResume() {
