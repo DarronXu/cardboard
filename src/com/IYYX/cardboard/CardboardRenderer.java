@@ -141,7 +141,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		newEyeDirection[1]=0;
 		//mEye[1]+=newEyeDirection[1]*scale;					//This line must be commented.						
 		mEye[2]-=newEyeDirection[2]*scale;
-		if (((mEye[0]/2-1.693)*(mEye[0]/2-1.693)+(mEye[2]/2-2.445)*(mEye[2]/2-2.445)) > 10f){
+		if (((mEye[0]/2-1.693)*(mEye[0]/2-1.693)+(mEye[2]/2+2.445)*(mEye[2]/2+2.445)) > 10f){
 			mEye[0] = tempEye[0];
 			mEye[2] = tempEye[2];
 			return;
@@ -268,8 +268,8 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		GameObject ptA = new GameObject(earthModel, new GameObjectUpdater(){
 			public void update(GameObject obj) {
 				Matrix.setIdentityM(obj.mModelMatrix, 0);
+				Matrix.translateM(obj.mModelMatrix, 0, 1.693f*2f, 2f, -2.445f*2f);
 				Matrix.scaleM(obj.mModelMatrix, 0, 0.3f, 0.3f, 0.3f);
-				Matrix.translateM(obj.mModelMatrix, 0, 1.693f*2f, 0, 2.445f*2f);
 			}
 		},new Texture(res,R.drawable.earth_texture,false));
 		chofsecretA= new PartitionedGameObject(chofsecretModel, "chofsecret.obj-info",new GameObjectUpdater(){
