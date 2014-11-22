@@ -28,7 +28,7 @@ public class NetB2 {
 				System.err.println("\n"+TcpManager.getLatestObj().toString()+"\n");
 			}
 		});
-//		
+		
 		while(true)
 		{
 			try {
