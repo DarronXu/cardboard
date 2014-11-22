@@ -138,8 +138,13 @@ public class ShadingTest {
 			//mTextureProgram.addGameObject(yOzFloor);
 			//mTextureProgram.addGameObject(zOxFloor);
 			boyA.addToGLProgram(mTextureProgram);
-			mTextureProgram.setBulbLight(0, new float[]{4,4,4,4});
-			mTextureProgram.setBulbLight(0, new float[]{-4,-4,-4,4});
+			//mTextureProgram.setAmbiantColor(0.35f, 0.35f, 0.35f);
+			mTextureProgram.setBulbLight(0, new float[]{2,0,0,4});
+			mTextureProgram.setBulbLight(1, new float[]{-4,0,0,4});
+			mTextureProgram.setBulbLight(2, new float[]{0,4,0,4});
+			mTextureProgram.setBulbLight(3, new float[]{0,-4,0,4});
+			mTextureProgram.setBulbLight(4, new float[]{0,0,4,4});
+			mTextureProgram.setBulbLight(5, new float[]{0,0,-4,4});
 			firstTime=false;
 		}
 		

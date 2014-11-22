@@ -83,8 +83,9 @@ class Test_GLShadingProgram extends GLProgram {
 		gl.glCompileShader(vertexShaderHandle);
 		gl.glGetShaderiv(vertexShaderHandle, GL2.GL_COMPILE_STATUS, compileStatus, 0);
 		if(compileStatus[0]==GL2.GL_FALSE){
+			String err=checkLogInfo(gl,vertexShaderHandle);
 			gl.glDeleteShader(vertexShaderHandle);
-			throw new RuntimeException("Error compiling GL Vertex Shader!");
+			throw new RuntimeException("Error compiling GL Vertex Shader! "+err);
 		}
 		//-----------------Fragment Shader-----------------
 		gl.glShaderSource(fragmentShaderHandle, 1, new String[]{mFragmentShader}, new int[]{mFragmentShader.length()}, 0);
@@ -109,12 +110,16 @@ class Test_GLShadingProgram extends GLProgram {
 		mProgramHandle = programHandle;
 		sunLights_Direction=ByteBuffer.allocateDirect(mMaximumSunCount*4*mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
 		bulbLights_Location=ByteBuffer.allocateDirect(mMaximumBulbCount*4*mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
+		ambiantColor=ByteBuffer.allocateDirect(1*3*mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
 		sunLights_Direction.position(0);
 		bulbLights_Location.position(0);
+		ambiantColor.position(0);
 		for(int i=0;i<mMaximumSunCount*4;i++) sunLights_Direction.put(0);
 		for(int i=0;i<mMaximumBulbCount*4;i++) bulbLights_Location.put(0);
+		for(int i=0;i<3;i++) ambiantColor.put(0);
 		sunLights_Direction.position(0);
 		bulbLights_Location.position(0);
+		ambiantColor.position(0);
 	}
 	public void loadIntoGLES() {
 		gl.glUseProgram(mProgramHandle);
@@ -124,12 +129,14 @@ class Test_GLShadingProgram extends GLProgram {
 			int mPositionHandle, mUVHandle, mNormalHandle;
 			int mModelMatrixHandle,mViewMatrixHandle,mProjectionMatrixHandle;
 			int mSunLightsHandle,mBulbLightsHandle;
-
+			int mAmbiantColorHanlde;
+			
 			mModelMatrixHandle = gl.glGetUniformLocation(mProgramHandle, "u_ModelMatrix");
 			mViewMatrixHandle = gl.glGetUniformLocation(mProgramHandle, "u_ViewMatrix");
 			mProjectionMatrixHandle = gl.glGetUniformLocation(mProgramHandle, "u_ProjectionMatrix");
 			mSunLightsHandle = gl.glGetUniformLocation(mProgramHandle, "u_sunLights_worldSpace");
 			mBulbLightsHandle = gl.glGetUniformLocation(mProgramHandle, "u_bulbLights_worldSpace");
+			mAmbiantColorHanlde = gl.glGetUniformLocation(mProgramHandle, "u_AmbiantColor");
 			
 			mPositionHandle = gl.glGetAttribLocation(mProgramHandle, "a_Position");
 			mUVHandle = gl.glGetAttribLocation(mProgramHandle, "a_UV");
@@ -144,6 +151,7 @@ class Test_GLShadingProgram extends GLProgram {
 			gl.glUniformMatrix4fv(mModelMatrixHandle, 1, false, obj.mModelMatrix, 0);
 			gl.glUniformMatrix4fv(mViewMatrixHandle, 1, false, mViewMatrix, 0);
 			gl.glUniformMatrix4fv(mProjectionMatrixHandle, 1, false, mProjectionMatrix, 0);
+			gl.glUniform3fv(mAmbiantColorHanlde, 1, ambiantColor);
 			gl.glUniform4fv(mSunLightsHandle, mMaximumSunCount, sunLights_Direction);
 			gl.glUniform4fv(mBulbLightsHandle, mMaximumSunCount, bulbLights_Location);
 			
@@ -170,6 +178,12 @@ class Test_GLShadingProgram extends GLProgram {
 	public static final int mBytesPerFloat=Float.SIZE/8;
 	private FloatBuffer sunLights_Direction;	//Parallel
 	private FloatBuffer bulbLights_Location;	//Divergent
+	private FloatBuffer ambiantColor;
+	public void setAmbiantColor(float r,float g,float b){
+		ambiantColor.put(0, r);
+		ambiantColor.put(1, g);
+		ambiantColor.put(2, b);
+	}
 	/**
 	 * 
 	 * @param sunID
