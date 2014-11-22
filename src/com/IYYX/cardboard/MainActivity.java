@@ -318,6 +318,8 @@ public class MainActivity extends CardboardActivity {
                                     public void onClick(DialogInterface dialog, int whichButton) {
                                         EditText textField = (EditText)
                                                 (textBoxView2.findViewById(R.id.calladdress_edit));
+                                        if(textField.getText().toString().equals(""))
+                                        	return;
                                         TcpManager.call(textField.getText().toString());
                                     }
                         })
