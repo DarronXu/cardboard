@@ -24,6 +24,23 @@ public class TcpManager {
 	public static void reset(){
 		bIsInitiated=false;
 		bIsInitiating=false;
+		try {
+			serverWriter.close();
+			serverReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			toServer.close();
+			fromServer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			socketToServer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		socketToServer=null;
 		fromServer=null;
 		toServer=null;
@@ -38,8 +55,18 @@ public class TcpManager {
 		isCallEstablished=false;
 		hasServerReceivedContactName=false;
 		requestThreadPause=true;
-		while(!threadPaused) try{Thread.sleep(20);} catch(Exception err) {err.printStackTrace();}
+		waitForSubThread();
+		requestThreadPause=false;
 		threadObject=null;
+	}
+	
+	private static void waitForSubThread() {
+		try {
+			threadObject.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			if(threadObject.isAlive()) waitForSubThread();
+		}
 	}
 	
 	private static String readHTTP(String urlStr){
@@ -81,6 +108,27 @@ public class TcpManager {
 		System.err.println(port);
 		try {
 			socketToServer = new Socket(serverIPorHostname,port);
+			toServer = socketToServer.getOutputStream();
+			fromServer = socketToServer.getInputStream();
+			serverWriter = new ObjectOutputStream(toServer);
+			serverReader = new ObjectInputStream(fromServer);
+			serverWriter.writeObject(myName);
+			serverWriter.flush();
+		} catch(IOException err) {
+			err.printStackTrace();
+			throw new RuntimeException("Cannot connect to server!");
+		}
+		threadObject=new Thread(threadTwo);
+		threadObject.start();
+		bIsInitiated=true;
+		bIsInitiating=true;
+	}
+
+	public static void initiateTest(int portNumber, String myName){
+		if(bIsInitiating) return;
+		mMyName=myName;
+		try {
+			socketToServer = new Socket("127.0.0.1",portNumber);
 			toServer = socketToServer.getOutputStream();
 			fromServer = socketToServer.getInputStream();
 			serverWriter = new ObjectOutputStream(toServer);
@@ -155,7 +203,7 @@ public class TcpManager {
 		public void OnNewData();
 	}
 	
-	private static boolean requestThreadPause=false, threadPaused=false;
+	private static boolean requestThreadPause=false;
 	private static Runnable threadTwo=new Runnable(){
 		public void run() {
 			while(!requestThreadPause){
@@ -167,7 +215,10 @@ public class TcpManager {
 				} catch(ClassNotFoundException|IOException e) {
 					e.printStackTrace();
 				}
-				if(!success) continue;
+				if(!success){
+					if(requestThreadPause) return;
+					else continue;
+				}
 				if(!isCallEstablished)
 				{
 					isCallEstablished=true;
@@ -175,8 +226,6 @@ public class TcpManager {
 				}
 				if(lNewData!=null) lNewData.OnNewData();
 			}
-			requestThreadPause=false;
-			threadPaused=true;
 		}
 	};
 }

@@ -22,7 +22,7 @@ public class NetB2 {
 		System.out.print("Please input your name: ");
 		String clientName = stdin.next();
 		
-		TcpManager.initiate("ngrok.com",clientName);
+		TcpManager.initiateTest(1111,clientName);
 		TcpManager.setListener(new TcpManager.OnNewDataListener(){
 			public void OnNewData() {
 				System.err.println("\n"+TcpManager.getLatestObj().toString()+"\n");
@@ -37,6 +37,11 @@ public class NetB2 {
 					System.out.print("Please input your friend's name: ");
 					String contactName = stdin.next();
 					TcpManager.call(contactName);
+				}
+				else if(str.equals("#!exit")) {
+					System.err.println("EXIT !");
+					TcpManager.reset();
+					return;
 				}
 				else {
 					TcpManager.sendObj(str);
