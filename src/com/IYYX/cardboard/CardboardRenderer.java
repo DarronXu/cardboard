@@ -13,6 +13,7 @@ import android.net.sip.SipManager;
 import android.opengl.*;
 import android.os.SystemClock;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.IYYX.cardboard.myAPIs.GLShadingProgram;
 import com.IYYX.cardboard.myAPIs.GLTextureProgram;
@@ -43,6 +44,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	}
 	
 	public void onDrawEye(EyeTransform arg0) {
+		if(failedToConnect) return;
 		float[] projectM=arg0.getPerspective();
         Matrix.multiplyMM(mViewMatrix, 0, arg0.getEyeView(), 0, mCameraMatrix, 0);
 		mTextureProgram.loadIntoGLES();
@@ -188,6 +190,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	Status contactStatus;
 	boolean isCallSucceed = false;
 	public void onNewFrame(HeadTransform arg0) {
+		if(failedToConnect) return;
 		if (isCallSucceed){
 			float[] oldEyeDirection=new float[4];
 			float[] newEyeDirection=new float[4];
@@ -218,31 +221,41 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	final float[] startupEye=new float[]{0,0,0};
 	final float[] startupLook=new float[]{1f,0f,0};
 	final float[] startupEyeDirection=new float[] {1f,0f,0};
-
+	public static boolean failedToConnect=false;
 	public void onSurfaceCreated(EGLConfig arg0) {
 		//MessageQueue.onRestart();
+		getMyCallback().showToast3D("Hello, "+myUsername+" !");
+		PartitionedGameObject.resetOpenedTextures();		//VERY IMPORTANT. When Activity is Paused, old OpenGL Handls expired and the old Texture 'pointers' can't be used anymore.
 		if (!TcpManager.isInitiated()){
-			TcpManager.initiate("ngrok.com",myUsername);
-			TcpManager.setListener(new TcpManager.OnBeingCalledListener() {
-				
-				@Override
-				public void OnBeingCalled(String contactName) {
-					// TODO Auto-generated method stub
-					isCallSucceed = true;
-				}
-			});
-			TcpManager.setListener(new TcpManager.OnCallSucceedListener() {
-				
-				@Override
-				public void OnCallSucceed() {
-					// TODO Auto-generated method stub
-					isCallSucceed = true;
+			try {
+				TcpManager.initiate("ngrok.com",myUsername);
+				TcpManager.setListener(new TcpManager.OnBeingCalledListener() {
 					
-				}
-			});
+					@Override
+					public void OnBeingCalled(String contactName) {
+						// TODO Auto-generated method stub
+						isCallSucceed = true;
+					}
+				});
+				TcpManager.setListener(new TcpManager.OnCallSucceedListener() {
+					
+					@Override
+					public void OnCallSucceed() {
+						// TODO Auto-generated method stub
+						isCallSucceed = true;
+						
+					}
+				});
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				//getMyCallback().showToast3D("Cannot connect to Server!\nCheck your network.");
+				failedToConnect=true;
+				dad.finish();
+				e.printStackTrace();
+				return;
+			}
 		}
 		
-		PartitionedGameObject.resetOpenedTextures();		//VERY IMPORTANT. When Activity is Paused, old OpenGL Handls expired and the old Texture 'pointers' can't be used anymore.
 		GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.7f);
 		GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 		GLES20.glDepthFunc(GLES20.GL_LESS);

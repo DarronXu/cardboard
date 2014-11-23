@@ -22,7 +22,6 @@ public class NetB2 {
 		System.out.print("Please input your name: ");
 		String clientName = stdin.next();
 		
-		TcpManager.initiateTest(1111,clientName);
 		TcpManager.setListener(new TcpManager.OnNewDataListener(){
 			public void OnNewData() {
 				System.err.println("\n"+TcpManager.getLatestObj().toString()+"\n");

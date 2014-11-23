@@ -65,6 +65,8 @@ public class MainActivity extends CardboardActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(renderer!=null&&renderer.failedToConnect)
+        	StartupActivity.connectionFailed();
         if (call != null) {
             call.close();
         }
@@ -103,7 +105,8 @@ public class MainActivity extends CardboardActivity {
         String password = prefs.getString("passPref", "");
 
         if (username.length() == 0 || domain.length() == 0 || password.length() == 0) {
-            showDialog(UPDATE_SETTINGS_DIALOG);
+            //showDialog(UPDATE_SETTINGS_DIALOG);
+        	//show3DToast("PLEASE Input Your VoIP Account\n in the SIP Settings Dialog.");
             return;
         }
 
@@ -410,6 +413,7 @@ public class MainActivity extends CardboardActivity {
 			renderer.keepStepping=false;
 		}
 		TcpManager.reset();
+		this.finish();
 	}
 	
 	protected void onResume() {

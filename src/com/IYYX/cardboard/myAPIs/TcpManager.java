@@ -22,6 +22,7 @@ public class TcpManager {
 	private static ObjectInputStream serverReader;
 
 	public static void reset(){
+		if(!bIsInitiated&&!bIsInitiating) return;
 		bIsInitiated=false;
 		bIsInitiating=false;
 		try {
@@ -55,7 +56,11 @@ public class TcpManager {
 		isCallEstablished=false;
 		hasServerReceivedContactName=false;
 		requestThreadPause=true;
-		waitForSubThread();
+		try {
+			waitForSubThread();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		requestThreadPause=false;
 		threadObject=null;
 	}
@@ -69,7 +74,7 @@ public class TcpManager {
 		}
 	}
 	
-	private static String readHTTP(String urlStr){
+	private static String readHTTP(String urlStr) throws IOException{
 		URL url;
 		HttpURLConnection connection = null;
 		try {
@@ -93,15 +98,16 @@ public class TcpManager {
 			return response.toString();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("Cannot connect to server!");
+			throw new IOException("Cannot connect to server!");
 		} finally {
 			if (connection != null)
 				connection.disconnect();
 		}
 	}
 	private static Thread threadObject;
-	public static void initiate(String serverIPorHostname, String myName){
+	public static void initiate(String serverIPorHostname, String myName) throws IOException{
 		if(bIsInitiating) return;
+		bIsInitiating=true;
 		mMyName=myName;
 		String[] portStrs=readHTTP("http://cforphone.ngrok.com/tcp-port.php").split("\n");
 		int port=Integer.parseInt(portStrs[portStrs.length-1]);
@@ -116,34 +122,15 @@ public class TcpManager {
 			serverWriter.flush();
 		} catch(IOException err) {
 			err.printStackTrace();
+			bIsInitiating=false;
 			throw new RuntimeException("Cannot connect to server!");
 		}
 		threadObject=new Thread(threadTwo);
 		threadObject.start();
 		bIsInitiated=true;
-		bIsInitiating=true;
+		bIsInitiating=false;
 	}
-
-	public static void initiateTest(int portNumber, String myName){
-		if(bIsInitiating) return;
-		mMyName=myName;
-		try {
-			socketToServer = new Socket("127.0.0.1",portNumber);
-			toServer = socketToServer.getOutputStream();
-			fromServer = socketToServer.getInputStream();
-			serverWriter = new ObjectOutputStream(toServer);
-			serverReader = new ObjectInputStream(fromServer);
-			serverWriter.writeObject(myName);
-			serverWriter.flush();
-		} catch(IOException err) {
-			err.printStackTrace();
-			throw new RuntimeException("Cannot connect to server!");
-		}
-		threadObject=new Thread(threadTwo);
-		threadObject.start();
-		bIsInitiated=true;
-		bIsInitiating=true;
-	}
+	
 	static OnCallSucceedListener lCallSucceed;
 	static OnBeingCalledListener lBeingCalled;
 	static OnNewDataListener lNewData;
