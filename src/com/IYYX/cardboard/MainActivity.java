@@ -386,14 +386,14 @@ public class MainActivity extends CardboardActivity {
         cardboardView.setRenderer(renderer);
         setCardboardView(cardboardView);
         mOverlayView.show3DToast("Please hold you phone so that it's vertical to the ground.\nThen, please turn your head around to search for the object.");
-        cardboardView.setOnTouchListener(new OnTouchListener() {
+        /*cardboardView.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
 				v.performClick();
 				onCardboardTrigger();
 				return false;
 			}
         	
-        });
+        });*/
 	}
 	String myUsername,contactUsername;
 	/*

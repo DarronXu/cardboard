@@ -14,6 +14,7 @@ import android.opengl.*;
 import android.os.SystemClock;
 import android.util.Log;
 
+import com.IYYX.cardboard.myAPIs.GLShadingProgram;
 import com.IYYX.cardboard.myAPIs.GLTextureProgram;
 import com.IYYX.cardboard.myAPIs.GameObject;
 import com.IYYX.cardboard.myAPIs.GameObjectUpdater;
@@ -29,6 +30,8 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	private float[] mViewMatrix = new float[16];
 	
 	GLTextureProgram mTextureProgram;
+	GLShadingProgram mShadingProgram;
+	
 	Model[] R2D2Model,policeModel,mapModel;
 	PartitionedGameObject R2D2A,mapA;
 	String myUsername = null,contactUsername = null;
@@ -40,20 +43,19 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	}
 	
 	public void onDrawEye(EyeTransform arg0) {
+		float[] projectM=arg0.getPerspective();
         Matrix.multiplyMM(mViewMatrix, 0, arg0.getEyeView(), 0, mCameraMatrix, 0);
+		mTextureProgram.loadIntoGLES();
 		mTextureProgram.updateAllGameObjects();
         mTextureProgram.resetViewMatrix(mViewMatrix);
-        //float[] projectionM=arg0.getPerspective();
-        //float[] zoom=new float[16];
-        //float[] result=new float[16];
-        //Matrix.setIdentityM(zoom, 0);
-        //Matrix.scaleM(zoom, 0, 0.93f, 0.93f, 0.93f);
-        //Matrix.multiplyMM(result, 0,  projectionM, 0,zoom, 0);
-        //mTextureProgram.resetProjectionMatrix(result);
-        mTextureProgram.resetProjectionMatrix(arg0.getPerspective());
-        
+        mTextureProgram.resetProjectionMatrix(projectM);
 		GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT|GLES20.GL_COLOR_BUFFER_BIT);
 		mTextureProgram.renderAllGameObjects();
+		mShadingProgram.loadIntoGLES();
+		mShadingProgram.updateAllGameObjects();
+		mShadingProgram.resetViewMatrix(mViewMatrix);
+		mShadingProgram.resetProjectionMatrix(projectM);
+		mShadingProgram.renderAllGameObjects();
 	}
 	
 	boolean keepStepping=false;
@@ -207,7 +209,6 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		if(keepStepping) {
 			stepForward(0.25f);
 		}
-		mTextureProgram.loadIntoGLES();
 	}
 	
 	float[] mEye;
@@ -260,6 +261,20 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		mTextureProgram = new GLTextureProgram(res);
 		mTextureProgram.resetZoomFactor(zoomFactor);
 		
+		mShadingProgram = new GLShadingProgram(res);
+		mShadingProgram.resetZoomFactor(zoomFactor);
+
+		final float ambiantIntensity=0.2f;
+		final float bulbIntensity=300.0f;
+		
+		mShadingProgram.setAmbiantColor(ambiantIntensity,ambiantIntensity,ambiantIntensity);
+		mShadingProgram.setBulbLight(0, new float[]{20,0,0,bulbIntensity});
+		mShadingProgram.setBulbLight(1, new float[]{-40,0,0,bulbIntensity});
+		mShadingProgram.setBulbLight(2, new float[]{0,40,0,bulbIntensity});
+		mShadingProgram.setBulbLight(3, new float[]{0,-40,0,bulbIntensity});
+		mShadingProgram.setBulbLight(4, new float[]{0,0,40,bulbIntensity});
+		mShadingProgram.setBulbLight(5, new float[]{0,0,-40,bulbIntensity});
+		
 		//------------------------ Load in Models and Textures --------------------------
 		//Model earthModel=null;
 		try {
@@ -292,7 +307,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		
 		//R2D2A.addToGLProgram(mTextureProgram);
 		mapA.addToGLProgram(mTextureProgram);
-		R2D2A.addToGLProgram(mTextureProgram);
+		R2D2A.addToGLProgram(mShadingProgram);
 		//mTextureProgram.objects.add(ptA);
 		getMyCallback().showToast3D("Hello, "+myUsername+" !");
 	}
