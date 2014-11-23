@@ -20,10 +20,6 @@ public class StartupActivity extends Activity {
 		startButton=(Button)findViewById(R.id.startButton);
 		SIPsettingsButton=(Button)findViewById(R.id.SIPsettingsButton);
 		username=(EditText)findViewById(R.id.startupUsername);
-<<<<<<< HEAD
-=======
-		//contactUsername=(EditText)findViewById(R.id.startupContactUsername);
->>>>>>> refs/heads/TryShading
 		startButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				Intent intent=new Intent();
@@ -32,16 +28,12 @@ public class StartupActivity extends Activity {
 				callMainActivity(intent,MainActivity.class);
 			}
 		});
-<<<<<<< HEAD
 		SIPsettingsButton.setOnClickListener(new OnClickListener(){
-=======
-		/*someButton.setOnClickListener(new OnClickListener(){
->>>>>>> refs/heads/TryShading
 			public void onClick(View v) {
 				Intent intent=new Intent();
 				callMainActivity(intent,SipSettings.class);
 			}
-		});*/
+		});
 	}
 	void callMainActivity(Intent src, Class<?> activity) {
 		Intent intent=new Intent(this,activity);

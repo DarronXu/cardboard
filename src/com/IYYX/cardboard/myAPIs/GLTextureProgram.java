@@ -68,6 +68,10 @@ public class GLTextureProgram extends GLProgram {
 		GLES20.glUseProgram(mProgramHandle);
 	}
 	public void renderAllGameObjects() {
+		float[] zoom=new float[16];
+		float[] model=new float[16];
+		Matrix.setIdentityM(zoom, 0);
+		Matrix.scaleM(zoom, 0, zoomFactor, zoomFactor, zoomFactor);
 		for(GameObject obj:objects) {
 			int mPositionHandle, mUVHandle;
 			int mMVPMatrixHandle;
@@ -79,8 +83,10 @@ public class GLTextureProgram extends GLProgram {
 			
 			GLES20.glEnableVertexAttribArray(mPositionHandle);
 			GLES20.glEnableVertexAttribArray(mUVHandle);
+			
+			Matrix.multiplyMM(model, 0, obj.mModelMatrix, 0, zoom, 0);
 
-			Matrix.multiplyMM(mMVPMatrix, 0, mViewMatrix, 0, obj.mModelMatrix, 0);
+			Matrix.multiplyMM(mMVPMatrix, 0, mViewMatrix, 0, model, 0);
 			Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mMVPMatrix, 0);
 			
 			GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mMVPMatrix, 0);
@@ -99,6 +105,11 @@ public class GLTextureProgram extends GLProgram {
 			GLES20.glDisableVertexAttribArray(mUVHandle);
 		}
 	}
+	
+	float zoomFactor=1.0f;
+	
+	public void resetZoomFactor(float factor) {zoomFactor=factor;}
+	
 	public void resetViewMatrix(float[] viewMatrix){
 		mViewMatrix = viewMatrix;
 	}

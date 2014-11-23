@@ -33,6 +33,8 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	PartitionedGameObject R2D2A,mapA;
 	String myUsername = null,contactUsername = null;
 	
+	final float zoomFactor=0.8f;
+	
 	public CardboardRenderer(Resources res,CardboardView cardboardView,CardboardOverlayView overlay, Activity dad) {
 		super(res,cardboardView, overlay, dad);
 	}
@@ -41,13 +43,14 @@ public class CardboardRenderer extends MyCardboardRenderer {
         Matrix.multiplyMM(mViewMatrix, 0, arg0.getEyeView(), 0, mCameraMatrix, 0);
 		mTextureProgram.updateAllGameObjects();
         mTextureProgram.resetViewMatrix(mViewMatrix);
-        float[] projectionM=arg0.getPerspective();
-        float[] zoom=new float[16];
-        float[] result=new float[16];
-        Matrix.setIdentityM(zoom, 0);
-        Matrix.scaleM(zoom, 0, 0.5f, 0.5f, 0.5f);
-        Matrix.multiplyMM(result, 0, zoom, 0, projectionM, 0);
-        mTextureProgram.resetProjectionMatrix(result);
+        //float[] projectionM=arg0.getPerspective();
+        //float[] zoom=new float[16];
+        //float[] result=new float[16];
+        //Matrix.setIdentityM(zoom, 0);
+        //Matrix.scaleM(zoom, 0, 0.93f, 0.93f, 0.93f);
+        //Matrix.multiplyMM(result, 0,  projectionM, 0,zoom, 0);
+        //mTextureProgram.resetProjectionMatrix(result);
+        mTextureProgram.resetProjectionMatrix(arg0.getPerspective());
         
 		GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT|GLES20.GL_COLOR_BUFFER_BIT);
 		mTextureProgram.renderAllGameObjects();
@@ -144,7 +147,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		//mEye[1]+=newEyeDirection[1]*scale;					//This line must be commented.						
 		mEye[2]-=newEyeDirection[2]*scale;
 		
-		if (mEye[0]>44f || mEye[0]<-44f || mEye[2]>44f ||mEye[2] <-44f){
+		if (mEye[0]/zoomFactor>44f || mEye[0]/zoomFactor<-44f || mEye[2]/zoomFactor>44f ||mEye[2]/zoomFactor <-44f){
 			mEye[0] = tempEye[0];
 			mEye[2] = tempEye[2];
 			return;
@@ -154,7 +157,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		mLook[1]=mEye[1]+oldEyeDirection[1]*scale;				//This line must NOT be commented.
 		mLook[2]=mEye[2]+oldEyeDirection[2]*scale;
 		
-		Matrix.setLookAtM(mCameraMatrix, 0,
+		setLookAtM_ZOOMED(mCameraMatrix, 0,
 				mEye[0], mEye[1]-0.5f, mEye[2],
 				mLook[0], mLook[1]-0.5f, mLook[2],
 				0, 1f, 0);
@@ -249,12 +252,13 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		
 		mEye=startupEye.clone();
 		mLook=startupLook.clone();
-		Matrix.setLookAtM(mCameraMatrix, 0,
+		setLookAtM_ZOOMED(mCameraMatrix, 0,
 				startupEye[0], startupEye[1]-0.5f, startupEye[2],
 				startupLook[0], startupLook[1]-0.5f, startupLook[2],
 				0, 1f, 0f);
 		
 		mTextureProgram = new GLTextureProgram(res);
+		mTextureProgram.resetZoomFactor(zoomFactor);
 		
 		//------------------------ Load in Models and Textures --------------------------
 		//Model earthModel=null;
@@ -291,6 +295,15 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		R2D2A.addToGLProgram(mTextureProgram);
 		//mTextureProgram.objects.add(ptA);
 		getMyCallback().showToast3D("Hello, "+myUsername+" !");
+	}
+	
+	void setLookAtM_ZOOMED(float[] rm, int rmOffset,
+            float eyeX, float eyeY, float eyeZ,
+            float centerX, float centerY, float centerZ, float upX, float upY,
+            float upZ) {
+		Matrix.setLookAtM(rm, rmOffset, eyeX/zoomFactor, eyeY/zoomFactor, eyeZ/zoomFactor,
+				centerX/zoomFactor, centerY/zoomFactor, centerZ/zoomFactor,
+				upX/zoomFactor, upY/zoomFactor, upZ/zoomFactor);
 	}
 
 	@Override

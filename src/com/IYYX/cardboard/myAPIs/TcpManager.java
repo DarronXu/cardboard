@@ -27,18 +27,18 @@ public class TcpManager {
 		try {
 			serverWriter.close();
 			serverReader.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		try {
 			toServer.close();
 			fromServer.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		try {
 			socketToServer.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		socketToServer=null;
