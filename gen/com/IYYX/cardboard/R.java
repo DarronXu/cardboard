@@ -30,6 +30,7 @@ public final class R {
         public static final int mona_lisa=0x7f020007;
     }
     public static final class id {
+<<<<<<< HEAD
         public static final int SIPsettingsButton=0x7f090007;
         public static final int callButton=0x7f090008;
         public static final int calladdress_edit=0x7f090001;
@@ -58,6 +59,39 @@ public final class R {
         public static final int simple_image_fragment=0x7f050008;
         public static final int simple_image_vertex=0x7f050009;
         public static final int simple_vertex=0x7f05000a;
+=======
+        public static final int callButton=0x7f090007;
+        public static final int calladdress_edit=0x7f090001;
+        public static final int calladdress_view=0x7f090000;
+        public static final int cardboard_view=0x7f090003;
+        public static final int overlay=0x7f090004;
+        public static final int sipSettingsButton=0x7f090008;
+        public static final int startButton=0x7f090006;
+        public static final int startupUsername=0x7f090005;
+        public static final int ui_layout=0x7f090002;
+    }
+    public static final class layout {
+        public static final int activity_main=0x7f030000;
+        public static final int call_address_dialog=0x7f030001;
+        public static final int common_ui=0x7f030002;
+        public static final int startup_ui=0x7f030003;
+    }
+    public static final class raw {
+        public static final int grid_fragment=0x7f050000;
+        public static final int image_fragment=0x7f050001;
+        public static final int image_vertex=0x7f050002;
+        public static final int light_vertex=0x7f050003;
+        public static final int myapi_for_windows_fragment=0x7f050004;
+        public static final int myapi_fragment=0x7f050005;
+        public static final int myapi_vertex=0x7f050006;
+        public static final int shading_test_for_windows_fragment=0x7f050007;
+        public static final int shading_test_fragment=0x7f050008;
+        public static final int shading_test_vertex=0x7f050009;
+        public static final int simple_fragment=0x7f05000a;
+        public static final int simple_image_fragment=0x7f05000b;
+        public static final int simple_image_vertex=0x7f05000c;
+        public static final int simple_vertex=0x7f05000d;
+>>>>>>> refs/heads/TryShading
     }
     public static final class string {
         public static final int action_settings=0x7f070009;
