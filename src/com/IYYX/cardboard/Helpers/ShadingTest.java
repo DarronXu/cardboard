@@ -21,6 +21,10 @@ import javax.media.opengl.GLEventListener;
 import javax.media.opengl.GLProfile;
 import javax.media.opengl.awt.GLCanvas;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
 
 import com.IYYX.cardboard.myAPIs.GameObject;
@@ -35,18 +39,19 @@ public class ShadingTest {
 	static String objPath;
 	static String objInfoName;
 
+	static Test_GLShadingProgram mTextureProgram=null;
 	static class glEventer implements GLEventListener{
 		
 		private float[] mCameraMatrix = new float[16];			//The position and orientation of Camera
 		private float[] mProjectionMatrix = new float[16];
 		
 		
-		Test_GLShadingProgram mTextureProgram;
 		Model earthModel;
 		Model[] boyModel;
 		GameObject earthA;
 		GameObject earthB;
 		PartitionedGameObject boyA;
+		Test_GLTextureProgram mOldProgram;
 		Texture earthTexture;
 		GL2 gl;
 		
@@ -82,12 +87,14 @@ public class ShadingTest {
 			//setCameraMatrix();
 			
 			mTextureProgram = new Test_GLShadingProgram(gl);
+			mOldProgram = new Test_GLTextureProgram(gl);
 			
 			//------------------------ Load in Models and Textures --------------------------
-
+			Model[] mapModel=null;
 			try {
 				floorModel = Model.readWholeModel("floor.obj", new TestCallback());
 				boyModel = Model.readPartitionedModel(objPath, new TestCallback());
+				mapModel = Model.readPartitionedModel("chofsecret.obj", new TestCallback());
 			} catch (IOException e) {e.printStackTrace();}
 			
 			GameObjectUpdater commonUpdater=new GameObjectUpdater(){
@@ -123,6 +130,7 @@ public class ShadingTest {
 			};
 			
 			boyA = new PartitionedGameObject(boyModel,objInfoName, commonUpdater, gl);
+			PartitionedGameObject map = new PartitionedGameObject(mapModel,"chofsecret.obj-info", commonUpdater, gl);
 			GameObject xOyFloor,yOzFloor,zOxFloor;
 			xOyFloor=new GameObject(floorModel, null);
 			yOzFloor=new GameObject(floorModel, null);
@@ -138,13 +146,14 @@ public class ShadingTest {
 			//mTextureProgram.addGameObject(yOzFloor);
 			//mTextureProgram.addGameObject(zOxFloor);
 			boyA.addToGLProgram(mTextureProgram);
-			//mTextureProgram.setAmbiantColor(0.35f, 0.35f, 0.35f);
-			mTextureProgram.setBulbLight(0, new float[]{2,0,0,4});
-			mTextureProgram.setBulbLight(1, new float[]{-4,0,0,4});
-			mTextureProgram.setBulbLight(2, new float[]{0,4,0,4});
-			mTextureProgram.setBulbLight(3, new float[]{0,-4,0,4});
-			mTextureProgram.setBulbLight(4, new float[]{0,0,4,4});
-			mTextureProgram.setBulbLight(5, new float[]{0,0,-4,4});
+			map.addToGLProgram(mOldProgram);
+			mTextureProgram.setAmbiantColor(ambiantIntensity,ambiantIntensity,ambiantIntensity);
+			mTextureProgram.setBulbLight(0, new float[]{2,0,0,bulbIntensity});
+			mTextureProgram.setBulbLight(1, new float[]{-4,0,0,bulbIntensity});
+			mTextureProgram.setBulbLight(2, new float[]{0,4,0,bulbIntensity});
+			mTextureProgram.setBulbLight(3, new float[]{0,-4,0,bulbIntensity});
+			mTextureProgram.setBulbLight(4, new float[]{0,0,4,bulbIntensity});
+			mTextureProgram.setBulbLight(5, new float[]{0,0,-4,bulbIntensity});
 			firstTime=false;
 		}
 		
@@ -152,7 +161,7 @@ public class ShadingTest {
 			gl=arg0.getGL().getGL2();
 			if(firstTime) realInit();
 			Matrix.setIdentityM(mProjectionMatrix, 0);
-			Matrix.perspectiveM(mProjectionMatrix, 0, 45f, width/height, 0.01f, 5.0f);
+			Matrix.perspectiveM(mProjectionMatrix, 0, 45f, width/height, 0.01f, 10.0f);
 			Matrix.setLookAtM(mCameraMatrix, 0, eye[0], eye[1], eye[2], look[0], look[1], look[2], up[0], up[1], up[2]);
 			mTextureProgram.loadIntoGLES();
 			mTextureProgram.updateAllGameObjects(); 			/* The original "update()" */
@@ -161,6 +170,15 @@ public class ShadingTest {
 	        //-------------- The following part is originally named "render()" ----------------
 			gl.glClear(GL2.GL_DEPTH_BUFFER_BIT|GL2.GL_COLOR_BUFFER_BIT);
 			mTextureProgram.renderAllGameObjects();
+			
+			//----------------
+
+			mOldProgram.loadIntoGLES();
+			mOldProgram.updateAllGameObjects(); 			/* The original "update()" */
+			mOldProgram.resetViewMatrix(mCameraMatrix);
+			mOldProgram.resetProjectionMatrix(mProjectionMatrix);
+	        //-------------- The following part is originally named "render()" ----------------
+			mOldProgram.renderAllGameObjects();
 		}
 		public void dispose(GLAutoDrawable arg0) {
 		}
@@ -175,6 +193,9 @@ public class ShadingTest {
 			this.height=height;
 		}
 	}
+
+	public static float ambiantIntensity=0.10f;
+	public static float bulbIntensity=7.0f;
 	
 	public static void main(String[] args) {
 		
@@ -236,29 +257,92 @@ public class ShadingTest {
         });
         FPSAnimator anim1=new FPSAnimator(canvas,60);
         anim1.start();
-        
-        Scanner scan=new Scanner(System.in);
-        
-        while(true) {
-        	String line=scan.nextLine();
-        	String[] split=line.split(" ");
-        	if(split.length>0) try {
-        		if(split[0].equalsIgnoreCase("eye")) {
-        			eventer.eye[0]=Float.parseFloat(split[1]);
-        			eventer.eye[1]=Float.parseFloat(split[2]);
-        			eventer.eye[2]=Float.parseFloat(split[3]);
-        		}
-        		if(split[0].equalsIgnoreCase("look")) {
-        			eventer.look[0]=Float.parseFloat(split[1]);
-        			eventer.look[1]=Float.parseFloat(split[2]);
-        			eventer.look[2]=Float.parseFloat(split[3]);
-        		}
-        	}
-        	catch (Exception err) {
-        		err.printStackTrace();
-        	}
-        }
+
+        JFrame ambiantIntense=new JFrame("Ambiant Light");
+        JFrame bulbIntense=new JFrame("Bulb Light");
+        final JTextField bulbField=new JTextField();
+        final JTextField ambiantField=new JTextField();
+        bulbField.setSize(80, 60);
+        ambiantField.setSize(80, 60);
+        ambiantIntense.add(ambiantField);
+        bulbIntense.add(bulbField);
+        ambiantIntense.pack();
+        bulbIntense.pack();
+        bulbField.setText(""+bulbIntensity);
+        ambiantField.setText(""+ambiantIntensity);
+        bulbField.getDocument().addDocumentListener(new DocumentListener(){
+			public void changedUpdate(DocumentEvent e) {
+				try{
+				bulbIntensity=Float.parseFloat(bulbField.getText());} catch(Exception err){err.printStackTrace();}
+				updateI();
+			}
+			public void insertUpdate(DocumentEvent e) {
+				try{
+				bulbIntensity=Float.parseFloat(bulbField.getText());} catch(Exception err){err.printStackTrace();}
+				updateI();
+			}
+			public void removeUpdate(DocumentEvent e) {
+				try{
+				bulbIntensity=Float.parseFloat(bulbField.getText());} catch(Exception err){err.printStackTrace();}
+				updateI();
+			}
+		});
+
+        ambiantField.getDocument().addDocumentListener(new DocumentListener(){
+			public void changedUpdate(DocumentEvent e) {
+				try{
+				ambiantIntensity=Float.parseFloat(bulbField.getText());} catch(Exception err){err.printStackTrace();}
+				updateI();
+			}
+			public void insertUpdate(DocumentEvent e) { 
+				try{
+				ambiantIntensity=Float.parseFloat(bulbField.getText());} catch(Exception err){err.printStackTrace();}
+				updateI();
+			}
+			public void removeUpdate(DocumentEvent e) {
+				try{
+				ambiantIntensity=Float.parseFloat(bulbField.getText());} catch(Exception err){err.printStackTrace();}
+				updateI();
+			}
+		});
+        ambiantIntense.setSize(85, 65);
+        bulbIntense.setSize(85, 65);
+        ambiantIntense.setVisible(true);
+        bulbIntense.setVisible(true);
 	}
+	
+	static void updateI(){
+		mTextureProgram.setAmbiantColor(ambiantIntensity,ambiantIntensity,ambiantIntensity);
+		mTextureProgram.setBulbLight(0, new float[]{2,0,0,bulbIntensity});
+		mTextureProgram.setBulbLight(1, new float[]{-4,0,0,bulbIntensity});
+		mTextureProgram.setBulbLight(2, new float[]{0,4,0,bulbIntensity});
+		mTextureProgram.setBulbLight(3, new float[]{0,-4,0,bulbIntensity});
+		mTextureProgram.setBulbLight(4, new float[]{0,0,4,bulbIntensity});
+		mTextureProgram.setBulbLight(5, new float[]{0,0,-4,bulbIntensity});
+	}
+	
+	/*
+	 * 
+	static void showSearchBoxFrame(){
+		searchBoxFrame=new JFrame("Search Box");
+		textField=new JTextField();
+		textField.setSize(80, 60);
+		searchBoxFrame.add(textField);
+		textField.getDocument().addDocumentListener(new DocumentListener(){
+			public void changedUpdate(DocumentEvent e) {
+				updateList();
+			}
+			public void insertUpdate(DocumentEvent e) {
+				updateList();
+			}
+			public void removeUpdate(DocumentEvent e) {
+				updateList();
+			}
+		});
+		searchBoxFrame.pack();
+		searchBoxFrame.setVisible(true);
+	}
+	 */
 
 	static boolean isPUpKeyPressed = false;
 	static boolean isPDownKeyPressed = false;
