@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class DarronNetServer1 {
 	
 	static int i=0;
-	static int PORT_NUM=1111; 
+	static int PORT_NUM=1111;
 	static HashMap<String,Socket> map=new HashMap<String,Socket>();
 	static HashMap<String,ObjectOutputStream> map2=new HashMap<String,ObjectOutputStream>();
 	public static void main(String[] args) {
