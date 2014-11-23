@@ -32,7 +32,6 @@ public final class R {
     public static final class id {
 <<<<<<< HEAD
         public static final int SIPsettingsButton=0x7f090007;
-        public static final int callButton=0x7f090008;
         public static final int calladdress_edit=0x7f090001;
         public static final int calladdress_view=0x7f090000;
         public static final int cardboard_view=0x7f090003;

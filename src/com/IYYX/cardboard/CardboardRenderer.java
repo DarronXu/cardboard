@@ -29,8 +29,8 @@ public class CardboardRenderer extends MyCardboardRenderer {
 	private float[] mViewMatrix = new float[16];
 	
 	GLTextureProgram mTextureProgram;
-	Model[] boyModel,policeModel,mapModel;
-	PartitionedGameObject boyA,mapA;
+	Model[] R2D2Model,policeModel,mapModel;
+	PartitionedGameObject R2D2A,mapA;
 	String myUsername = null,contactUsername = null;
 	
 	public CardboardRenderer(Resources res,CardboardView cardboardView,CardboardOverlayView overlay, Activity dad) {
@@ -41,7 +41,13 @@ public class CardboardRenderer extends MyCardboardRenderer {
         Matrix.multiplyMM(mViewMatrix, 0, arg0.getEyeView(), 0, mCameraMatrix, 0);
 		mTextureProgram.updateAllGameObjects();
         mTextureProgram.resetViewMatrix(mViewMatrix);
-        mTextureProgram.resetProjectionMatrix(arg0.getPerspective());
+        float[] projectionM=arg0.getPerspective();
+        float[] zoom=new float[16];
+        float[] result=new float[16];
+        Matrix.setIdentityM(zoom, 0);
+        Matrix.scaleM(zoom, 0, 0.5f, 0.5f, 0.5f);
+        Matrix.multiplyMM(result, 0, zoom, 0, projectionM, 0);
+        mTextureProgram.resetProjectionMatrix(result);
         
 		GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT|GLES20.GL_COLOR_BUFFER_BIT);
 		mTextureProgram.renderAllGameObjects();
@@ -137,20 +143,20 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		newEyeDirection[1]=0;
 		//mEye[1]+=newEyeDirection[1]*scale;					//This line must be commented.						
 		mEye[2]-=newEyeDirection[2]*scale;
-		/*
-		if (((mEye[0]/2-1.693)*(mEye[0]/2-1.693)+(mEye[2]/2-2.445)*(mEye[2]/2-2.445)) > 10f){
+		
+		if (mEye[0]>44f || mEye[0]<-44f || mEye[2]>44f ||mEye[2] <-44f){
 			mEye[0] = tempEye[0];
 			mEye[2] = tempEye[2];
 			return;
 		}
-		*/
+		
 		mLook[0]=mEye[0]+oldEyeDirection[0]*scale;
 		mLook[1]=mEye[1]+oldEyeDirection[1]*scale;				//This line must NOT be commented.
 		mLook[2]=mEye[2]+oldEyeDirection[2]*scale;
 		
 		Matrix.setLookAtM(mCameraMatrix, 0,
-				mEye[0], mEye[1], mEye[2],
-				mLook[0], mLook[1], mLook[2],
+				mEye[0], mEye[1]-0.5f, mEye[2],
+				mLook[0], mLook[1]-0.5f, mLook[2],
 				0, 1f, 0);
 		pasueMainActivity=false;
 	}
@@ -244,32 +250,34 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		mEye=startupEye.clone();
 		mLook=startupLook.clone();
 		Matrix.setLookAtM(mCameraMatrix, 0,
-				startupEye[0], startupEye[1], startupEye[2],
-				startupLook[0], startupLook[1], startupLook[2],
+				startupEye[0], startupEye[1]-0.5f, startupEye[2],
+				startupLook[0], startupLook[1]-0.5f, startupLook[2],
 				0, 1f, 0f);
 		
 		mTextureProgram = new GLTextureProgram(res);
 		
 		//------------------------ Load in Models and Textures --------------------------
-		Model earthModel=null;
+		//Model earthModel=null;
 		try {
 			//These new IO functions can read Models much faster.
-			boyModel = ModelIO.loadPartitioned(assets.open("boy.objpp"), getMyCallback());
+			R2D2Model = ModelIO.loadPartitioned(assets.open("R2D2.objpp"), getMyCallback());
 			//mapModel = ModelIO.loadPartitioned(assets.open("map.objpp"), getMyCallback());
-			earthModel=ModelIO.loadWhole(assets.open("earth.objpp"), getMyCallback());
+			//earthModel=ModelIO.loadWhole(assets.open("earth.objpp"), getMyCallback());
 			mapModel = ModelIO.loadPartitioned(assets.open("map.objpp"), getMyCallback());
 		} catch (IOException | ClassNotFoundException e) {e.printStackTrace();}
 		
-		boyA = new PartitionedGameObject(boyModel, "boy.obj-info", new ContactUpdater(), getMyCallback());
+		R2D2A = new PartitionedGameObject(R2D2Model, "R2D2.obj-info", new ContactUpdater(), getMyCallback());
 
 		//mapA= new PartitionedGameObject(mapModel, "map.obj-info",new GameObjectUpdater(){
-		GameObject ptA = new GameObject(earthModel, new GameObjectUpdater(){
+		/*
+		
 			public void update(GameObject obj) {
 				Matrix.setIdentityM(obj.mModelMatrix, 0);
 				Matrix.scaleM(obj.mModelMatrix, 0, 0.3f, 0.3f, 0.3f);
 				Matrix.translateM(obj.mModelMatrix, 0, 1.693f*2f, 0, 2.445f*2f);
 			}
 		},new Texture(res,R.drawable.earth_texture,false));
+		 */
 		mapA= new PartitionedGameObject(mapModel, "map.obj-info",new GameObjectUpdater(){
 			public void update(GameObject obj) {
 				Matrix.setIdentityM(obj.mModelMatrix, 0);
@@ -278,10 +286,10 @@ public class CardboardRenderer extends MyCardboardRenderer {
 			}
 		}, getMyCallback());
 		
-		//boyA.addToGLProgram(mTextureProgram);
+		//R2D2A.addToGLProgram(mTextureProgram);
 		mapA.addToGLProgram(mTextureProgram);
-		boyA.addToGLProgram(mTextureProgram);
-		mTextureProgram.objects.add(ptA);
+		R2D2A.addToGLProgram(mTextureProgram);
+		//mTextureProgram.objects.add(ptA);
 		getMyCallback().showToast3D("Hello, "+myUsername+" !");
 	}
 
@@ -307,7 +315,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 			float[] angle = getAxisAngleForRotationBetweenVectors(new float[]{0,0,1}, Direction, true);
 			Matrix.setIdentityM(obj.mModelMatrix, 0);
 			
-			Matrix.translateM(obj.mModelMatrix, 0, eyes[0], eyes[1], eyes[2]);
+			Matrix.translateM(obj.mModelMatrix, 0, eyes[0], eyes[1]-1f, eyes[2]);
 			Matrix.rotateM(obj.mModelMatrix, 0, angle[0], 0.0f, angle[2], angle[3]);
 			if(obj.mPrototype.name.contains("c7d648bf")){
 			}
