@@ -36,6 +36,9 @@ public class NetB2 {
 				if(str.equals("^^^")) {
 					System.out.print("Please input your friend's name: ");
 					String contactName = stdin.next();
+					while (contactName.equals("")){
+						contactName = stdin.next();
+					}
 					TcpManager.call(contactName);
 				}
 				else if(str.equals("#!exit")) {

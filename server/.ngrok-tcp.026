@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [2014/11/22 13:19:30 CST] [WARN] (ngrok/log.Warn:93) Failed to get user's home directory: user: Current not implemented on linux/386. Using $HOME: /home/c4phone
 [2014/11/22 13:19:30 CST] [INFO] (ngrok/log.Info:89) Reading configuration file /home/c4phone/.ngrok
 [2014/11/22 13:19:30 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Trusting root CAs: [assets/client/tls/ngrokroot.crt]
@@ -145,3 +146,311 @@
 [2014/11/22 13:29:30 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:4a664c6c] Reading message with length: 28
 [2014/11/22 13:29:30 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:4a664c6c] Read message {"Type":"Pong","Payload":{}}
 [2014/11/22 13:29:30 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:4a664c6c] Waiting to read message
+=======
+[2014/11/21 23:21:30 CST] [WARN] (ngrok/log.Warn:93) Failed to get user's home directory: user: Current not implemented on linux/386. Using $HOME: /home/dave
+[2014/11/21 23:21:30 CST] [INFO] (ngrok/log.Info:89) Reading configuration file /home/dave/.ngrok
+[2014/11/21 23:21:30 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Trusting root CAs: [assets/client/tls/ngrokroot.crt]
+[2014/11/21 23:21:30 CST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [view] [web] Serving web interface on 127.0.0.1:4040
+[2014/11/21 23:21:30 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:21:30 CST] [INFO] (ngrok/log.Info:89) Checking for update
+[2014/11/21 23:21:30 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:21:30 CST] [INFO] (ngrok/log.Info:89) Waiting 1 seconds before reconnecting
+[2014/11/21 23:21:30 CST] [EROR] (ngrok/log.Error:97) Error while checking for update: Post https://api.equinox.io/1/Updates: dial tcp: lookup api.equinox.io: no DNS servers
+[2014/11/21 23:21:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:21:31 CST] [INFO] (ngrok/log.Info:89) Waiting 2 seconds before reconnecting
+[2014/11/21 23:21:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:21:33 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:21:33 CST] [INFO] (ngrok/log.Info:89) Waiting 4 seconds before reconnecting
+[2014/11/21 23:21:33 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:21:37 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:21:37 CST] [INFO] (ngrok/log.Info:89) Waiting 8 seconds before reconnecting
+[2014/11/21 23:21:37 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:21:45 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:21:45 CST] [INFO] (ngrok/log.Info:89) Waiting 16 seconds before reconnecting
+[2014/11/21 23:21:45 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:22:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:22:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:22:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:22:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:22:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:22:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:23:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:23:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:23:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:23:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:23:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:23:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:24:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:24:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:24:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:24:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:24:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:24:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:25:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:25:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:25:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:25:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:25:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:25:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:26:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:26:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:26:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:26:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:26:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:26:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:27:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:27:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:27:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:27:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:27:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:27:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:28:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:28:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:28:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:28:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:28:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:28:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:29:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:29:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:29:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:29:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:29:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:29:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:30:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:30:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:30:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:30:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:30:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:30:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:31:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:31:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:31:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:31:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:31:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:31:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:32:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:32:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:32:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:32:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:32:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:32:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:33:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:33:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:33:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:33:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:33:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:33:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:34:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:34:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:34:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:34:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:34:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:34:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:35:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:35:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:35:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:35:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:35:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:35:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:36:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:36:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:36:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:36:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:36:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:36:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:37:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:37:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:37:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:37:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:37:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:37:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:38:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:38:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:38:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:38:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:38:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:38:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:39:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:39:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:39:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:39:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:39:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:39:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:40:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:40:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:40:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:40:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:40:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:40:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:41:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:41:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:41:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:41:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:41:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:41:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:42:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:42:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:42:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:42:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:42:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:42:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:43:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:43:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:43:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:43:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:43:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:43:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:44:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:44:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:44:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:44:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:44:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:44:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:45:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:45:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:45:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:45:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:45:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:45:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:46:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:46:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:46:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:46:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:46:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:46:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:47:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:47:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:47:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:47:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:47:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:47:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:48:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:48:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:48:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:48:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:48:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:48:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:49:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:49:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:49:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:49:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:49:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:49:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:50:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:50:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:50:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:50:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:50:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:50:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:51:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:51:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:51:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:51:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:51:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:51:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:52:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:52:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:52:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:52:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:52:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:52:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:53:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:53:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:53:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:53:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:53:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:53:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:54:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:54:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:54:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:54:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:54:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:54:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:55:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:55:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:55:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:55:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:55:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:55:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:56:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:56:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:56:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:56:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:56:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:56:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:57:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:57:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:57:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:57:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:57:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:57:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:58:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:58:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:58:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:58:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:58:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:58:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:59:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:59:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:59:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/21 23:59:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/21 23:59:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/21 23:59:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:00:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:00:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:00:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:00:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:00:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:00:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:01:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:01:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:01:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:01:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:01:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:01:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:02:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:02:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:02:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:02:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:02:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:02:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:03:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:03:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:03:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:03:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:03:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:03:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:04:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:04:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:04:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:04:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:04:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:04:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:05:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:05:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:05:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:05:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:05:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:05:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:06:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:06:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:06:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:06:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:06:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:06:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:07:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:07:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:07:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:07:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:07:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:07:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:08:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:08:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:08:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:08:31 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:08:31 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:08:31 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2014/11/22 00:09:01 CST] [EROR] (ngrok/log.Error:97) control recovering from failure dial tcp: lookup ngrokd.ngrok.com: no DNS servers
+[2014/11/22 00:09:01 CST] [INFO] (ngrok/log.Info:89) Waiting 30 seconds before reconnecting
+[2014/11/22 00:09:01 CST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+>>>>>>> 0e4878a5b7b62a0d49316fd366040f324afb44ea
