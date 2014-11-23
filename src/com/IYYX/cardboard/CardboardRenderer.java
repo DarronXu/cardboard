@@ -41,7 +41,13 @@ public class CardboardRenderer extends MyCardboardRenderer {
         Matrix.multiplyMM(mViewMatrix, 0, arg0.getEyeView(), 0, mCameraMatrix, 0);
 		mTextureProgram.updateAllGameObjects();
         mTextureProgram.resetViewMatrix(mViewMatrix);
-        mTextureProgram.resetProjectionMatrix(arg0.getPerspective());
+        float[] projectionM=arg0.getPerspective();
+        float[] zoom=new float[16];
+        float[] result=new float[16];
+        Matrix.setIdentityM(zoom, 0);
+        Matrix.scaleM(zoom, 0, 0.5f, 0.5f, 0.5f);
+        Matrix.multiplyMM(result, 0, zoom, 0, projectionM, 0);
+        mTextureProgram.resetProjectionMatrix(result);
         
 		GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT|GLES20.GL_COLOR_BUFFER_BIT);
 		mTextureProgram.renderAllGameObjects();
