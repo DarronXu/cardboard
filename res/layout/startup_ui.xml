@@ -38,15 +38,6 @@
         android:layout_height="wrap_content"
         android:text="Start SIP settings"
         android:id="@+id/SIPsettingsButton"/>
-    <Button
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="15sp"
-        android:layout_marginBottom="5sp"
-        android:layout_marginTop="5sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Make a Call"
-        android:id="@+id/callButton"/>
 
     <View 
         android:layout_weight="1"

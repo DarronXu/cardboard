@@ -1,5 +1,7 @@
 package com.IYYX.cardboard;
 
+import com.IYYX.cardboard.myAPIs.TcpManager;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ public class StartupActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent=new Intent();
 				intent.putExtra("myName", username.getText().toString());
+				if (username.getText().toString().equals("")||username.getText().toString().equals(TcpManager.mMyName)) return;
 				callMainActivity(intent,MainActivity.class);
 			}
 		});

@@ -143,13 +143,13 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		newEyeDirection[1]=0;
 		//mEye[1]+=newEyeDirection[1]*scale;					//This line must be commented.						
 		mEye[2]-=newEyeDirection[2]*scale;
-		/*
-		if (((mEye[0]/2-1.693)*(mEye[0]/2-1.693)+(mEye[2]/2-2.445)*(mEye[2]/2-2.445)) > 10f){
+		
+		if (mEye[0]>44f || mEye[0]<-44f || mEye[2]>44f ||mEye[2] <-44f){
 			mEye[0] = tempEye[0];
 			mEye[2] = tempEye[2];
 			return;
 		}
-		*/
+		
 		mLook[0]=mEye[0]+oldEyeDirection[0]*scale;
 		mLook[1]=mEye[1]+oldEyeDirection[1]*scale;				//This line must NOT be commented.
 		mLook[2]=mEye[2]+oldEyeDirection[2]*scale;
@@ -257,25 +257,27 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		mTextureProgram = new GLTextureProgram(res);
 		
 		//------------------------ Load in Models and Textures --------------------------
-		Model earthModel=null;
+		//Model earthModel=null;
 		try {
 			//These new IO functions can read Models much faster.
 			R2D2Model = ModelIO.loadPartitioned(assets.open("R2D2.objpp"), getMyCallback());
 			//mapModel = ModelIO.loadPartitioned(assets.open("map.objpp"), getMyCallback());
-			earthModel=ModelIO.loadWhole(assets.open("earth.objpp"), getMyCallback());
+			//earthModel=ModelIO.loadWhole(assets.open("earth.objpp"), getMyCallback());
 			mapModel = ModelIO.loadPartitioned(assets.open("map.objpp"), getMyCallback());
 		} catch (IOException | ClassNotFoundException e) {e.printStackTrace();}
 		
 		R2D2A = new PartitionedGameObject(R2D2Model, "R2D2.obj-info", new ContactUpdater(), getMyCallback());
 
 		//mapA= new PartitionedGameObject(mapModel, "map.obj-info",new GameObjectUpdater(){
-		GameObject ptA = new GameObject(earthModel, new GameObjectUpdater(){
+		/*
+		
 			public void update(GameObject obj) {
 				Matrix.setIdentityM(obj.mModelMatrix, 0);
 				Matrix.scaleM(obj.mModelMatrix, 0, 0.3f, 0.3f, 0.3f);
 				Matrix.translateM(obj.mModelMatrix, 0, 1.693f*2f, 0, 2.445f*2f);
 			}
 		},new Texture(res,R.drawable.earth_texture,false));
+		 */
 		mapA= new PartitionedGameObject(mapModel, "map.obj-info",new GameObjectUpdater(){
 			public void update(GameObject obj) {
 				Matrix.setIdentityM(obj.mModelMatrix, 0);
@@ -287,7 +289,7 @@ public class CardboardRenderer extends MyCardboardRenderer {
 		//R2D2A.addToGLProgram(mTextureProgram);
 		mapA.addToGLProgram(mTextureProgram);
 		R2D2A.addToGLProgram(mTextureProgram);
-		mTextureProgram.objects.add(ptA);
+		//mTextureProgram.objects.add(ptA);
 		getMyCallback().showToast3D("Hello, "+myUsername+" !");
 	}
 
